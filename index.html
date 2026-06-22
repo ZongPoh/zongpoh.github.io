@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Zong Poh — Portfolio</title>
+<meta name="description" content="Personal portfolio of Zong Poh — machine learning, reinforcement learning, and computer vision projects." />
+<style>
+  :root{
+    --bg:#ffffff;
+    --bg-soft:#f6f7f9;
+    --text:#1a1d21;
+    --muted:#5c636e;
+    --line:#e6e8ec;
+    --accent:#2f6df6;
+    --accent-soft:#eaf0fe;
+    --radius:14px;
+    --maxw:880px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+  /* Nav */
+  nav{
+    position:sticky;top:0;z-index:10;
+    background:rgba(255,255,255,.85);
+    backdrop-filter:saturate(180%) blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+  nav .brand{font-weight:700;letter-spacing:-.01em;color:var(--text)}
+  nav .links{display:flex;gap:22px}
+  nav .links a{color:var(--muted);font-size:.95rem;font-weight:500}
+  nav .links a:hover{color:var(--text);text-decoration:none}
+
+  /* Hero */
+  header.hero{padding:90px 0 70px}
+  .eyebrow{
+    display:inline-block;font-size:.8rem;font-weight:600;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--accent);
+    background:var(--accent-soft);padding:6px 12px;border-radius:999px;margin-bottom:22px;
+  }
+  h1{font-size:2.7rem;line-height:1.1;letter-spacing:-.02em;margin-bottom:18px}
+  .hero p.lead{font-size:1.2rem;color:var(--muted);max-width:640px}
+  .cta{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 20px;border-radius:10px;font-weight:600;font-size:.95rem;
+    border:1px solid var(--line);color:var(--text);background:#fff;transition:.15s;
+  }
+  .btn:hover{text-decoration:none;border-color:var(--text)}
+  .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .btn.primary:hover{background:#1f59d8;border-color:#1f59d8}
+
+  /* Sections */
+  section{padding:60px 0;border-top:1px solid var(--line)}
+  h2{font-size:1.6rem;letter-spacing:-.01em;margin-bottom:8px}
+  .section-sub{color:var(--muted);margin-bottom:34px}
+
+  /* About */
+  .about p{color:var(--muted);max-width:680px;margin-bottom:16px}
+  .skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .chip{
+    font-size:.85rem;font-weight:500;color:var(--text);
+    background:var(--bg-soft);border:1px solid var(--line);
+    padding:7px 13px;border-radius:999px;
+  }
+
+  /* Project card */
+  .project{
+    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;
+  }
+  .media{
+    aspect-ratio:16/9;background:linear-gradient(135deg,#eef2f9,#f6f7f9);
+    display:flex;align-items:center;justify-content:center;color:var(--muted);
+    font-size:.95rem;border-bottom:1px solid var(--line);text-align:center;padding:20px;
+  }
+  .media span{max-width:320px}
+  .project-body{padding:28px}
+  .project-body h3{font-size:1.35rem;letter-spacing:-.01em;margin-bottom:6px}
+  .project-tag{font-size:.8rem;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+  .project-body p{color:var(--muted);margin:14px 0}
+  .explore{margin:20px 0 6px}
+  .explore h4{font-size:.95rem;margin-bottom:10px}
+  .explore ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 24px}
+  .explore li{position:relative;padding-left:22px;color:var(--muted);font-size:.95rem}
+  .explore li::before{content:"→";position:absolute;left:0;color:var(--accent)}
+  .stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+  .stack .chip{background:#fff}
+  .project-links{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+
+  blockquote{
+    border-left:3px solid var(--accent);background:var(--accent-soft);
+    padding:16px 20px;border-radius:0 10px 10px 0;color:var(--text);
+    font-style:italic;margin-top:24px;max-width:680px;
+  }
+
+  /* Contact */
+  .contact p{color:var(--muted);max-width:620px;margin-bottom:24px}
+  .contact-links{display:flex;gap:14px;flex-wrap:wrap}
+
+  footer{padding:40px 0 60px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+
+  @media(max-width:640px){
+    h1{font-size:2.1rem}
+    .explore ul{grid-template-columns:1fr}
+    nav .links{gap:16px}
+    nav .links a.hide-sm{display:none}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="brand">Zong Poh</span>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a class="hide-sm" href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Machine Learning · Computer Vision · RL</span>
+    <h1>Hi, I'm Zong Poh.<br />I build things that learn to drive.</h1>
+    <p class="lead">
+      I'm a developer exploring machine learning, reinforcement learning, and computer
+      vision through hands-on projects — turning "can I make this work?" ideas into
+      working systems.
+    </p>
+    <div class="cta">
+      <a class="btn primary" href="#projects">View my work</a>
+      <!-- TODO: replace with your LinkedIn URL -->
+      <a class="btn" href="https://www.linkedin.com/in/YOUR-USERNAME" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</header>
+
+<section id="about" class="about">
+  <div class="wrap">
+    <h2>About</h2>
+    <p class="section-sub">A bit about how I work and what I'm into.</p>
+    <p>
+      I learn best by building. Over the past year I went from a simple self-driving
+      bus demo — line-following logic, PID steering, and raycast obstacle detection —
+      to training reinforcement learning agents to drive in a custom simulation.
+    </p>
+    <p>
+      Along the way I've leaned on AI tools to speed up development and troubleshooting,
+      but my biggest lessons came from the opposite direction: digging in when things
+      broke, and actually understanding the systems I was wiring together. Growth, for me,
+      comes from making mistakes, figuring out why they happened, and learning how to fix them.
+    </p>
+    <div class="skills">
+      <span class="chip">Python</span>
+      <span class="chip">PyTorch</span>
+      <span class="chip">OpenCV</span>
+      <span class="chip">NumPy</span>
+      <span class="chip">Reinforcement Learning</span>
+      <span class="chip">Computer Vision</span>
+      <span class="chip">Unity</span>
+      <span class="chip">CNNs</span>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Projects</h2>
+    <p class="section-sub">Featured work. More on the way.</p>
+
+    <article class="project">
+      <div class="media">
+        <!-- TODO: swap this placeholder for a demo image or embed a YouTube video here -->
+        <span>Demo video / screenshots coming soon — add your media here.</span>
+      </div>
+      <div class="project-body">
+        <span class="project-tag">Featured Project</span>
+        <h3>Project ML Racing</h3>
+        <p>
+          A personal project where I built a Unity-based racing environment and connected
+          it to a PPO reinforcement learning agent that learns to drive using computer
+          vision and vehicle telemetry. What began as a simple experiment became one of
+          the most engaging learning experiences I've had.
+        </p>
+        <p>
+          The agent can currently make its way around the track — though, for now, my
+          keyboard driving still beats it. There's plenty left to do before it can truly
+          race competitively, and that's exactly what makes it fun.
+        </p>
+
+        <div class="explore">
+          <h4>What I explored</h4>
+          <ul>
+            <li>Computer vision with Canny edge detection for lane detection</li>
+            <li>CNN-based lane detection using a MobileNet model</li>
+            <li>Data collection &amp; classification to train the model</li>
+            <li>Unity-to-Python integration for camera &amp; telemetry</li>
+            <li>PPO reinforcement learning &amp; reward shaping</li>
+            <li>Model fine-tuning and debugging the full pipeline</li>
+          </ul>
+        </div>
+
+        <blockquote>
+          The hardest moments came when the model behaved unexpectedly and I had to
+          properly understand the integration between the CNN, the PPO agent, the
+          observations, and the reward structure.
+        </blockquote>
+
+        <div class="stack">
+          <span class="chip">Unity</span>
+          <span class="chip">NWH Vehicle Physics 2</span>
+          <span class="chip">EasyRoads3D Pro v3</span>
+          <span class="chip">Python</span>
+          <span class="chip">PyTorch</span>
+          <span class="chip">OpenCV</span>
+          <span class="chip">NumPy</span>
+          <span class="chip">RCC Cartoon Race Track</span>
+        </div>
+
+        <div class="project-links">
+          <!-- TODO: add your repo / video links, or remove if not ready -->
+          <a class="btn" href="#" target="_blank" rel="noopener">Source code</a>
+          <a class="btn" href="#" target="_blank" rel="noopener">Watch demo</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <h2>Get in touch</h2>
+    <p>
+      I'm always happy to connect over machine learning, robotics, or interesting
+      side projects. Reach out anytime.
+    </p>
+    <div class="contact-links">
+      <a class="btn primary" href="mailto:loozongpoh@gmail.com">Email me</a>
+      <!-- TODO: replace with your LinkedIn URL -->
+      <a class="btn" href="https://www.linkedin.com/in/YOUR-USERNAME" target="_blank" rel="noopener">LinkedIn</a>
+      <!-- TODO: replace with your GitHub URL -->
+      <a class="btn" href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    © <span id="year"></span> Zong Poh. Built with curiosity.
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
