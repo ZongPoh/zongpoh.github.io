@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Zong Poh — Portfolio</title>
-<meta name="description" content="Personal portfolio of Zong Poh — machine learning, reinforcement learning, and computer vision projects." />
+<title>Loo Zong Poh — Portfolio</title>
+<meta name="description" content="Portfolio of Loo Zong Poh — computer engineer working in machine learning, reinforcement learning, and computer vision." />
 <style>
   :root{
     --bg:#ffffff;
@@ -51,7 +51,7 @@
     background:var(--accent-soft);padding:6px 12px;border-radius:999px;margin-bottom:22px;
   }
   h1{font-size:2.7rem;line-height:1.1;letter-spacing:-.02em;margin-bottom:18px}
-  .hero p.lead{font-size:1.2rem;color:var(--muted);max-width:640px}
+  .hero p.lead{font-size:1.2rem;color:var(--muted);max-width:660px}
   .cta{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
   .btn{
     display:inline-flex;align-items:center;gap:8px;
@@ -84,6 +84,7 @@
     aspect-ratio:16/9;background:linear-gradient(135deg,#eef2f9,#f6f7f9);
     display:flex;align-items:center;justify-content:center;color:var(--muted);
     font-size:.95rem;border-bottom:1px solid var(--line);text-align:center;padding:20px;
+    overflow:hidden;
   }
   .media span{max-width:320px}
   .project-body{padding:28px}
@@ -105,6 +106,15 @@
     font-style:italic;margin-top:24px;max-width:680px;
   }
 
+  /* Video grid (YouTube embeds) */
+  .video-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .video-card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff}
+  .embed{position:relative;width:100%;padding-top:56.25%;background:#000}
+  .embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .video-card .caption{padding:16px 18px}
+  .video-card .caption h4{font-size:1.02rem;line-height:1.35;margin-bottom:4px}
+  .video-card .caption p{color:var(--muted);font-size:.9rem}
+
   /* Contact */
   .contact p{color:var(--muted);max-width:620px;margin-bottom:24px}
   .contact-links{display:flex;gap:14px;flex-wrap:wrap}
@@ -114,6 +124,7 @@
   @media(max-width:640px){
     h1{font-size:2.1rem}
     .explore ul{grid-template-columns:1fr}
+    .video-grid{grid-template-columns:1fr}
     nav .links{gap:16px}
     nav .links a.hide-sm{display:none}
   }
@@ -123,10 +134,11 @@
 
 <nav>
   <div class="wrap">
-    <span class="brand">Zong Poh</span>
+    <span class="brand">Loo Zong Poh</span>
     <div class="links">
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
+      <a class="hide-sm" href="#work">Earlier Work</a>
       <a class="hide-sm" href="#contact">Contact</a>
     </div>
   </div>
@@ -134,17 +146,16 @@
 
 <header class="hero">
   <div class="wrap">
-    <span class="eyebrow">Machine Learning · Computer Vision · RL</span>
-    <h1>Hi, I'm Zong Poh.<br />I build things that learn to drive.</h1>
+    <span class="eyebrow">Computer Engineer · Machine Learning · Computer Vision</span>
+    <h1>Hi, I'm Zong Poh.<br />I build things that learn.</h1>
     <p class="lead">
-      I'm a developer exploring machine learning, reinforcement learning, and computer
-      vision through hands-on projects — turning "can I make this work?" ideas into
-      working systems.
+      A computer engineer with extensive programming expertise and a strong foundation
+      in computer science. I tackle complex challenges with a solutions-oriented
+      mindset — and lately, that means teaching machines to drive.
     </p>
     <div class="cta">
       <a class="btn primary" href="#projects">View my work</a>
-      <!-- TODO: replace with your LinkedIn URL -->
-      <a class="btn" href="https://www.linkedin.com/in/YOUR-USERNAME" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="https://www.linkedin.com/in/loo-zong-poh" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </div>
 </header>
@@ -152,17 +163,26 @@
 <section id="about" class="about">
   <div class="wrap">
     <h2>About</h2>
-    <p class="section-sub">A bit about how I work and what I'm into.</p>
+    <p class="section-sub">Who I am and how I work.</p>
+    <p>
+      As a computer engineer with extensive programming expertise and a strong
+      foundation in computer science, I excel at tackling complex challenges with a
+      solutions-oriented mindset. Driven by a commitment to innovation, I approach
+      problem-solving with a combination of technical precision and strategic thinking.
+    </p>
+    <p>
+      I'm passionate about continuous learning and actively seek opportunities that
+      broaden my professional and personal growth. This adaptability, combined with a
+      diverse skill set, empowers me to contribute effectively to impactful projects
+      across multiple disciplines.
+    </p>
     <p>
       I learn best by building. Over the past year I went from a simple self-driving
       bus demo — line-following logic, PID steering, and raycast obstacle detection —
-      to training reinforcement learning agents to drive in a custom simulation.
-    </p>
-    <p>
-      Along the way I've leaned on AI tools to speed up development and troubleshooting,
-      but my biggest lessons came from the opposite direction: digging in when things
-      broke, and actually understanding the systems I was wiring together. Growth, for me,
-      comes from making mistakes, figuring out why they happened, and learning how to fix them.
+      to training reinforcement learning agents to drive in a custom simulation. My
+      biggest lessons came when things broke and I had to truly understand the systems
+      I was wiring together. Growth, for me, comes from making mistakes, figuring out
+      why they happened, and learning how to fix them.
     </p>
     <div class="skills">
       <span class="chip">Python</span>
@@ -179,13 +199,16 @@
 
 <section id="projects">
   <div class="wrap">
-    <h2>Projects</h2>
-    <p class="section-sub">Featured work. More on the way.</p>
+    <h2>Featured Project</h2>
+    <p class="section-sub">The project I've been most absorbed in.</p>
 
     <article class="project">
       <div class="media">
-        <!-- TODO: swap this placeholder for a demo image or embed a YouTube video here -->
-        <span>Demo video / screenshots coming soon — add your media here.</span>
+        <!-- When your ML Racing demo is on YouTube, replace this whole .media block with:
+        <div class="embed"><iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+          title="Project ML Racing" allow="accelerometer; autoplay; clipboard-write;
+          encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div> -->
+        <span>Demo video coming soon — upload to YouTube and embed it here.</span>
       </div>
       <div class="project-body">
         <span class="project-tag">Featured Project</span>
@@ -241,26 +264,73 @@
   </div>
 </section>
 
+<section id="work">
+  <div class="wrap">
+    <h2>Earlier Work</h2>
+    <p class="section-sub">Autonomous-driving and traffic-simulation work in Unity, integrated with PTV VISSIM.</p>
+
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="embed">
+          <iframe src="https://www.youtube.com/embed/tRKfI3aIPDM"
+            title="Driving Simulator with VISSIM Integration in Unity"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="caption">
+          <h4>Driving Simulator with VISSIM Integration in Unity</h4>
+          <p>A drivable simulator in Unity wired up to live PTV VISSIM traffic.</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="embed">
+          <iframe src="https://www.youtube.com/embed/EM7AHhyWbNg"
+            title="Autonomous Vehicles in Unity with VISSIM traffic — Stopping for jaywalkers"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="caption">
+          <h4>Autonomous Vehicles with VISSIM traffic — Stopping for jaywalkers</h4>
+          <p>A simple autonomous vehicle detecting and stopping for jaywalking pedestrians.</p>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="embed">
+          <iframe src="https://www.youtube.com/embed/LF9YIEZRR3M"
+            title="Autonomous Vehicles in Unity with VISSIM traffic — Failing to give way"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="caption">
+          <h4>Autonomous Vehicles with VISSIM traffic — Failing to give way</h4>
+          <p>A scenario study of give-way behaviour and where the logic breaks down.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="contact" class="contact">
   <div class="wrap">
     <h2>Get in touch</h2>
     <p>
-      I'm always happy to connect over machine learning, robotics, or interesting
-      side projects. Reach out anytime.
+      Let's connect and explore opportunities to create meaningful, technology-driven
+      advancements together. I'm always happy to talk machine learning, robotics, or
+      interesting side projects.
     </p>
     <div class="contact-links">
       <a class="btn primary" href="mailto:loozongpoh@gmail.com">Email me</a>
-      <!-- TODO: replace with your LinkedIn URL -->
-      <a class="btn" href="https://www.linkedin.com/in/YOUR-USERNAME" target="_blank" rel="noopener">LinkedIn</a>
-      <!-- TODO: replace with your GitHub URL -->
-      <a class="btn" href="https://github.com/YOUR-USERNAME" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/loo-zong-poh" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="https://github.com/ZongPoh" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    © <span id="year"></span> Zong Poh. Built with curiosity.
+    © <span id="year"></span> Loo Zong Poh. Built with curiosity.
   </div>
 </footer>
 
