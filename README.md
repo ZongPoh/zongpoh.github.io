@@ -21,26 +21,6 @@ A Unity-based racing environment connected to a PPO reinforcement learning agent
 - Unity-to-Python integration for camera & telemetry
 - PPO reinforcement learning & reward shaping
 
-## Running locally
-
-No build step required — just open `index.html` in a browser:
-
-```bash
-# macOS / Linux
-open index.html
-
-# Windows
-start index.html
-```
-
-Or serve it with any static file server:
-
-```bash
-npx serve .
-# or
-python -m http.server
-```
-
 ## Structure
 
 ```
