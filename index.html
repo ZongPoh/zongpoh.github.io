@@ -99,6 +99,16 @@
   .stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
   .stack .chip{background:#fff}
   .project-links{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+  .project + .project{margin-top:36px}
+  .roles{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0 6px}
+  .roles li{background:var(--bg-soft);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:.93rem;color:var(--muted)}
+  .roles strong{display:block;color:var(--text);font-size:.95rem;margin-bottom:2px}
+  /* Photo gallery: add <img> tags inside .photo-grid */
+  .photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;border-bottom:1px solid var(--line);background:var(--bg-soft)}
+  .photo-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+  .photo-grid img.lead{grid-column:1/-1;aspect-ratio:16/9}
+  @media (max-width:640px){.photo-grid{grid-template-columns:1fr 1fr}}
+  @media (max-width:640px){.roles{grid-template-columns:1fr}}
 
   blockquote{
     border-left:3px solid var(--accent);background:var(--accent-soft);
@@ -205,16 +215,15 @@
 
 <section id="projects">
   <div class="wrap">
-    <h2>Featured Project</h2>
-    <p class="section-sub">The project I've been most absorbed in.</p>
+    <h2>Featured Projects</h2>
+    <p class="section-sub">Things I've built recently in Unity and machine learning.</p>
 
     <article class="project">
-      <div class="media">
-        <!-- When your ML Racing demo is on YouTube, replace this whole .media block with:
-        <div class="embed"><iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-          title="Project ML Racing" allow="accelerometer; autoplay; clipboard-write;
-          encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div> -->
-        <span>Demo video coming soon — upload to YouTube and embed it here.</span>
+      <div class="embed">
+        <iframe src="https://www.youtube.com/embed/n5OL3Fog0ZE"
+          title="Project ML Racing demo"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen loading="lazy"></iframe>
       </div>
       <div class="project-body">
         <span class="project-tag">Featured Project</span>
@@ -261,9 +270,66 @@
         </div>
 
         <div class="project-links">
-          <!-- TODO: add your repo / video links, or remove if not ready -->
-          <a class="btn" href="#" target="_blank" rel="noopener">Source code</a>
-          <a class="btn" href="#" target="_blank" rel="noopener">Watch demo</a>
+          <a class="btn" href="https://youtu.be/n5OL3Fog0ZE" target="_blank" rel="noopener">Watch on YouTube</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="photo-grid">
+        <img class="lead" src="images/drone-1-commander-map.jpg" alt="Commander coordinating the team from the tactical map with a walkie-talkie" loading="lazy">
+        <img src="images/drone-2-driver-gamepad.jpg" alt="Participant driving a rescue vehicle with a gamepad" loading="lazy">
+        <img src="images/drone-3-driver-view.jpg" alt="Driver's view with mission timer and compass HUD" loading="lazy">
+        <img src="images/drone-4-handheld-gamepad.jpg" alt="Participant playing on a handheld gaming PC" loading="lazy">
+        <img src="images/drone-5-four-player-test.jpg" alt="Four-player split-screen test during development" loading="lazy">
+        <img src="images/drone-6-role-briefing.jpg" alt="Role briefing screens for each player" loading="lazy">
+        <img src="images/drone-7-countdown.jpg" alt="Mission countdown shown on every player's screen" loading="lazy">
+      </div>
+      <div class="project-body">
+        <span class="project-tag">Red Cross Youth · Drone Workshop</span>
+        <h3>Multiplayer Disaster Response Simulation</h3>
+        <p>
+          A four-player disaster-response game I built in Unity for a Red Cross Youth drone
+          workshop. Each player takes on a different role and only sees the information
+          relevant to that role, so the team has to talk and coordinate to find survivors
+          and deliver supplies before time runs out.
+        </p>
+
+        <ul class="roles">
+          <li><strong>Drone Operator</strong>Flies the drone to scan for hidden survivors and supply crates.</li>
+          <li><strong>Commander</strong>Receives discoveries on a live tactical map and directs the team.</li>
+          <li><strong>Drivers (×2)</strong>Navigate the flooded area, collect objectives and return them to HQ.</li>
+          <li><strong>Shared mission</strong>Timer, scoring and crash penalties that the whole team works against.</li>
+        </ul>
+
+        <div class="explore">
+          <h4>What I built</h4>
+          <ul>
+            <li>LAN multiplayer with Netcode for GameObjects (direct-IP host/client)</li>
+            <li>Server-authoritative mission state with client-authoritative vehicle movement</li>
+            <li>Role selection, ready-up and countdown synced across clients</li>
+            <li>Role-specific cameras, UI and controls</li>
+            <li>Drone flight, camera control and object scanning</li>
+            <li>Real-time tactical map tracking players and objectives</li>
+            <li>Vehicle driving, collection and delivery mechanics</li>
+            <li>Keyboard and gamepad support</li>
+          </ul>
+        </div>
+
+        <blockquote>
+          The biggest challenge wasn't Unity itself but balancing the user experience with
+          the lesson objectives: the game had to be intuitive and fun while still making
+          players rely on one another.
+        </blockquote>
+
+        <div class="stack">
+          <span class="chip">Unity</span>
+          <span class="chip">C#</span>
+          <span class="chip">Netcode for GameObjects</span>
+          <span class="chip">Unity Transport</span>
+          <span class="chip">ParrelSync</span>
+          <span class="chip">NWH Vehicle Physics 2</span>
+          <span class="chip">Flooded Grounds</span>
         </div>
       </div>
     </article>
