@@ -108,6 +108,25 @@
   .photo-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
   .photo-grid img.lead{grid-column:1/-1;aspect-ratio:16/9}
   @media (max-width:640px){.photo-grid{grid-template-columns:1fr 1fr}}
+  .photo-grid img{cursor:zoom-in;transition:opacity .15s}
+  .photo-grid img:hover{opacity:.88}
+  .photo-grid img:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+  .photo-hint{font-size:.85rem;color:var(--muted);padding:10px 28px 0}
+
+  /* Lightbox */
+  .lightbox{position:fixed;inset:0;z-index:100;background:rgba(10,12,16,.97);display:none;backdrop-filter:blur(6px);
+    flex-direction:column;align-items:center;justify-content:center;padding:56px 64px 24px}
+  .lightbox.open{display:flex}
+  .lightbox img{max-width:100%;max-height:calc(100vh - 200px);object-fit:contain;border-radius:6px}
+  .lb-caption{color:#e8eaee;max-width:760px;text-align:center;margin-top:16px;font-size:.98rem;line-height:1.55}
+  .lb-count{color:#9aa1ad;font-size:.8rem;margin-top:6px}
+  .lightbox button{position:absolute;background:rgba(255,255,255,.1);border:0;color:#fff;
+    width:44px;height:44px;border-radius:50%;font-size:1.4rem;cursor:pointer;line-height:1}
+  .lightbox button:hover{background:rgba(255,255,255,.22)}
+  .lb-close{top:14px;right:14px}
+  .lb-prev{left:12px;top:50%;transform:translateY(-50%)}
+  .lb-next{right:12px;top:50%;transform:translateY(-50%)}
+  @media (max-width:640px){.lightbox{padding:56px 12px 20px}.lb-prev,.lb-next{top:auto;bottom:14px;transform:none}}
   @media (max-width:640px){.roles{grid-template-columns:1fr}}
 
   blockquote{
@@ -278,14 +297,15 @@
 
     <article class="project">
       <div class="photo-grid">
-        <img class="lead" src="images/drone-1-commander-map.jpg" alt="Commander coordinating the team from the tactical map with a walkie-talkie" loading="lazy">
-        <img src="images/drone-2-driver-gamepad.jpg" alt="Participant driving a rescue vehicle with a gamepad" loading="lazy">
-        <img src="images/drone-3-driver-view.jpg" alt="Driver's view with mission timer and compass HUD" loading="lazy">
-        <img src="images/drone-4-handheld-gamepad.jpg" alt="Participant playing on a handheld gaming PC" loading="lazy">
-        <img src="images/drone-5-four-player-test.jpg" alt="Four-player split-screen test during development" loading="lazy">
-        <img src="images/drone-6-role-briefing.jpg" alt="Role briefing screens for each player" loading="lazy">
-        <img src="images/drone-7-countdown.jpg" alt="Mission countdown shown on every player's screen" loading="lazy">
+        <img class="lead" src="images/drone-1-commander-map.jpg" alt="Commander coordinating the team from the tactical map with a walkie-talkie" data-caption="Commander view: the tactical map shows where each driver is, which survivors and supplies the drone has found, and suggested tasks. The Commander relays orders to the drivers by walkie-talkie." loading="lazy" tabindex="0">
+        <img src="images/drone-2-driver-gamepad.jpg" alt="Participant driving a rescue vehicle with a gamepad" data-caption="A driver steering a rescue vehicle through the flooded town with a gamepad to reach survivors and supply crates." loading="lazy" tabindex="0">
+        <img src="images/drone-3-driver-view.jpg" alt="Driver's view with mission timer and compass HUD" data-caption="Driver's-eye view: the mission timer, rescue counts and compass help drivers head for the objectives the Commander points them to." loading="lazy" tabindex="0">
+        <img src="images/drone-4-handheld-gamepad.jpg" alt="Participant playing on a handheld gaming PC" data-caption="Playing on a handheld gaming PC, with a walkie-talkie close by. The game supports both keyboard and gamepad controls." loading="lazy" tabindex="0">
+        <img src="images/drone-5-four-player-test.jpg" alt="Four-player test running on two monitors during development" data-caption="Testing all four roles at once during development: two drivers on the top screen, and the Commander's tactical map beside the drone operator's view on the bottom screen." loading="lazy" tabindex="0">
+        <img src="images/drone-6-role-briefing.jpg" alt="Role briefing screens for each player" data-caption="Role briefings: before the mission starts, each player sees instructions for their own role only." loading="lazy" tabindex="0">
+        <img src="images/drone-7-countdown.jpg" alt="Mission countdown shown on every player's screen" data-caption="A synchronised countdown runs on every player's screen so the whole team starts the mission together." loading="lazy" tabindex="0">
       </div>
+      <p class="photo-hint">Click a photo to enlarge it and read what&rsquo;s happening.</p>
       <div class="project-body">
         <span class="project-tag">Red Cross Youth · Drone Workshop</span>
         <h3>Multiplayer Disaster Response Simulation</h3>
@@ -414,9 +434,7 @@
       interesting side projects.
     </p>
     <div class="contact-links">
-      <a class="btn primary" href="mailto:loozongpoh@gmail.com">Email me</a>
-      <a class="btn" href="https://www.linkedin.com/in/loo-zong-poh" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn" href="https://github.com/ZongPoh" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn primary" href="https://www.linkedin.com/in/loo-zong-poh" target="_blank" rel="noopener">Connect on LinkedIn</a>
     </div>
   </div>
 </section>
@@ -428,5 +446,41 @@
 </footer>
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lb-close" aria-label="Close">&times;</button>
+  <button class="lb-prev" aria-label="Previous photo">&#8249;</button>
+  <img alt="">
+  <p class="lb-caption"></p>
+  <p class="lb-count"></p>
+  <button class="lb-next" aria-label="Next photo">&#8250;</button>
+</div>
+<script>
+(function(){
+  var imgs=[].slice.call(document.querySelectorAll('.photo-grid img'));
+  var lb=document.getElementById('lightbox'); if(!imgs.length||!lb) return;
+  var big=lb.querySelector('img'), cap=lb.querySelector('.lb-caption'), cnt=lb.querySelector('.lb-count');
+  var i=0, last=null;
+  function show(n){ i=(n+imgs.length)%imgs.length; var t=imgs[i];
+    big.src=t.src; big.alt=t.alt; cap.textContent=t.dataset.caption||t.alt;
+    cnt.textContent=(i+1)+' / '+imgs.length; }
+  function open(n){ last=document.activeElement; show(n); lb.classList.add('open');
+    document.body.style.overflow='hidden'; lb.querySelector('.lb-close').focus(); }
+  function close(){ lb.classList.remove('open'); document.body.style.overflow=''; if(last) last.focus(); }
+  imgs.forEach(function(im,n){
+    im.addEventListener('click',function(){open(n);});
+    im.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();open(n);} });
+  });
+  lb.querySelector('.lb-close').onclick=close;
+  lb.querySelector('.lb-prev').onclick=function(){show(i-1);};
+  lb.querySelector('.lb-next').onclick=function(){show(i+1);};
+  lb.addEventListener('click',function(e){ if(e.target===lb) close(); });
+  document.addEventListener('keydown',function(e){ if(!lb.classList.contains('open')) return;
+    if(e.key==='Escape') close(); else if(e.key==='ArrowLeft') show(i-1); else if(e.key==='ArrowRight') show(i+1); });
+  var x0=null;
+  lb.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
+  lb.addEventListener('touchend',function(e){ if(x0===null) return; var dx=e.changedTouches[0].clientX-x0;
+    if(Math.abs(dx)>50) show(dx<0?i+1:i-1); x0=null; });
+})();
+</script>
 </body>
 </html>
