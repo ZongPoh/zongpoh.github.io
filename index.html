@@ -96,8 +96,12 @@
   .explore ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 24px}
   .explore li{position:relative;padding-left:22px;color:var(--muted);font-size:.95rem}
   .explore li::before{content:"→";position:absolute;left:0;color:var(--accent)}
-  .stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+  .stack{display:flex;flex-direction:column;gap:14px;margin-top:22px}
+  .stack-group:not(:first-child){padding-top:14px;border-top:1px dashed var(--line)}
+  .stack-label{display:block;font-size:.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+  .stack-row{display:flex;flex-wrap:wrap;gap:8px}
   .stack .chip{background:#fff}
+  .stack .chip.asset{border-style:dashed;background:var(--bg-soft)}
   .project-links{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
   .project + .project{margin-top:36px}
   .roles{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0 6px}
@@ -236,7 +240,7 @@
 <section id="projects">
   <div class="wrap">
     <h2>Featured Projects</h2>
-    <p class="section-sub">Things I've built recently in Unity and machine learning.</p>
+    <p class="section-sub">Things I've built recently.</p>
 
     <article class="project">
       <div class="embed">
@@ -279,14 +283,24 @@
         </blockquote>
 
         <div class="stack">
-          <span class="chip">Unity</span>
-          <span class="chip">NWH Vehicle Physics 2</span>
-          <span class="chip">EasyRoads3D Pro v3</span>
-          <span class="chip">Python</span>
-          <span class="chip">PyTorch</span>
-          <span class="chip">OpenCV</span>
-          <span class="chip">NumPy</span>
-          <span class="chip">RCC Cartoon Race Track</span>
+          <div class="stack-group">
+            <span class="stack-label">Technology</span>
+            <div class="stack-row">
+              <span class="chip">Unity</span>
+              <span class="chip">Python</span>
+              <span class="chip">PyTorch</span>
+              <span class="chip">OpenCV</span>
+              <span class="chip">NumPy</span>
+            </div>
+          </div>
+          <div class="stack-group">
+            <span class="stack-label">Game Assets</span>
+            <div class="stack-row">
+              <span class="chip asset">NWH Vehicle Physics 2</span>
+              <span class="chip asset">EasyRoads3D Pro v3</span>
+              <span class="chip asset">RCC Cartoon Race Track</span>
+            </div>
+          </div>
         </div>
 
         <div class="project-links">
@@ -344,13 +358,23 @@
         </blockquote>
 
         <div class="stack">
-          <span class="chip">Unity</span>
-          <span class="chip">C#</span>
-          <span class="chip">Netcode for GameObjects</span>
-          <span class="chip">Unity Transport</span>
-          <span class="chip">ParrelSync</span>
-          <span class="chip">NWH Vehicle Physics 2</span>
-          <span class="chip">Flooded Grounds</span>
+          <div class="stack-group">
+            <span class="stack-label">Technology</span>
+            <div class="stack-row">
+              <span class="chip">Unity</span>
+              <span class="chip">C#</span>
+              <span class="chip">Netcode for GameObjects</span>
+              <span class="chip">Unity Transport</span>
+              <span class="chip">ParrelSync</span>
+            </div>
+          </div>
+          <div class="stack-group">
+            <span class="stack-label">Game Assets</span>
+            <div class="stack-row">
+              <span class="chip asset">NWH Vehicle Physics 2</span>
+              <span class="chip asset">Flooded Grounds</span>
+            </div>
+          </div>
         </div>
       </div>
     </article>
