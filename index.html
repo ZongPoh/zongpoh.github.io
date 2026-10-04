@@ -69,7 +69,7 @@
 
   /* About */
   .about p{color:var(--muted);max-width:680px;margin-bottom:16px}
-  .skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .skills{margin-top:26px;max-width:680px}
   .chip{
     font-size:.85rem;font-weight:500;color:var(--text);
     background:var(--bg-soft);border:1px solid var(--line);
@@ -87,8 +87,59 @@
     overflow:hidden;
   }
   .media span{max-width:320px}
+  /* Project card: a compact row that is always visible (thumbnail, one-line
+     summary, tech, links), then the full write-up tucked inside <details>. */
+  .project{scroll-margin-top:76px}
+  .p-row{display:grid;grid-template-columns:260px 1fr;gap:24px;padding:20px;align-items:start}
+  .p-thumb{
+    position:relative;display:block;aspect-ratio:16/9;overflow:hidden;
+    border:1px solid var(--line);border-radius:10px;background:var(--bg-soft);
+  }
+  .p-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s}
+  .p-thumb:hover img{transform:scale(1.03)}
+  .p-thumb:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  .p-thumb.video::after{
+    content:"";position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;
+    border-radius:50%;background:rgba(16,18,22,.72) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M9 7v10l8-5z'/%3E%3C/svg%3E") center/26px no-repeat;
+  }
+  .p-badge{
+    position:absolute;left:8px;bottom:8px;background:rgba(16,18,22,.8);color:#fff;
+    font-size:.72rem;font-weight:600;line-height:1;padding:5px 9px;border-radius:999px;
+  }
+  .p-info h3{font-size:1.2rem;line-height:1.3;letter-spacing:-.01em;margin:2px 0 6px}
+  .p-sum{color:var(--muted);font-size:.97rem;line-height:1.55;max-width:520px}
+  .p-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .p-chips .chip{font-size:.78rem;padding:3px 10px;background:#fff}
+  .p-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .p-links .btn{padding:7px 14px;font-size:.88rem;border-radius:8px}
+  .p-more>summary{
+    list-style:none;cursor:pointer;user-select:none;
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:12px 20px;border-top:1px solid var(--line);background:var(--bg-soft);
+    font-size:.9rem;font-weight:600;color:var(--text);
+  }
+  .p-more>summary::-webkit-details-marker{display:none}
+  .p-more>summary::after{
+    content:"";flex:none;width:8px;height:8px;margin-right:4px;
+    border-right:2px solid currentColor;border-bottom:2px solid currentColor;
+    transform:translateY(-2px) rotate(45deg);transition:transform .15s;
+  }
+  .p-more[open]>summary::after{transform:translateY(2px) rotate(-135deg)}
+  .p-more>summary:hover{color:var(--accent)}
+  .p-more>summary:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+  .p-more[open]>summary{border-bottom:1px solid var(--line)}
+  .p-more .when-open{display:none}
+  .p-more[open]>summary .when-open{display:inline}
+  .p-more[open]>summary .when-closed{display:none}
+  @media (max-width:700px){
+    .p-row{grid-template-columns:1fr;gap:14px;padding:16px}
+    .p-more>summary{padding:12px 16px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .p-thumb img,.p-more>summary::after{transition:none}
+    .p-thumb:hover img{transform:none}
+  }
   .project-body{padding:28px}
-  .project-body h3{font-size:1.35rem;letter-spacing:-.01em;margin-bottom:6px}
   .project-tag{font-size:.8rem;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
   .project-body p{color:var(--muted);margin:14px 0}
   .explore{margin:20px 0 6px}
@@ -102,8 +153,8 @@
   .stack-row{display:flex;flex-wrap:wrap;gap:8px}
   .stack .chip{background:#fff}
   .stack .chip.asset{border-style:dashed;background:var(--bg-soft)}
-  .project-links{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
-  .project + .project{margin-top:36px}
+  .skills .chip{background:var(--bg-soft)}
+  .project + .project{margin-top:16px}
   .roles{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0 6px}
   .roles li{background:var(--bg-soft);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:.93rem;color:var(--muted)}
   .roles strong{display:block;color:var(--text);font-size:.95rem;margin-bottom:2px}
@@ -116,6 +167,13 @@
   .photo-grid img:hover{opacity:.88}
   .photo-grid img:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
   .photo-hint{font-size:.85rem;color:var(--muted);padding:10px 28px 0}
+  /* App screenshots: keep them wide and anchored to the top-left of the screen */
+  .photo-grid.shots img{aspect-ratio:16/9;object-position:left top}
+  @media (max-width:640px){.photo-grid.shots{grid-template-columns:repeat(3,1fr)}}
+  /* Sub-heading for a group of projects inside Featured Projects */
+  .project-group{margin:44px 0 20px}
+  .project-group h3{font-size:1.25rem;letter-spacing:-.01em;margin:8px 0 6px}
+  .project-group p{color:var(--muted);max-width:680px}
 
   /* Lightbox */
   .lightbox{position:fixed;inset:0;z-index:100;background:rgba(10,12,16,.97);display:none;backdrop-filter:blur(6px);
@@ -130,6 +188,7 @@
   .lb-close{top:14px;right:14px}
   .lb-prev{left:12px;top:50%;transform:translateY(-50%)}
   .lb-next{right:12px;top:50%;transform:translateY(-50%)}
+  .lightbox.single .lb-prev,.lightbox.single .lb-next,.lightbox.single .lb-count{display:none}
   @media (max-width:640px){.lightbox{padding:56px 12px 20px}.lb-prev,.lb-next{top:auto;bottom:14px;transform:none}}
   @media (max-width:640px){.roles{grid-template-columns:1fr}}
 
@@ -142,17 +201,15 @@
   /* Video grid (YouTube embeds) */
   .work-intro{color:var(--muted);max-width:700px;margin-bottom:14px}
   .work-intro:last-of-type{margin-bottom:34px}
-  .work-group-label{
-    font-size:.8rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
-    color:var(--accent);margin:14px 0 16px;
-  }
+  .clip-title{padding:14px 20px;font-size:.95rem;font-weight:600}
+  .p-more .video-grid{margin-bottom:0}
   .video-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-bottom:6px}
   .video-card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff}
   .embed{position:relative;width:100%;padding-top:56.25%;background:#000}
   .embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
   .video-card .caption{padding:16px 18px}
   .video-card .caption h4{font-size:1.02rem;line-height:1.35;margin-bottom:4px}
-  .video-card .caption p{color:var(--muted);font-size:.9rem}
+  .video-card .caption p{color:var(--muted);font-size:.9rem;margin:0}
 
   /* Contact */
   .contact p{color:var(--muted);max-width:620px;margin-bottom:24px}
@@ -221,18 +278,43 @@
       planned. That cycle of building, breaking, debugging, and refining is what keeps me
       curious&mdash;and helps me grow in a field that never stands still.
     </p>
-    <div class="skills">
-      <span class="chip">Python</span>
-      <span class="chip">PyTorch</span>
-      <span class="chip">OpenCV</span>
-      <span class="chip">NumPy</span>
-      <span class="chip">Reinforcement Learning</span>
-      <span class="chip">Computer Vision</span>
-      <span class="chip">Unity</span>
-      <span class="chip">CNNs</span>
-      <span class="chip">C#</span>
-      <span class="chip">Multiplayer Networking</span>
-      <span class="chip">Simulation</span>
+    <!-- Skills, grouped under labels. To add a group, copy one .stack-group block. -->
+    <div class="skills stack">
+      <div class="stack-group">
+        <span class="stack-label">Languages</span>
+        <div class="stack-row">
+          <span class="chip">Python</span>
+          <span class="chip">C#</span>
+          <span class="chip">JavaScript</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <span class="stack-label">Machine Learning &amp; Computer Vision</span>
+        <div class="stack-row">
+          <span class="chip">PyTorch</span>
+          <span class="chip">OpenCV</span>
+          <span class="chip">NumPy</span>
+          <span class="chip">Reinforcement Learning</span>
+          <span class="chip">Computer Vision</span>
+          <span class="chip">CNNs</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <span class="stack-label">Simulation &amp; Games</span>
+        <div class="stack-row">
+          <span class="chip">Unity</span>
+          <span class="chip">Simulation</span>
+          <span class="chip">Multiplayer Networking</span>
+          <span class="chip">Netcode for GameObjects</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <span class="stack-label">Web</span>
+        <div class="stack-row">
+          <span class="chip">three.js</span>
+          <span class="chip">SQLite</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -240,9 +322,32 @@
 <section id="projects">
   <div class="wrap">
     <h2>Featured Projects</h2>
-    <p class="section-sub">Things I've built recently.</p>
+    <p class="section-sub">Things I've built recently. Open any project for the full write-up.</p>
 
-    <article class="project">
+    <article class="project" id="ml-racing">
+      <div class="p-row">
+        <a class="p-thumb video" href="#ml-racing" aria-label="Open the full write-up for Project ML Racing">
+          <img src="https://i.ytimg.com/vi/n5OL3Fog0ZE/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+          <span class="p-badge">Demo video</span>
+        </a>
+        <div class="p-info">
+          <span class="project-tag">Reinforcement Learning · Computer Vision</span>
+          <h3>Project ML Racing</h3>
+          <p class="p-sum">A Unity racing environment where a PPO reinforcement learning agent learns to drive using computer vision and vehicle telemetry.</p>
+          <div class="p-chips">
+          <span class="chip">Unity</span>
+          <span class="chip">Python</span>
+          <span class="chip">PyTorch</span>
+          <span class="chip">OpenCV</span>
+          <span class="chip">NumPy</span>
+          </div>
+        <div class="p-links">
+          <a class="btn" href="https://youtu.be/n5OL3Fog0ZE" target="_blank" rel="noopener">Watch on YouTube</a>
+        </div>
+        </div>
+      </div>
+      <details class="p-more">
+        <summary><span class="when-closed">Read the full write-up</span><span class="when-open">Hide the write-up</span></summary>
       <div class="embed">
         <iframe src="https://www.youtube.com/embed/n5OL3Fog0ZE"
           title="Project ML Racing demo"
@@ -250,8 +355,6 @@
           allowfullscreen loading="lazy"></iframe>
       </div>
       <div class="project-body">
-        <span class="project-tag">Featured Project</span>
-        <h3>Project ML Racing</h3>
         <p>
           A personal project where I built a Unity-based racing environment and connected
           it to a PPO reinforcement learning agent that learns to drive using computer
@@ -303,13 +406,30 @@
           </div>
         </div>
 
-        <div class="project-links">
-          <a class="btn" href="https://youtu.be/n5OL3Fog0ZE" target="_blank" rel="noopener">Watch on YouTube</a>
-        </div>
       </div>
+      </details>
     </article>
 
-    <article class="project">
+    <article class="project" id="disaster-response">
+      <div class="p-row">
+        <a class="p-thumb" href="#disaster-response" aria-label="Open the full write-up for Multiplayer Disaster Response Simulation">
+          <img src="images/thumbs/drone.jpg" alt="" loading="lazy">
+          <span class="p-badge">7 photos</span>
+        </a>
+        <div class="p-info">
+          <span class="project-tag">Red Cross Youth · Drone Workshop</span>
+          <h3>Multiplayer Disaster Response Simulation</h3>
+          <p class="p-sum">A four-player Unity game for a drone workshop. Each role sees only part of the picture, so the team has to talk to find survivors and deliver supplies in time.</p>
+          <div class="p-chips">
+          <span class="chip">Unity</span>
+          <span class="chip">C#</span>
+          <span class="chip">Netcode for GameObjects</span>
+          <span class="chip">Unity Transport</span>
+          </div>
+        </div>
+      </div>
+      <details class="p-more">
+        <summary><span class="when-closed">Read the full write-up</span><span class="when-open">Hide the write-up</span></summary>
       <div class="photo-grid">
         <img class="lead" src="images/drone-1-commander-map.jpg" alt="Commander coordinating the team from the tactical map with a walkie-talkie" data-caption="Commander view: the tactical map shows where each driver is, which survivors and supplies the drone has found, and suggested tasks. The Commander relays orders to the drivers by walkie-talkie." loading="lazy" tabindex="0">
         <img src="images/drone-2-driver-gamepad.jpg" alt="Participant driving a rescue vehicle with a gamepad" data-caption="A driver steering a rescue vehicle through the flooded town with a gamepad to reach survivors and supply crates." loading="lazy" tabindex="0">
@@ -321,8 +441,6 @@
       </div>
       <p class="photo-hint">Click a photo to enlarge it and read what&rsquo;s happening.</p>
       <div class="project-body">
-        <span class="project-tag">Red Cross Youth · Drone Workshop</span>
-        <h3>Multiplayer Disaster Response Simulation</h3>
         <p>
           A four-player disaster-response game I built in Unity for a Red Cross Youth drone
           workshop. Each player takes on a different role and only sees the information
@@ -377,6 +495,173 @@
           </div>
         </div>
       </div>
+      </details>
+    </article>
+
+    <div class="project-group">
+      <span class="project-tag">Vibe-coded with AI</span>
+      <h3>Solving problems and having fun with AI</h3>
+      <p>
+        Two projects I vibe coded with AI: I described what I wanted, the AI wrote the
+        code, and I tested, broke and steered it until it worked. One solves a real
+        problem; the other is purely for fun.
+      </p>
+    </div>
+
+    <article class="project" id="adminhub">
+      <div class="p-row">
+        <a class="p-thumb" href="#adminhub" aria-label="Open the full write-up for AdminHub">
+          <img src="images/thumbs/adminhub.jpg" alt="" loading="lazy">
+          <span class="p-badge">4 screenshots</span>
+        </a>
+        <div class="p-info">
+          <span class="project-tag">Vibe-coded with AI · Solving a problem</span>
+          <h3>AdminHub</h3>
+          <p class="p-sum">A web app for a team&rsquo;s everyday admin work: room bookings, duty rosters, attendance and tasks, all behind one sign-in. Runs on the Python standard library and SQLite.</p>
+          <div class="p-chips">
+          <span class="chip">Python</span>
+          <span class="chip">SQLite</span>
+          <span class="chip">HTML</span>
+          <span class="chip">CSS</span>
+          <span class="chip">JavaScript</span>
+          </div>
+        <div class="p-links">
+          <a class="btn" href="https://github.com/ZongPoh/AdminHub-public" target="_blank" rel="noopener">View the code on GitHub</a>
+        </div>
+        </div>
+      </div>
+      <details class="p-more">
+        <summary><span class="when-closed">Read the full write-up</span><span class="when-open">Hide the write-up</span></summary>
+      <div class="photo-grid shots">
+        <img class="lead" src="images/adminhub-1-home.png" alt="AdminHub home dashboard showing a supervisor's day and the team's status" data-caption="Home dashboard for a supervisor: your own duties, tasks and room bookings on top, then the team's attendance, roster health, approvals, tasks and facility faults at a glance." loading="lazy" tabindex="0">
+        <img src="images/adminhub-2-duty-roster.png" alt="AdminHub duty roster calendar for the month" data-caption="Duty roster: a shared monthly calendar with a Duty Manager, Duty Supervisor and Duty Assistant each day. Clashes are flagged in red, and swap requests wait for approval on the left." loading="lazy" tabindex="0">
+        <img src="images/adminhub-3-meeting-rooms.png" alt="AdminHub meeting room calendar with five rooms" data-caption="Meeting rooms: all five rooms on one calendar, with check-in and check-out, and a reminder for a booking that was never checked out." loading="lazy" tabindex="0">
+        <img src="images/adminhub-4-tasks.png" alt="AdminHub task board with four columns" data-caption="Tasks: a Kanban board with priorities, deadlines, progress and overdue alerts across the team." loading="lazy" tabindex="0">
+      </div>
+      <p class="photo-hint">Click a screenshot to enlarge it. All names and records shown are made-up sample data.</p>
+      <div class="project-body">
+        <p>
+          A web app for a team's everyday admin work: room bookings, duty rosters, shift
+          planning, attendance, fitness tests, vehicles and tasks, all behind one sign-in
+          with a home dashboard that shows what needs your attention today.
+        </p>
+        <p>
+          It runs on nothing but the Python standard library and SQLite, so there is
+          nothing to install: download it, run one command, and it opens in the browser
+          with sample data ready to explore.
+        </p>
+
+        <div class="explore">
+          <h4>What it does</h4>
+          <ul>
+            <li>Meeting rooms on one calendar, bookings that can't clash, check-in and check-out</li>
+            <li>Duty roster with auto-generated drafts, availability checks and duty swaps</li>
+            <li>Shift planning with desk-duty rules and minimum manpower per shift</li>
+            <li>Attendance headcount, plus leave and course approvals</li>
+            <li>Fitness test results, forecasts and session booking</li>
+            <li>Kanban tasks with team workload and deadline alerts</li>
+            <li>Room equipment, fault reports and a repair workflow</li>
+            <li>Role-based permissions and a timestamped activity log</li>
+          </ul>
+        </div>
+
+        <div class="stack">
+          <div class="stack-group">
+            <span class="stack-label">Technology</span>
+            <div class="stack-row">
+              <span class="chip">Python</span>
+              <span class="chip">SQLite</span>
+              <span class="chip">HTML</span>
+              <span class="chip">CSS</span>
+              <span class="chip">JavaScript</span>
+            </div>
+          </div>
+          <div class="stack-group">
+            <span class="stack-label">How it was built</span>
+            <div class="stack-row">
+              <span class="chip asset">Vibe coded with AI</span>
+              <span class="chip asset">No frameworks</span>
+              <span class="chip asset">Automated tests</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      </details>
+    </article>
+
+    <article class="project" id="project-trains">
+      <div class="p-row">
+        <a class="p-thumb" href="#project-trains" aria-label="Open the full write-up for Project Trains">
+          <img src="images/thumbs/trains.jpg" alt="" loading="lazy">
+          <span class="p-badge">Playable</span>
+        </a>
+        <div class="p-info">
+          <span class="project-tag">Vibe-coded with AI · Just for fun</span>
+          <h3>Project Trains</h3>
+          <p class="p-sum">A virtual toy-train city with a Japanese theme that runs in the browser. Lay track, build stations and watch a town grow around them.</p>
+          <div class="p-chips">
+          <span class="chip">JavaScript</span>
+          <span class="chip">three.js</span>
+          <span class="chip">Vite</span>
+          <span class="chip">GitHub Pages</span>
+          </div>
+        <div class="p-links">
+          <a class="btn primary" href="https://zongpoh.github.io/project-trains/" target="_blank" rel="noopener">Play it in your browser</a>
+          <a class="btn" href="https://github.com/ZongPoh/project-trains" target="_blank" rel="noopener">View the code on GitHub</a>
+        </div>
+        </div>
+      </div>
+      <details class="p-more">
+        <summary><span class="when-closed">Read the full write-up</span><span class="when-open">Hide the write-up</span></summary>
+      <div class="photo-grid">
+        <img class="lead" src="images/trains-1-starter-city.jpg" alt="A toy-train city with bullet trains on viaducts, a highway on pillars and a river" data-caption="The starter city: bullet trains on viaducts, a highway on pillars crossing the river, passengers waiting on a station platform, and cherry blossom in spring." loading="lazy" tabindex="0">
+      </div>
+      <div class="project-body">
+        <p>
+          A virtual toy-train city with a Japanese theme, inspired by riding the bullet
+          train and by toy train sets. Lay track on the board, build stations and signals,
+          bridge rivers, tunnel through hills, and watch a town grow around your stations.
+        </p>
+        <p>
+          It runs in the browser with nothing to install, and it opens with a starter city
+          that is already running, so you can simply watch the trains or climb aboard one.
+        </p>
+
+        <div class="explore">
+          <h4>What's in it</h4>
+          <ul>
+            <li>Eleven bullet trains running on a 56&nbsp;&times;&nbsp;56 board with four build levels</li>
+            <li>Express and local services that overtake and couple at stations</li>
+            <li>Stations with platform doors, queueing passengers, staff and departure melodies</li>
+            <li>Rivers with bridges, hills with tunnels, roads and level crossings</li>
+            <li>Highways on pillars with ramps, flyovers and traffic</li>
+            <li>Passengers whose journeys grow the town around each station</li>
+            <li>A ride-along camera with driver, chase and window views</li>
+            <li>Four seasons, day and night, and sound generated in the browser</li>
+          </ul>
+        </div>
+
+        <div class="stack">
+          <div class="stack-group">
+            <span class="stack-label">Technology</span>
+            <div class="stack-row">
+              <span class="chip">JavaScript</span>
+              <span class="chip">three.js</span>
+              <span class="chip">Vite</span>
+              <span class="chip">GitHub Pages</span>
+            </div>
+          </div>
+          <div class="stack-group">
+            <span class="stack-label">How it was built</span>
+            <div class="stack-row">
+              <span class="chip asset">Vibe coded with AI</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      </details>
     </article>
   </div>
 </section>
@@ -395,57 +680,90 @@
       bus simulator and an autonomous-vehicle simulation.
     </p>
 
-    <p class="work-group-label">Bus Simulator</p>
-    <div class="video-grid">
-      <div class="video-card">
+    <article class="project" id="bus-simulator">
+      <div class="p-row">
+        <a class="p-thumb video" href="#bus-simulator" aria-label="Show the clip for Bus Simulator">
+          <img src="https://i.ytimg.com/vi/tRKfI3aIPDM/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+          <span class="p-badge">1 clip</span>
+        </a>
+        <div class="p-info">
+          <span class="project-tag">PTV Group · Team project</span>
+          <h3>Bus Simulator</h3>
+          <p class="p-sum">A bus simulator designed to give an immersive experience for both driver
+          training and traffic-behaviour analysis, with live traffic streamed from PTV
+          VISSIM into Unity.</p>
+          <div class="p-chips">
+            <span class="chip">Unity</span>
+            <span class="chip">PTV VISSIM</span>
+          </div>
+          <div class="p-links">
+            <a class="btn" href="https://youtu.be/tRKfI3aIPDM" target="_blank" rel="noopener">Watch on YouTube</a>
+          </div>
+        </div>
+      </div>
+      <details class="p-more">
+        <summary><span class="when-closed">Watch the clip here</span><span class="when-open">Hide the clip</span></summary>
         <div class="embed">
           <iframe src="https://www.youtube.com/embed/tRKfI3aIPDM"
             title="Driving Simulator with VISSIM Integration in Unity"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen loading="lazy"></iframe>
         </div>
-        <div class="caption">
-          <h4>Driving Simulator with VISSIM Integration in Unity</h4>
-          <p>A bus simulator designed to give an immersive experience for both driver
-          training and traffic-behaviour analysis, with live traffic streamed from PTV
-          VISSIM into Unity.</p>
-        </div>
-      </div>
-    </div>
+        <p class="clip-title">Driving Simulator with VISSIM Integration in Unity</p>
+      </details>
+    </article>
 
-    <p class="work-group-label">Autonomous Vehicle Simulation</p>
-    <p class="work-intro">
-      An autonomous-vehicle simulation used to test edge cases against realistic VISSIM
-      traffic behaviour.
-    </p>
-    <div class="video-grid">
-      <div class="video-card">
-        <div class="embed">
-          <iframe src="https://www.youtube.com/embed/EM7AHhyWbNg"
-            title="Autonomous Vehicles in Unity with VISSIM traffic — Stopping for jaywalkers"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="caption">
-          <h4>Stopping for jaywalkers</h4>
-          <p>An edge-case scenario where the autonomous vehicle detects and stops for
-          jaywalking pedestrians.</p>
+    <article class="project" id="av-simulation">
+      <div class="p-row">
+        <a class="p-thumb video" href="#av-simulation" aria-label="Show the clips for Autonomous Vehicle Simulation">
+          <img src="https://i.ytimg.com/vi/EM7AHhyWbNg/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+          <span class="p-badge">2 clips</span>
+        </a>
+        <div class="p-info">
+          <span class="project-tag">PTV Group · Team project</span>
+          <h3>Autonomous Vehicle Simulation</h3>
+          <p class="p-sum">An autonomous-vehicle simulation used to test edge cases against realistic VISSIM
+          traffic behaviour.</p>
+          <div class="p-chips">
+            <span class="chip">Unity</span>
+            <span class="chip">PTV VISSIM</span>
+          </div>
         </div>
       </div>
+      <details class="p-more">
+        <summary><span class="when-closed">Watch the clips here</span><span class="when-open">Hide the clips</span></summary>
+        <div class="project-body">
+          <div class="video-grid">
+            <div class="video-card">
+              <div class="embed">
+                <iframe src="https://www.youtube.com/embed/EM7AHhyWbNg"
+                  title="Autonomous Vehicles in Unity with VISSIM traffic — Stopping for jaywalkers"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen loading="lazy"></iframe>
+              </div>
+              <div class="caption">
+                <h4>Stopping for jaywalkers</h4>
+                <p>An edge-case scenario where the autonomous vehicle detects and stops for
+                jaywalking pedestrians.</p>
+              </div>
+            </div>
 
-      <div class="video-card">
-        <div class="embed">
-          <iframe src="https://www.youtube.com/embed/LF9YIEZRR3M"
-            title="Autonomous Vehicles in Unity with VISSIM traffic — Failing to give way"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen loading="lazy"></iframe>
+            <div class="video-card">
+              <div class="embed">
+                <iframe src="https://www.youtube.com/embed/LF9YIEZRR3M"
+                  title="Autonomous Vehicles in Unity with VISSIM traffic — Failing to give way"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen loading="lazy"></iframe>
+              </div>
+              <div class="caption">
+                <h4>Failing to give way</h4>
+                <p>An edge-case study of give-way behaviour and where the logic breaks down.</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="caption">
-          <h4>Failing to give way</h4>
-          <p>An edge-case study of give-way behaviour and where the logic breaks down.</p>
-        </div>
-      </div>
-    </div>
+      </details>
+    </article>
   </div>
 </section>
 
@@ -470,6 +788,23 @@
 </footer>
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script>
+/* Project cards: clicking a thumbnail, or arriving on a link like #adminhub, opens that card. */
+(function(){
+  function more(id){ var a=id&&document.getElementById(id);
+    return a&&a.classList.contains('project')?a.querySelector('.p-more'):null; }
+  function fromHash(){ var d=more(decodeURIComponent(location.hash.slice(1))); if(d) d.open=true; }
+  [].forEach.call(document.querySelectorAll('.p-thumb'),function(t){
+    t.addEventListener('click',function(e){
+      e.preventDefault();
+      var card=t.closest('.project'), d=card.querySelector('.p-more');
+      d.open=!d.open;
+      if(d.open&&history.replaceState) history.replaceState(null,'','#'+card.id);
+    });
+  });
+  window.addEventListener('hashchange',fromHash); fromHash();
+})();
+</script>
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
   <button class="lb-close" aria-label="Close">&times;</button>
   <button class="lb-prev" aria-label="Previous photo">&#8249;</button>
@@ -480,19 +815,21 @@
 </div>
 <script>
 (function(){
-  var imgs=[].slice.call(document.querySelectorAll('.photo-grid img'));
-  var lb=document.getElementById('lightbox'); if(!imgs.length||!lb) return;
+  var all=[].slice.call(document.querySelectorAll('.photo-grid img')), imgs=all;
+  var lb=document.getElementById('lightbox'); if(!all.length||!lb) return;
   var big=lb.querySelector('img'), cap=lb.querySelector('.lb-caption'), cnt=lb.querySelector('.lb-count');
   var i=0, last=null;
   function show(n){ i=(n+imgs.length)%imgs.length; var t=imgs[i];
     big.src=t.src; big.alt=t.alt; cap.textContent=t.dataset.caption||t.alt;
     cnt.textContent=(i+1)+' / '+imgs.length; }
-  function open(n){ last=document.activeElement; show(n); lb.classList.add('open');
+  function open(el){ last=document.activeElement;
+    imgs=[].slice.call(el.closest('.photo-grid').querySelectorAll('img'));
+    lb.classList.toggle('single',imgs.length<2); show(imgs.indexOf(el)); lb.classList.add('open');
     document.body.style.overflow='hidden'; lb.querySelector('.lb-close').focus(); }
   function close(){ lb.classList.remove('open'); document.body.style.overflow=''; if(last) last.focus(); }
-  imgs.forEach(function(im,n){
-    im.addEventListener('click',function(){open(n);});
-    im.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();open(n);} });
+  all.forEach(function(im){
+    im.addEventListener('click',function(){open(im);});
+    im.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();open(im);} });
   });
   lb.querySelector('.lb-close').onclick=close;
   lb.querySelector('.lb-prev').onclick=function(){show(i-1);};
