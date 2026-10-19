@@ -286,6 +286,58 @@
   .pmodal-close:hover{border-color:var(--text)}
   @media (max-width:640px){.pmodal{padding:0}.pmodal-box{border-radius:0;min-height:100%}}
   @media (prefers-reduced-motion:reduce){.pcard,.pcover img{transition:none}.pcard:hover{transform:none}.pcover:hover img{transform:none}}
+
+  /* ===== Enhancements: quick summary, nav, tap targets, layout ===== */
+  html{scroll-padding-top:68px}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  a:focus-visible,.btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+
+  /* Nav: every link on every screen, finger-sized, shows where you are */
+  nav .links{gap:4px}
+  nav .links a{display:inline-flex;align-items:center;min-height:44px;padding:0 10px;border-radius:8px;white-space:nowrap}
+  nav .links a[aria-current="true"]{color:var(--text);box-shadow:inset 0 -2px 0 var(--accent);border-radius:0}
+  @media (max-width:640px){ nav .links a.hide-sm{display:inline-flex} }
+  @media (max-width:480px){
+    nav .brand{display:none}
+    nav .wrap{justify-content:center}
+    nav .links{gap:0;width:100%;justify-content:space-between}
+    nav .links a{padding:0 6px;font-size:.9rem}
+  }
+  @media (max-width:360px){ nav .links a{padding:0 3px;font-size:.84rem} nav .wrap{padding:0 12px} }
+
+  /* Hero: tighter on small screens */
+  header.hero{padding:64px 0 56px}
+  .eyebrow{border-radius:12px}
+  @media (max-width:640px){
+    header.hero{padding:36px 0 40px}
+    .eyebrow{font-size:.72rem;letter-spacing:.05em;margin-bottom:16px}
+    .hero p.lead{font-size:1.05rem}
+    .cta{margin-top:24px}
+    .cta .btn{flex:1 1 auto;justify-content:center}
+  }
+
+
+  /* Finger-sized links and buttons */
+  .plinks a{display:inline-flex;align-items:center;min-height:40px}
+  .readmore{min-height:40px}
+  .pfilter{min-height:38px;padding:6px 16px}
+  @media (max-width:640px){ .wrap{padding:0 20px} }
+
+  /* Wide screens: use the space. Text keeps a readable line length;
+     the layout, project grid and About spread out. */
+  @media (min-width:1180px){
+    :root{--maxw:1140px}
+    header.hero{padding:88px 0 80px}
+    h1{font-size:3.3rem;max-width:900px}
+    .hero p.lead{font-size:1.25rem;max-width:720px}
+    .pgrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+    .about .wrap{display:grid;grid-template-columns:minmax(0,1fr) 400px;column-gap:64px;align-items:start}
+    .about .wrap>*{grid-column:1}
+    .about .wrap>.skills{grid-column:2;grid-row:1/span 6;margin-top:0;max-width:none;
+      padding:22px 24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-soft)}
+    .about .skills .chip{background:#fff}
+    .work-intro{max-width:760px}
+  }
 </style>
 </head>
 <body>
@@ -294,9 +346,9 @@
   <div class="wrap">
     <span class="brand">Loo Zong Poh</span>
     <div class="links">
-      <a href="#about">About</a>
       <a href="#projects">Projects</a>
-      <a class="hide-sm" href="#work">Earlier Work</a>
+      <a href="#about">About</a>
+      <a class="hide-sm" href="#work">Earlier work</a>
       <a class="hide-sm" href="#contact">Contact</a>
     </div>
   </div>
@@ -308,78 +360,17 @@
     <h1>Hi, I'm Zong Poh.<br />I learn by building&mdash;and build things that learn.</h1>
     <p class="lead">
       I&rsquo;m a computer engineer who explores emerging technology by turning it into
-      working systems. From machine learning and computer vision to real-time simulation
-      and multiplayer networking, I enjoy understanding how every layer fits
-      together&mdash;especially when the challenge is teaching machines to drive.
+      working systems, from machine learning and computer vision to real-time simulation
+      and multiplayer networking.
     </p>
     <div class="cta">
       <a class="btn primary" href="#projects">View my work</a>
       <a class="btn" href="https://www.linkedin.com/in/loo-zong-poh" target="_blank" rel="noopener">LinkedIn</a>
     </div>
+
   </div>
 </header>
 
-<section id="about" class="about">
-  <div class="wrap">
-    <h2>About</h2>
-    <p class="section-sub">Who I am and how I work.</p>
-    <p>
-      I&rsquo;m a computer engineer who learns best by building. When a new technology
-      catches my attention&mdash;whether it&rsquo;s a machine-learning architecture, a
-      computer-vision technique, a simulation framework, or a multiplayer networking
-      feature&mdash;my first instinct is to open an editor and put it to work.
-    </p>
-    <p>
-      I enjoy going beyond the surface to understand how the entire system fits together:
-      from data and models to engines, infrastructure, and networks. I&rsquo;m not
-      interested in treating technology as a black box; I want to understand what makes
-      it work, where it breaks, and how it can be improved.
-    </p>
-    <p>
-      Some of my most valuable lessons have come from experiments that didn&rsquo;t go as
-      planned. That cycle of building, breaking, debugging, and refining is what keeps me
-      curious&mdash;and helps me grow in a field that never stands still.
-    </p>
-    <!-- Skills, grouped under labels. To add a group, copy one .stack-group block. -->
-    <div class="skills stack">
-      <div class="stack-group">
-        <span class="stack-label">Languages</span>
-        <div class="stack-row">
-          <span class="chip">Python</span>
-          <span class="chip">C#</span>
-          <span class="chip">JavaScript</span>
-        </div>
-      </div>
-      <div class="stack-group">
-        <span class="stack-label">Machine Learning &amp; Computer Vision</span>
-        <div class="stack-row">
-          <span class="chip">PyTorch</span>
-          <span class="chip">OpenCV</span>
-          <span class="chip">NumPy</span>
-          <span class="chip">Reinforcement Learning</span>
-          <span class="chip">Computer Vision</span>
-          <span class="chip">CNNs</span>
-        </div>
-      </div>
-      <div class="stack-group">
-        <span class="stack-label">Simulation &amp; Games</span>
-        <div class="stack-row">
-          <span class="chip">Unity</span>
-          <span class="chip">Simulation</span>
-          <span class="chip">Multiplayer Networking</span>
-          <span class="chip">Netcode for GameObjects</span>
-        </div>
-      </div>
-      <div class="stack-group">
-        <span class="stack-label">Web</span>
-        <div class="stack-row">
-          <span class="chip">three.js</span>
-          <span class="chip">SQLite</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <section id="projects">
   <div class="wrap">
@@ -573,8 +564,8 @@
       </div>
       <div class="pcard-full" hidden>
       <div class="photo-grid shots">
-        <img class="lead" src="images/trains-2-build-tools.jpg" alt="A toy-train city with bullet trains on viaducts, a highway on pillars and a river" data-caption="The starter city: bullet trains on viaducts, a highway on pillars crossing the river, passengers waiting on a station platform, and cherry blossom in spring." loading="lazy" tabindex="0">
-        <img src="images/trains-1-starter-city.jpg" alt="The full game screen with the building tools, departure board and train depot" data-caption="The builder: track, ramp, station, road, river, hill and highway tools on the left, a live departure board on the right, and the depot of eleven bullet trains along the bottom." loading="lazy" tabindex="0">
+        <img class="lead" src="images/trains-2-build-tools.jpg" alt="The full game screen with the building tools, departure board and train depot" data-caption="The builder: track, ramp, station, road, river, hill and highway tools on the left, a live departure board on the right, and the depot of eleven bullet trains along the bottom." loading="lazy" tabindex="0">
+        <img src="images/trains-1-starter-city.jpg" alt="A toy-train city with bullet trains on viaducts, a highway on pillars and a river" data-caption="The starter city: bullet trains on viaducts, a highway on pillars crossing the river, passengers waiting on a station platform, and cherry blossom in spring." loading="lazy" tabindex="0">
         <img src="images/trains-3-ride-doctor-yellow.jpg" alt="Chase view behind the yellow Doctor Yellow train among cherry blossom, heading towards Shin-Osaka" data-caption="Riding along behind Doctor Yellow, the track-inspection train, through cherry blossom towards Shin-Osaka, with other bullet trains running on the viaduct above." loading="lazy" tabindex="0">
         <img src="images/trains-4-passenger-window.jpg" alt="View from a passenger window on a viaduct, looking over the city" data-caption="The passenger-window view from an E6 Komachi on the viaduct, looking out over the city." loading="lazy" tabindex="0">
         <img src="images/trains-5-night-shin-osaka.jpg" alt="An E5 Hayabusa on a viaduct at night, curving into Shin-Osaka station with lit windows" data-caption="At night the windows light up: an E5 Hayabusa curves along the viaduct into Shin-Osaka." loading="lazy" tabindex="0">
@@ -817,6 +808,68 @@
   </div>
 </div>
 
+<section id="about" class="about">
+  <div class="wrap">
+    <h2>About</h2>
+    <p class="section-sub">Who I am and how I work.</p>
+    <p>
+      I&rsquo;m a computer engineer who learns best by building. When a new technology
+      catches my attention&mdash;whether it&rsquo;s a machine-learning architecture, a
+      computer-vision technique, a simulation framework, or a multiplayer networking
+      feature&mdash;my first instinct is to open an editor and put it to work.
+    </p>
+    <p>
+      I enjoy going beyond the surface to understand how the entire system fits together:
+      from data and models to engines, infrastructure, and networks. I&rsquo;m not
+      interested in treating technology as a black box; I want to understand what makes
+      it work, where it breaks, and how it can be improved.
+    </p>
+    <p>
+      Some of my most valuable lessons have come from experiments that didn&rsquo;t go as
+      planned. That cycle of building, breaking, debugging, and refining is what keeps me
+      curious&mdash;and helps me grow in a field that never stands still.
+    </p>
+    <!-- Skills, grouped under labels. To add a group, copy one .stack-group block. -->
+    <div class="skills stack">
+      <div class="stack-group">
+        <span class="stack-label">Languages</span>
+        <div class="stack-row">
+          <span class="chip">Python</span>
+          <span class="chip">C#</span>
+          <span class="chip">JavaScript</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <span class="stack-label">Machine Learning &amp; Computer Vision</span>
+        <div class="stack-row">
+          <span class="chip">PyTorch</span>
+          <span class="chip">OpenCV</span>
+          <span class="chip">NumPy</span>
+          <span class="chip">Reinforcement Learning</span>
+          <span class="chip">Computer Vision</span>
+          <span class="chip">CNNs</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <span class="stack-label">Simulation &amp; Games</span>
+        <div class="stack-row">
+          <span class="chip">Unity</span>
+          <span class="chip">Simulation</span>
+          <span class="chip">Multiplayer Networking</span>
+          <span class="chip">Netcode for GameObjects</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <span class="stack-label">Web</span>
+        <div class="stack-row">
+          <span class="chip">three.js</span>
+          <span class="chip">SQLite</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="work">
   <div class="wrap">
     <h2>Earlier Work</h2>
@@ -981,6 +1034,7 @@
     filters.forEach(function(x){x.setAttribute('aria-pressed',x===f);});
     [].forEach.call(document.querySelectorAll('.pcard'),function(c){
       c.hidden=!(f.dataset.cat==='all'||c.dataset.cat===f.dataset.cat); });
+    document.querySelector('.pgrid').classList.toggle('is-filtered',f.dataset.cat!=='all');
   }); });
 
   /* Earlier Work cards keep the original open/close behaviour */
@@ -1036,6 +1090,26 @@
   lb.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
   lb.addEventListener('touchend',function(e){ if(x0===null) return; var dx=e.changedTouches[0].clientX-x0;
     if(Math.abs(dx)>50) show(dx<0?i+1:i-1); x0=null; });
+})();
+</script>
+<script>
+/* Nav: underline the section you are reading */
+(function(){
+  var links=[].slice.call(document.querySelectorAll('nav .links a'));
+  if(!('IntersectionObserver' in window)) return;
+  var map={}; links.forEach(function(a){ map[a.getAttribute('href').slice(1)]=a; });
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(!e.isIntersecting) return;
+      links.forEach(function(a){ a.removeAttribute('aria-current'); });
+      var a=map[e.target.id]; if(a) a.setAttribute('aria-current','true'); });
+  },{rootMargin:'-45% 0px -50% 0px'});
+  Object.keys(map).forEach(function(id){ var el=document.getElementById(id); if(el) io.observe(el); });
+  /* the last section is short, so mark it once the page is scrolled to the bottom */
+  window.addEventListener('scroll',function(){
+    if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4){
+      links.forEach(function(a){ a.removeAttribute('aria-current'); });
+      links[links.length-1].setAttribute('aria-current','true'); }
+  },{passive:true});
 })();
 </script>
 </body>
