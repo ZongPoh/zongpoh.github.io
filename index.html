@@ -572,9 +572,16 @@
         </div>
       </div>
       <div class="pcard-full" hidden>
-      <div class="photo-grid">
-        <img class="lead" src="images/trains-1-starter-city.jpg" alt="A toy-train city with bullet trains on viaducts, a highway on pillars and a river" data-caption="The starter city: bullet trains on viaducts, a highway on pillars crossing the river, passengers waiting on a station platform, and cherry blossom in spring." loading="lazy" tabindex="0">
+      <div class="photo-grid shots">
+        <img class="lead" src="images/trains-2-build-tools.jpg" alt="A toy-train city with bullet trains on viaducts, a highway on pillars and a river" data-caption="The starter city: bullet trains on viaducts, a highway on pillars crossing the river, passengers waiting on a station platform, and cherry blossom in spring." loading="lazy" tabindex="0">
+        <img src="images/trains-1-starter-city.jpg" alt="The full game screen with the building tools, departure board and train depot" data-caption="The builder: track, ramp, station, road, river, hill and highway tools on the left, a live departure board on the right, and the depot of eleven bullet trains along the bottom." loading="lazy" tabindex="0">
+        <img src="images/trains-3-ride-doctor-yellow.jpg" alt="Chase view behind the yellow Doctor Yellow train among cherry blossom, heading towards Shin-Osaka" data-caption="Riding along behind Doctor Yellow, the track-inspection train, through cherry blossom towards Shin-Osaka, with other bullet trains running on the viaduct above." loading="lazy" tabindex="0">
+        <img src="images/trains-4-passenger-window.jpg" alt="View from a passenger window on a viaduct, looking over the city" data-caption="The passenger-window view from an E6 Komachi on the viaduct, looking out over the city." loading="lazy" tabindex="0">
+        <img src="images/trains-5-night-shin-osaka.jpg" alt="An E5 Hayabusa on a viaduct at night, curving into Shin-Osaka station with lit windows" data-caption="At night the windows light up: an E5 Hayabusa curves along the viaduct into Shin-Osaka." loading="lazy" tabindex="0">
+        <img src="images/trains-6-autumn.jpg" alt="The city in autumn with red and gold trees" data-caption="Autumn: red and gold trees across the city." loading="lazy" tabindex="0">
+        <img src="images/trains-7-winter.jpg" alt="The city covered in snow in winter" data-caption="Winter: the whole board under snow, with the trains still running." loading="lazy" tabindex="0">
       </div>
+      <p class="photo-hint">Click a screenshot to enlarge it.</p>
       <div class="project-body">
         <p>
           A virtual toy-train city with a Japanese theme, inspired by riding the bullet
@@ -622,6 +629,91 @@
       
       </div>
     </article>
+    <article class="pcard" id="hex-farm" data-cat="games">
+      <button type="button" class="pcover" data-open="hex-farm" aria-label="Open the full write-up for Hex Farm">
+        <img src="images/thumbs/hexfarm.jpg" alt="" loading="lazy">
+        <span class="pstatus live">Playable</span>
+      </button>
+      <div class="pcard-body">
+        <span class="project-tag">Browser game &middot; Built with AI</span>
+        <h3>Hex Farm</h3>
+        <p class="p-sum">A 3D hex-tile farming and settlement game in the browser. Grow a camp into a town while rabbits raid your crops, foxes hunt and neighbouring villages trade with you or raid you.</p>
+        <div class="p-chips"><span class="chip">React</span><span class="chip">Three.js</span><span class="chip">Vite</span><span class="chip">GitHub Pages</span></div>
+        <div class="plinks">
+          <button type="button" class="readmore" data-open="hex-farm">Read the write-up</button>
+          <a href="https://zongpoh.github.io/Project-Farmer/" target="_blank" rel="noopener" class="go">Play it &rarr;</a><a href="https://github.com/ZongPoh/Project-Farmer" target="_blank" rel="noopener">Code &rarr;</a>
+        </div>
+      </div>
+      <div class="pcard-full" hidden>
+      <div class="photo-grid shots">
+        <img class="lead" src="images/hexfarm-1-town-overview.jpg" alt="Hex Farm game screen with a large town on a 3D hex map, a minimap and the management panels" data-caption="A Town in its fourth year: 22 workers, farms, quarries and houses across the valley, with the minimap, job queue and settlement inspector alongside." loading="lazy" tabindex="0">
+        <img src="images/hexfarm-2-early-hamlet.jpg" alt="An early hamlet of a few buildings among forests, rivers and rocky hills" data-caption="An early hamlet on day 41, with workers out on the land and a neighbouring village sending a raid." loading="lazy" tabindex="0">
+        <img src="images/hexfarm-3-winter.jpg" alt="The settlement covered in snow in winter" data-caption="Winter: snow covers the valley, and the stores laid by in autumn have to last until spring." loading="lazy" tabindex="0">
+        <img src="images/hexfarm-4-dusk-lamps.jpg" alt="The town at dusk with lamps lit in the buildings" data-caption="Dusk: the sky follows the real sun position, and lamps come on across the town as night falls." loading="lazy" tabindex="0">
+      </div>
+      <p class="photo-hint">Click a screenshot to enlarge it.</p>
+      <div class="project-body">
+        <p>
+          A 3D hex-tile farming and settlement game that runs entirely in the browser.
+          Start with a camp on a hex map and grow it into a town: farm, cut wood, quarry
+          stone, catch horses and claim land, while rabbits raid your crops, foxes hunt,
+          and neighbouring villages trade with you or raid you.
+        </p>
+        <p>
+          The world keeps running while you're away and catches up when you return. Your
+          settlement saves to a small file you can load anywhere, with no account or
+          server needed.
+        </p>
+
+        <div class="explore">
+          <h4>What's in it</h4>
+          <ul>
+            <li>An hourly clock, four seasons, a sky driven by real sun position, dusk lamps and moonlight</li>
+            <li>Workers who walk to each job, queue up, mend what breaks and forage when idle</li>
+            <li>Rabbits, foxes, horses, goats and hens, with a predator&ndash;prey balance tuned over three simulated years</li>
+            <li>Territory that grows as you build, plus raiders and peaceful settlers</li>
+            <li>Progression from Camp to Homestead, Hamlet, Village and Town, with tools, skills, healing and defences</li>
+          </ul>
+        </div>
+
+        <div class="explore">
+          <h4>Under the hood</h4>
+          <ul>
+            <li>All game rules live in plain JavaScript with no React or Three.js, so 483 tests run in Node without a browser</li>
+            <li>Live play, idle play and offline catch-up all go through one tick, so 120 days away replays in a fraction of a second</li>
+            <li>Sparse tile storage and windowed instanced rendering keep a game day at 1&ndash;3&nbsp;ms, from 24&nbsp;&times;&nbsp;16 up to 400&nbsp;&times;&nbsp;200 tiles</li>
+            <li>Saves store only changed tiles, so a save is a few KB</li>
+            <li>Balance and performance fixes driven by headless simulations and profiling, including a 55&times; speed-up traced to repeated failed pathfinding</li>
+            <li>Every push runs lint and tests in GitHub Actions before publishing</li>
+          </ul>
+        </div>
+
+        <div class="stack">
+          <div class="stack-group">
+            <span class="stack-label">Technology</span>
+            <div class="stack-row">
+              <span class="chip">React</span>
+              <span class="chip">Three.js</span>
+              <span class="chip">React Three Fiber</span>
+              <span class="chip">Vite</span>
+              <span class="chip">GitHub Actions</span>
+              <span class="chip">GitHub Pages</span>
+            </div>
+          </div>
+          <div class="stack-group">
+            <span class="stack-label">How it was built</span>
+            <div class="stack-row">
+              <span class="chip asset">Built with AI</span>
+              <span class="chip asset">Automated tests</span>
+              <span class="chip asset">CI-gated deploys</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
+      </div>
+    </article>
     <article class="pcard" id="adminhub" data-cat="tools">
       <button type="button" class="pcover" data-open="adminhub" aria-label="Open the full write-up for AdminHub">
         <img src="images/thumbs/adminhub.jpg" alt="" loading="lazy">
@@ -634,7 +726,6 @@
         <div class="p-chips"><span class="chip">Python</span><span class="chip">SQLite</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span></div>
         <div class="plinks">
           <button type="button" class="readmore" data-open="adminhub">Read the write-up</button>
-          <a href="https://github.com/ZongPoh/AdminHub-public" target="_blank" rel="noopener">Code on GitHub &rarr;</a>
         </div>
       </div>
       <div class="pcard-full" hidden>
