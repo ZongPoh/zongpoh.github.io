@@ -1,784 +1,2243 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Loo Zong Poh — Portfolio</title>
-<meta name="description" content="Portfolio of Loo Zong Poh — computer engineer working in machine learning, reinforcement learning, and computer vision." />
-<style>
-  :root{
-    --bg:#ffffff;
-    --bg-soft:#f6f7f9;
-    --text:#1a1d21;
-    --muted:#5c636e;
-    --line:#e6e8ec;
-    --accent:#2f6df6;
-    --accent-soft:#eaf0fe;
-    --radius:14px;
-    --maxw:880px;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    color:var(--text);
-    background:var(--bg);
-    line-height:1.65;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:var(--accent);text-decoration:none}
-  a:hover{text-decoration:underline}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loo Zong Poh — Portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio of Loo Zong Poh — computer engineer working in machine learning, reinforcement learning, and computer vision."
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --bg-soft: #f6f7f9;
+        --text: #1a1d21;
+        --muted: #5c636e;
+        --line: #e6e8ec;
+        --accent: #2f6df6;
+        --accent-soft: #eaf0fe;
+        --radius: 14px;
+        --maxw: 880px;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+        color: var(--text);
+        background: var(--bg);
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .wrap {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 0 24px;
+      }
 
-  /* Nav */
-  nav{
-    position:sticky;top:0;z-index:10;
-    background:rgba(255,255,255,.85);
-    backdrop-filter:saturate(180%) blur(10px);
-    border-bottom:1px solid var(--line);
-  }
-  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
-  nav .brand{font-weight:700;letter-spacing:-.01em;color:var(--text)}
-  nav .links{display:flex;gap:22px}
-  nav .links a{color:var(--muted);font-size:.95rem;font-weight:500}
-  nav .links a:hover{color:var(--text);text-decoration:none}
+      /* Nav */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: saturate(180%) blur(10px);
+        border-bottom: 1px solid var(--line);
+      }
+      nav .wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+      }
+      nav .brand {
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        color: var(--text);
+      }
+      nav .links {
+        display: flex;
+        gap: 22px;
+      }
+      nav .links a {
+        color: var(--muted);
+        font-size: 0.95rem;
+        font-weight: 500;
+      }
+      nav .links a:hover {
+        color: var(--text);
+        text-decoration: none;
+      }
 
-  /* Hero */
-  header.hero{padding:90px 0 70px}
-  .eyebrow{
-    display:inline-block;font-size:.8rem;font-weight:600;letter-spacing:.08em;
-    text-transform:uppercase;color:var(--accent);
-    background:var(--accent-soft);padding:6px 12px;border-radius:999px;margin-bottom:22px;
-  }
-  h1{font-size:2.7rem;line-height:1.1;letter-spacing:-.02em;margin-bottom:18px}
-  .hero p.lead{font-size:1.2rem;color:var(--muted);max-width:660px}
-  .cta{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
-  .btn{
-    display:inline-flex;align-items:center;gap:8px;
-    padding:11px 20px;border-radius:10px;font-weight:600;font-size:.95rem;
-    border:1px solid var(--line);color:var(--text);background:#fff;transition:.15s;
-  }
-  .btn:hover{text-decoration:none;border-color:var(--text)}
-  .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
-  .btn.primary:hover{background:#1f59d8;border-color:#1f59d8}
+      /* Hero */
+      header.hero {
+        padding: 90px 0 70px;
+      }
+      .eyebrow {
+        display: inline-block;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+        background: var(--accent-soft);
+        padding: 6px 12px;
+        border-radius: 999px;
+        margin-bottom: 22px;
+      }
+      h1 {
+        font-size: 2.7rem;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        margin-bottom: 18px;
+      }
+      .hero p.lead {
+        font-size: 1.2rem;
+        color: var(--muted);
+        max-width: 660px;
+      }
+      .cta {
+        display: flex;
+        gap: 12px;
+        margin-top: 32px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 11px 20px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        border: 1px solid var(--line);
+        color: var(--text);
+        background: #fff;
+        transition: 0.15s;
+      }
+      .btn:hover {
+        text-decoration: none;
+        border-color: var(--text);
+      }
+      .btn.primary {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent);
+      }
+      .btn.primary:hover {
+        background: #1f59d8;
+        border-color: #1f59d8;
+      }
 
-  /* Sections */
-  section{padding:60px 0;border-top:1px solid var(--line)}
-  h2{font-size:1.6rem;letter-spacing:-.01em;margin-bottom:8px}
-  .section-sub{color:var(--muted);margin-bottom:34px}
+      /* Sections */
+      section {
+        padding: 60px 0;
+        border-top: 1px solid var(--line);
+      }
+      h2 {
+        font-size: 1.6rem;
+        letter-spacing: -0.01em;
+        margin-bottom: 8px;
+      }
+      .section-sub {
+        color: var(--muted);
+        margin-bottom: 34px;
+      }
 
-  /* About */
-  .about p{color:var(--muted);max-width:680px;margin-bottom:16px}
-  .skills{margin-top:26px;max-width:680px}
-  .chip{
-    font-size:.85rem;font-weight:500;color:var(--text);
-    background:var(--bg-soft);border:1px solid var(--line);
-    padding:7px 13px;border-radius:999px;
-  }
+      /* About Me: illustration left, text right */
+      .about-split {
+        display: grid;
+        grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+        gap: 56px;
+        align-items: center;
+      }
+      .about-visual {
+        aspect-ratio: 1/1.05;
+        border-radius: 24px;
+        background: radial-gradient(
+          circle at 30% 25%,
+          #fff 0,
+          var(--accent-soft) 70%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6%;
+      }
+      .net {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+      }
+      .net .edges line {
+        stroke: var(--accent);
+        stroke-opacity: 0.18;
+        stroke-width: 1.5;
+      }
+      .net .nodes circle {
+        fill: #fff;
+        stroke: var(--accent);
+        stroke-width: 3;
+      }
+      .net .pulse {
+        fill: var(--accent);
+        opacity: 0;
+      }
+      .net .net-labels text {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        fill: var(--accent);
+        text-anchor: middle;
+        opacity: 0.7;
+      }
+      .net .nodes circle {
+        animation: nodeGlow 3.6s ease-in-out infinite;
+      }
+      .net .nodes circle:nth-child(3n + 1) {
+        animation-delay: 0.6s;
+      }
+      .net .nodes circle:nth-child(3n + 2) {
+        animation-delay: 1.4s;
+      }
+      @keyframes nodeGlow {
+        0%,
+        100% {
+          fill: #fff;
+        }
+        50% {
+          fill: var(--accent-soft);
+        }
+      }
+      .about-text > h2 {
+        margin-bottom: 16px;
+      }
+      .about-text > p {
+        color: var(--muted);
+        margin-bottom: 14px;
+        font-size: 1.05rem;
+      }
+      .about-cta {
+        margin-top: 22px;
+      }
+      @media (max-width: 860px) {
+        .about-split {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+        .about-visual {
+          max-width: 420px;
+          width: 100%;
+          margin: 0 auto;
+          aspect-ratio: 1.2/1;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .net .nodes circle {
+          animation: none;
+        }
+      }
+      .chip {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--text);
+        background: var(--bg-soft);
+        border: 1px solid var(--line);
+        padding: 7px 13px;
+        border-radius: 999px;
+      }
 
-  /* Project card */
-  .project{
-    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;
-  }
-  .media{
-    aspect-ratio:16/9;background:linear-gradient(135deg,#eef2f9,#f6f7f9);
-    display:flex;align-items:center;justify-content:center;color:var(--muted);
-    font-size:.95rem;border-bottom:1px solid var(--line);text-align:center;padding:20px;
-    overflow:hidden;
-  }
-  .media span{max-width:320px}
-  /* Project card: a compact row that is always visible (thumbnail, one-line
+      /* Project card */
+      .project {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        overflow: hidden;
+        background: #fff;
+      }
+      /* Project card: a compact row that is always visible (thumbnail, one-line
      summary, tech, links), then the full write-up tucked inside <details>. */
-  .project{scroll-margin-top:76px}
-  .p-row{display:grid;grid-template-columns:260px 1fr;gap:24px;padding:20px;align-items:start}
-  .p-thumb{
-    position:relative;display:block;aspect-ratio:16/9;overflow:hidden;
-    border:1px solid var(--line);border-radius:10px;background:var(--bg-soft);
-  }
-  .p-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s}
-  .p-thumb:hover img{transform:scale(1.03)}
-  .p-thumb:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-  .p-thumb.video::after{
-    content:"";position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;
-    border-radius:50%;background:rgba(16,18,22,.72) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M9 7v10l8-5z'/%3E%3C/svg%3E") center/26px no-repeat;
-  }
-  .p-badge{
-    position:absolute;left:8px;bottom:8px;background:rgba(16,18,22,.8);color:#fff;
-    font-size:.72rem;font-weight:600;line-height:1;padding:5px 9px;border-radius:999px;
-  }
-  .p-info h3{font-size:1.2rem;line-height:1.3;letter-spacing:-.01em;margin:2px 0 6px}
-  .p-sum{color:var(--muted);font-size:.97rem;line-height:1.55;max-width:520px}
-  .p-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-  .p-chips .chip{font-size:.78rem;padding:3px 10px;background:#fff}
-  .p-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-  .p-links .btn{padding:7px 14px;font-size:.88rem;border-radius:8px}
-  .p-more>summary{
-    list-style:none;cursor:pointer;user-select:none;
-    display:flex;align-items:center;justify-content:space-between;gap:12px;
-    padding:12px 20px;border-top:1px solid var(--line);background:var(--bg-soft);
-    font-size:.9rem;font-weight:600;color:var(--text);
-  }
-  .p-more>summary::-webkit-details-marker{display:none}
-  .p-more>summary::after{
-    content:"";flex:none;width:8px;height:8px;margin-right:4px;
-    border-right:2px solid currentColor;border-bottom:2px solid currentColor;
-    transform:translateY(-2px) rotate(45deg);transition:transform .15s;
-  }
-  .p-more[open]>summary::after{transform:translateY(2px) rotate(-135deg)}
-  .p-more>summary:hover{color:var(--accent)}
-  .p-more>summary:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
-  .p-more[open]>summary{border-bottom:1px solid var(--line)}
-  .p-more .when-open{display:none}
-  .p-more[open]>summary .when-open{display:inline}
-  .p-more[open]>summary .when-closed{display:none}
-  @media (max-width:700px){
-    .p-row{grid-template-columns:1fr;gap:14px;padding:16px}
-    .p-more>summary{padding:12px 16px}
-  }
-  @media (prefers-reduced-motion:reduce){
-    .p-thumb img,.p-more>summary::after{transition:none}
-    .p-thumb:hover img{transform:none}
-  }
-  .project-body{padding:28px}
-  .project-tag{font-size:.8rem;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
-  .project-body p{color:var(--muted);margin:14px 0}
-  .explore{margin:20px 0 6px}
-  .explore h4{font-size:.95rem;margin-bottom:10px}
-  .explore ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 24px}
-  .explore li{position:relative;padding-left:22px;color:var(--muted);font-size:.95rem}
-  .explore li::before{content:"→";position:absolute;left:0;color:var(--accent)}
-  .stack{display:flex;flex-direction:column;gap:14px;margin-top:22px}
-  .stack-group:not(:first-child){padding-top:14px;border-top:1px dashed var(--line)}
-  .stack-label{display:block;font-size:.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
-  .stack-row{display:flex;flex-wrap:wrap;gap:8px}
-  .stack .chip{background:#fff}
-  .stack .chip.asset{border-style:dashed;background:var(--bg-soft)}
-  .skills .chip{background:var(--bg-soft)}
-  .project + .project{margin-top:16px}
-  .roles{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0 6px}
-  .roles li{background:var(--bg-soft);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:.93rem;color:var(--muted)}
-  .roles strong{display:block;color:var(--text);font-size:.95rem;margin-bottom:2px}
-  /* Photo gallery: add <img> tags inside .photo-grid */
-  .photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;border-bottom:1px solid var(--line);background:var(--bg-soft)}
-  .photo-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
-  .photo-grid img.lead{grid-column:1/-1;aspect-ratio:16/9}
-  @media (max-width:640px){.photo-grid{grid-template-columns:1fr 1fr}}
-  .photo-grid img{cursor:zoom-in;transition:opacity .15s}
-  .photo-grid img:hover{opacity:.88}
-  .photo-grid img:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
-  .photo-hint{font-size:.85rem;color:var(--muted);padding:10px 28px 0}
-  /* App screenshots: keep them wide and anchored to the top-left of the screen */
-  .photo-grid.shots img{aspect-ratio:16/9;object-position:left top}
-  @media (max-width:640px){.photo-grid.shots{grid-template-columns:repeat(3,1fr)}}
-  /* Sub-heading for a group of projects inside Featured Projects */
-  .project-group{margin:44px 0 20px}
-  .project-group h3{font-size:1.25rem;letter-spacing:-.01em;margin:8px 0 6px}
-  .project-group p{color:var(--muted);max-width:680px}
+      .project {
+        scroll-margin-top: 76px;
+      }
+      .p-row {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        gap: 24px;
+        padding: 20px;
+        align-items: start;
+      }
+      .p-thumb {
+        position: relative;
+        display: block;
+        aspect-ratio: 16/9;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--bg-soft);
+      }
+      .p-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.25s;
+      }
+      .p-thumb:hover img {
+        transform: scale(1.03);
+      }
+      .p-thumb:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 2px;
+      }
+      .p-thumb.video::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 46px;
+        height: 46px;
+        margin: -23px 0 0 -23px;
+        border-radius: 50%;
+        background: rgba(16, 18, 22, 0.72)
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M9 7v10l8-5z'/%3E%3C/svg%3E")
+          center/26px no-repeat;
+      }
+      .p-badge {
+        position: absolute;
+        left: 8px;
+        bottom: 8px;
+        background: rgba(16, 18, 22, 0.8);
+        color: #fff;
+        font-size: 0.72rem;
+        font-weight: 600;
+        line-height: 1;
+        padding: 5px 9px;
+        border-radius: 999px;
+      }
+      .p-info h3 {
+        font-size: 1.2rem;
+        line-height: 1.3;
+        letter-spacing: -0.01em;
+        margin: 2px 0 6px;
+      }
+      .p-sum {
+        color: var(--muted);
+        font-size: 0.97rem;
+        line-height: 1.55;
+        max-width: 520px;
+      }
+      .p-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 12px;
+      }
+      .p-chips .chip {
+        font-size: 0.78rem;
+        padding: 3px 10px;
+        background: #fff;
+      }
+      .p-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 14px;
+      }
+      .p-links .btn {
+        padding: 7px 14px;
+        font-size: 0.88rem;
+        border-radius: 8px;
+      }
+      .p-more > summary {
+        list-style: none;
+        cursor: pointer;
+        user-select: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 20px;
+        border-top: 1px solid var(--line);
+        background: var(--bg-soft);
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .p-more > summary::-webkit-details-marker {
+        display: none;
+      }
+      .p-more > summary::after {
+        content: "";
+        flex: none;
+        width: 8px;
+        height: 8px;
+        margin-right: 4px;
+        border-right: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+        transform: translateY(-2px) rotate(45deg);
+        transition: transform 0.15s;
+      }
+      .p-more[open] > summary::after {
+        transform: translateY(2px) rotate(-135deg);
+      }
+      .p-more > summary:hover {
+        color: var(--accent);
+      }
+      .p-more > summary:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: -3px;
+      }
+      .p-more[open] > summary {
+        border-bottom: 1px solid var(--line);
+      }
+      .p-more .when-open {
+        display: none;
+      }
+      .p-more[open] > summary .when-open {
+        display: inline;
+      }
+      .p-more[open] > summary .when-closed {
+        display: none;
+      }
+      @media (max-width: 700px) {
+        .p-row {
+          grid-template-columns: 1fr;
+          gap: 14px;
+          padding: 16px;
+        }
+        .p-more > summary {
+          padding: 12px 16px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .p-thumb img,
+        .p-more > summary::after {
+          transition: none;
+        }
+        .p-thumb:hover img {
+          transform: none;
+        }
+      }
+      .project-body {
+        padding: 28px;
+      }
+      .project-tag {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .project-body p {
+        color: var(--muted);
+        margin: 14px 0;
+      }
+      .explore {
+        margin: 20px 0 6px;
+      }
+      .explore h4 {
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+      }
+      .explore ul {
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px 24px;
+      }
+      .explore li {
+        position: relative;
+        padding-left: 22px;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+      .explore li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+      }
+      .stack {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-top: 22px;
+      }
+      .stack-group:not(:first-child) {
+        padding-top: 14px;
+        border-top: 1px dashed var(--line);
+      }
+      .stack-label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 8px;
+      }
+      .stack-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .stack .chip {
+        background: #fff;
+      }
+      .stack .chip.asset {
+        border-style: dashed;
+        background: var(--bg-soft);
+      }
+      .project + .project {
+        margin-top: 16px;
+      }
+      .roles {
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin: 18px 0 6px;
+      }
+      .roles li {
+        background: var(--bg-soft);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-size: 0.93rem;
+        color: var(--muted);
+      }
+      .roles strong {
+        display: block;
+        color: var(--text);
+        font-size: 0.95rem;
+        margin-bottom: 2px;
+      }
+      /* Photo gallery: add <img> tags inside .photo-grid */
+      .photo-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4px;
+        border-bottom: 1px solid var(--line);
+        background: var(--bg-soft);
+      }
+      .photo-grid img {
+        width: 100%;
+        aspect-ratio: 4/3;
+        object-fit: cover;
+        display: block;
+      }
+      .photo-grid img.lead {
+        grid-column: 1/-1;
+        aspect-ratio: 16/9;
+      }
+      @media (max-width: 640px) {
+        .photo-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .photo-grid img {
+        cursor: zoom-in;
+        transition: opacity 0.15s;
+      }
+      .photo-grid img:hover {
+        opacity: 0.88;
+      }
+      .photo-grid img:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: -3px;
+      }
+      .photo-hint {
+        font-size: 0.85rem;
+        color: var(--muted);
+        padding: 10px 28px 0;
+      }
+      /* App screenshots: keep them wide and anchored to the top-left of the screen */
+      .photo-grid.shots img {
+        aspect-ratio: 16/9;
+        object-position: left top;
+      }
+      @media (max-width: 640px) {
+        .photo-grid.shots {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      /* Sub-heading for a group of projects inside Featured Projects */
 
-  /* Lightbox */
-  .lightbox{position:fixed;inset:0;z-index:100;background:rgba(10,12,16,.97);display:none;backdrop-filter:blur(6px);
-    flex-direction:column;align-items:center;justify-content:center;padding:56px 64px 24px}
-  .lightbox.open{display:flex}
-  .lightbox img{max-width:100%;max-height:calc(100vh - 200px);object-fit:contain;border-radius:6px}
-  .lb-caption{color:#e8eaee;max-width:760px;text-align:center;margin-top:16px;font-size:.98rem;line-height:1.55}
-  .lb-count{color:#9aa1ad;font-size:.8rem;margin-top:6px}
-  .lightbox button{position:absolute;background:rgba(255,255,255,.1);border:0;color:#fff;
-    width:44px;height:44px;border-radius:50%;font-size:1.4rem;cursor:pointer;line-height:1}
-  .lightbox button:hover{background:rgba(255,255,255,.22)}
-  .lb-close{top:14px;right:14px}
-  .lb-prev{left:12px;top:50%;transform:translateY(-50%)}
-  .lb-next{right:12px;top:50%;transform:translateY(-50%)}
-  .lightbox.single .lb-prev,.lightbox.single .lb-next,.lightbox.single .lb-count{display:none}
-  @media (max-width:640px){.lightbox{padding:56px 12px 20px}.lb-prev,.lb-next{top:auto;bottom:14px;transform:none}}
-  @media (max-width:640px){.roles{grid-template-columns:1fr}}
+      /* Lightbox */
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        background: rgba(10, 12, 16, 0.97);
+        display: none;
+        backdrop-filter: blur(6px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 56px 64px 24px;
+      }
+      .lightbox.open {
+        display: flex;
+      }
+      .lightbox img {
+        max-width: 100%;
+        max-height: calc(100vh - 200px);
+        object-fit: contain;
+        border-radius: 6px;
+      }
+      .lb-caption {
+        color: #e8eaee;
+        max-width: 760px;
+        text-align: center;
+        margin-top: 16px;
+        font-size: 0.98rem;
+        line-height: 1.55;
+      }
+      .lb-count {
+        color: #9aa1ad;
+        font-size: 0.8rem;
+        margin-top: 6px;
+      }
+      .lightbox button {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.1);
+        border: 0;
+        color: #fff;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        font-size: 1.4rem;
+        cursor: pointer;
+        line-height: 1;
+      }
+      .lightbox button:hover {
+        background: rgba(255, 255, 255, 0.22);
+      }
+      .lb-close {
+        top: 14px;
+        right: 14px;
+      }
+      .lb-prev {
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .lb-next {
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .lightbox.single .lb-prev,
+      .lightbox.single .lb-next,
+      .lightbox.single .lb-count {
+        display: none;
+      }
+      @media (max-width: 640px) {
+        .lightbox {
+          padding: 56px 12px 20px;
+        }
+        .lb-prev,
+        .lb-next {
+          top: auto;
+          bottom: 14px;
+          transform: none;
+        }
+      }
+      @media (max-width: 640px) {
+        .roles {
+          grid-template-columns: 1fr;
+        }
+      }
 
-  blockquote{
-    border-left:3px solid var(--accent);background:var(--accent-soft);
-    padding:16px 20px;border-radius:0 10px 10px 0;color:var(--text);
-    font-style:italic;margin-top:24px;max-width:680px;
-  }
+      blockquote {
+        border-left: 3px solid var(--accent);
+        background: var(--accent-soft);
+        padding: 16px 20px;
+        border-radius: 0 10px 10px 0;
+        color: var(--text);
+        font-style: italic;
+        margin-top: 24px;
+        max-width: 680px;
+      }
 
-  /* Video grid (YouTube embeds) */
-  .work-intro{color:var(--muted);max-width:700px;margin-bottom:14px}
-  .work-intro:last-of-type{margin-bottom:34px}
-  .clip-title{padding:14px 20px;font-size:.95rem;font-weight:600}
-  .p-more .video-grid{margin-bottom:0}
-  .video-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-bottom:6px}
-  .video-card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff}
-  .embed{position:relative;width:100%;padding-top:56.25%;background:#000}
-  .embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-  .video-card .caption{padding:16px 18px}
-  .video-card .caption h4{font-size:1.02rem;line-height:1.35;margin-bottom:4px}
-  .video-card .caption p{color:var(--muted);font-size:.9rem;margin:0}
+      /* Video grid (YouTube embeds) */
+      .work-intro {
+        color: var(--muted);
+        max-width: 700px;
+        margin-bottom: 14px;
+      }
+      .work-intro:last-of-type {
+        margin-bottom: 34px;
+      }
+      .clip-title {
+        padding: 14px 20px;
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+      .p-more .video-grid {
+        margin-bottom: 0;
+      }
+      .video-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 26px;
+        margin-bottom: 6px;
+      }
+      .video-card {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        overflow: hidden;
+        background: #fff;
+      }
+      .embed {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%;
+        background: #000;
+      }
+      .embed iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+      .video-card .caption {
+        padding: 16px 18px;
+      }
+      .video-card .caption h4 {
+        font-size: 1.02rem;
+        line-height: 1.35;
+        margin-bottom: 4px;
+      }
+      .video-card .caption p {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin: 0;
+      }
 
-  /* Contact */
-  .contact p{color:var(--muted);max-width:620px;margin-bottom:24px}
-  .contact-links{display:flex;gap:14px;flex-wrap:wrap}
+      /* Contact */
+      .contact p {
+        color: var(--muted);
+        max-width: 620px;
+        margin-bottom: 24px;
+      }
+      .contact-links {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
 
-  footer{padding:40px 0 60px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+      footer {
+        padding: 40px 0 60px;
+        color: var(--muted);
+        font-size: 0.9rem;
+        border-top: 1px solid var(--line);
+      }
 
-  @media(max-width:640px){
-    h1{font-size:2.1rem}
-    .explore ul{grid-template-columns:1fr}
-    .video-grid{grid-template-columns:1fr}
-    nav .links{gap:16px}
-    nav .links a.hide-sm{display:none}
-  }
-  /* ---- Featured Projects: card grid ---- */
-  .pfilters{display:flex;flex-wrap:wrap;gap:6px;margin:-10px 0 22px}
-  .pfilter{font:inherit;font-size:.86rem;font-weight:500;color:var(--muted);background:#fff;
-    border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer}
-  .pfilter:hover{color:var(--text);border-color:var(--text)}
-  .pfilter[aria-pressed="true"]{background:var(--text);border-color:var(--text);color:#fff}
-  .pfilter:focus-visible,.readmore:focus-visible,.pcover:focus-visible,.pmodal-close:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-  .pgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-  @media (max-width:640px){.pgrid{grid-template-columns:1fr}}
-  .pcard{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--radius);
-    background:#fff;overflow:hidden;scroll-margin-top:76px;transition:transform .18s,box-shadow .18s}
-  .pcard:hover{transform:translateY(-2px);box-shadow:0 1px 2px rgba(26,29,33,.05),0 8px 24px rgba(26,29,33,.07)}
-  .pcard[hidden]{display:none}
-  .pcover{position:relative;display:block;width:100%;aspect-ratio:16/9;padding:0;border:0;
-    border-bottom:1px solid var(--line);background:var(--bg-soft);cursor:pointer;overflow:hidden}
-  .pcover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s}
-  .pcover:hover img{transform:scale(1.03)}
-  .pcover.video::after{
-    content:"";position:absolute;left:50%;top:50%;width:46px;height:46px;margin:-23px 0 0 -23px;
-    border-radius:50%;background:rgba(16,18,22,.72) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M9 7v10l8-5z'/%3E%3C/svg%3E") center/26px no-repeat;
-  }
-  .pstatus{position:absolute;top:10px;left:10px;background:rgba(255,255,255,.95);color:var(--text);
-    font-size:.72rem;font-weight:600;line-height:1;padding:6px 9px;border-radius:6px}
-  .pstatus.live{background:var(--accent);color:#fff}
-  .pstatus.dev{background:#fff;color:var(--muted);border:1px dashed var(--muted)}
-  .pcard-body{display:flex;flex-direction:column;gap:8px;padding:18px 20px 20px;flex:1}
-  .pcard-body h3{font-size:1.15rem;line-height:1.3;letter-spacing:-.01em}
-  .pcard-body .p-sum{font-size:.94rem}
-  .pcard-body .p-chips{margin-top:4px}
-  .pcard-body .p-chips .chip{font-size:.76rem;padding:3px 9px;background:var(--bg-soft)}
-  .plinks{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;margin-top:auto;padding-top:10px;font-size:.9rem;font-weight:600}
-  .readmore{font:inherit;font-weight:600;font-size:.88rem;color:var(--text);background:#fff;
-    border:1px solid var(--line);border-radius:8px;padding:7px 13px;cursor:pointer}
-  .readmore:hover{border-color:var(--text)}
-  .plinks a.go{color:var(--accent)}
-  .plinks .soon{color:var(--muted);font-weight:500}
-  /* unreleased game card */
-  .pcard.plan{background:transparent;border-style:dashed}
-  .pcard.plan .pcover{cursor:default;border-bottom-style:dashed;
-    background:repeating-linear-gradient(45deg,var(--bg-soft) 0 12px,var(--line) 12px 13px)}
-  .pcard.plan .project-tag{color:var(--muted)}
-  .pcard.plan .p-chips .chip{background:transparent;border-style:dashed;color:var(--muted)}
-  .pprogress{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);margin-top:4px}
-  .pbar{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
-  .pbar i{display:block;height:100%;background:var(--muted)}
-  .ai-note{margin-top:22px;font-size:.92rem;color:var(--muted);max-width:680px}
-  .ai-note strong{color:var(--text)}
+      @media (max-width: 640px) {
+        h1 {
+          font-size: 2.1rem;
+        }
+        .explore ul {
+          grid-template-columns: 1fr;
+        }
+        .video-grid {
+          grid-template-columns: 1fr;
+        }
+        nav .links {
+          gap: 16px;
+        }
+        nav .links a.hide-sm {
+          display: none;
+        }
+      }
+      /* ---- Featured Projects: card grid ---- */
+      .pfilters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: -10px 0 22px;
+      }
+      .pfilter {
+        font: inherit;
+        font-size: 0.86rem;
+        font-weight: 500;
+        color: var(--muted);
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 6px 14px;
+        cursor: pointer;
+      }
+      .pfilter:hover {
+        color: var(--text);
+        border-color: var(--text);
+      }
+      .pfilter[aria-pressed="true"] {
+        background: var(--text);
+        border-color: var(--text);
+        color: #fff;
+      }
+      .pfilter:focus-visible,
+      .readmore:focus-visible,
+      .pcover:focus-visible,
+      .pmodal-close:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 2px;
+      }
+      .pgrid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+      @media (max-width: 640px) {
+        .pgrid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .pcard {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: #fff;
+        overflow: hidden;
+        scroll-margin-top: 76px;
+        transition:
+          transform 0.18s,
+          box-shadow 0.18s;
+      }
+      .pcard:hover {
+        transform: translateY(-2px);
+        box-shadow:
+          0 1px 2px rgba(26, 29, 33, 0.05),
+          0 8px 24px rgba(26, 29, 33, 0.07);
+      }
+      .pcard[hidden] {
+        display: none;
+      }
+      .pcover {
+        position: relative;
+        display: block;
+        width: 100%;
+        aspect-ratio: 16/9;
+        padding: 0;
+        border: 0;
+        border-bottom: 1px solid var(--line);
+        background: var(--bg-soft);
+        cursor: pointer;
+        overflow: hidden;
+      }
+      .pcover img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.25s;
+      }
+      .pcover:hover img {
+        transform: scale(1.03);
+      }
+      .pcover.video::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 46px;
+        height: 46px;
+        margin: -23px 0 0 -23px;
+        border-radius: 50%;
+        background: rgba(16, 18, 22, 0.72)
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M9 7v10l8-5z'/%3E%3C/svg%3E")
+          center/26px no-repeat;
+      }
+      .pstatus {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: rgba(255, 255, 255, 0.95);
+        color: var(--text);
+        font-size: 0.72rem;
+        font-weight: 600;
+        line-height: 1;
+        padding: 6px 9px;
+        border-radius: 6px;
+      }
+      .pstatus.live {
+        background: var(--accent);
+        color: #fff;
+      }
+      .pstatus.dev {
+        background: #fff;
+        color: var(--muted);
+        border: 1px dashed var(--muted);
+      }
+      .pcard-body {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 18px 20px 20px;
+        flex: 1;
+      }
+      .pcard-body h3 {
+        font-size: 1.15rem;
+        line-height: 1.3;
+        letter-spacing: -0.01em;
+      }
+      .pcard-body .p-sum {
+        font-size: 0.94rem;
+      }
+      .pcard-body .p-chips {
+        margin-top: 4px;
+      }
+      .pcard-body .p-chips .chip {
+        font-size: 0.76rem;
+        padding: 3px 9px;
+        background: var(--bg-soft);
+      }
+      .plinks {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px 16px;
+        margin-top: auto;
+        padding-top: 10px;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+      .readmore {
+        font: inherit;
+        font-weight: 600;
+        font-size: 0.88rem;
+        color: var(--text);
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 7px 13px;
+        cursor: pointer;
+      }
+      .readmore:hover {
+        border-color: var(--text);
+      }
+      .plinks a.go {
+        color: var(--accent);
+      }
+      .plinks .soon {
+        color: var(--muted);
+        font-weight: 500;
+      }
+      /* unreleased game card */
+      .pcard.plan {
+        background: transparent;
+        border-style: dashed;
+      }
+      .pcard.plan .pcover {
+        cursor: default;
+        border-bottom-style: dashed;
+        background: repeating-linear-gradient(
+          45deg,
+          var(--bg-soft) 0 12px,
+          var(--line) 12px 13px
+        );
+      }
+      .pcard.plan .project-tag {
+        color: var(--muted);
+      }
+      .pcard.plan .p-chips .chip {
+        background: transparent;
+        border-style: dashed;
+        color: var(--muted);
+      }
+      .pprogress {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin-top: 4px;
+      }
+      .pbar {
+        height: 6px;
+        border-radius: 3px;
+        background: var(--line);
+        overflow: hidden;
+      }
+      .pbar i {
+        display: block;
+        height: 100%;
+        background: var(--muted);
+      }
 
-  /* write-up viewer */
-  .pmodal{position:fixed;inset:0;z-index:50;background:rgba(10,12,16,.55);backdrop-filter:blur(3px);
-    display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto}
-  .pmodal[hidden]{display:none}
-  .pmodal-box{width:100%;max-width:820px;background:#fff;border-radius:var(--radius);overflow:hidden;
-    box-shadow:0 20px 60px rgba(0,0,0,.25)}
-  .pmodal-head{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px;
-    padding:14px 20px;background:#fff;border-bottom:1px solid var(--line)}
-  .pmodal-head h3{font-size:1.1rem;letter-spacing:-.01em}
-  .pmodal-close{flex:none;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:#fff;
-    font-size:1.3rem;line-height:1;cursor:pointer;color:var(--text)}
-  .pmodal-close:hover{border-color:var(--text)}
-  @media (max-width:640px){.pmodal{padding:0}.pmodal-box{border-radius:0;min-height:100%}}
-  @media (prefers-reduced-motion:reduce){.pcard,.pcover img{transition:none}.pcard:hover{transform:none}.pcover:hover img{transform:none}}
+      /* write-up viewer */
+      .pmodal {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        background: rgba(10, 12, 16, 0.55);
+        backdrop-filter: blur(3px);
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 40px 16px;
+        overflow-y: auto;
+      }
+      .pmodal[hidden] {
+        display: none;
+      }
+      .pmodal-box {
+        width: 100%;
+        max-width: 820px;
+        background: #fff;
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+      }
+      .pmodal-head {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px 20px;
+        background: #fff;
+        border-bottom: 1px solid var(--line);
+      }
+      .pmodal-head h3 {
+        font-size: 1.1rem;
+        letter-spacing: -0.01em;
+      }
+      .pmodal-close {
+        flex: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid var(--line);
+        background: #fff;
+        font-size: 1.3rem;
+        line-height: 1;
+        cursor: pointer;
+        color: var(--text);
+      }
+      .pmodal-close:hover {
+        border-color: var(--text);
+      }
+      @media (max-width: 640px) {
+        .pmodal {
+          padding: 0;
+        }
+        .pmodal-box {
+          border-radius: 0;
+          min-height: 100%;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .pcard,
+        .pcover img {
+          transition: none;
+        }
+        .pcard:hover {
+          transform: none;
+        }
+        .pcover:hover img {
+          transform: none;
+        }
+      }
 
-  /* ===== Enhancements: quick summary, nav, tap targets, layout ===== */
-  html{scroll-padding-top:68px}
-  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-  a:focus-visible,.btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+      /* ===== Enhancements: quick summary, nav, tap targets, layout ===== */
+      html {
+        scroll-padding-top: 68px;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+      a:focus-visible,
+      .btn:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 2px;
+        border-radius: 8px;
+      }
 
-  /* Nav: every link on every screen, finger-sized, shows where you are */
-  nav .links{gap:4px}
-  nav .links a{display:inline-flex;align-items:center;min-height:44px;padding:0 10px;border-radius:8px;white-space:nowrap}
-  nav .links a[aria-current="true"]{color:var(--text);box-shadow:inset 0 -2px 0 var(--accent);border-radius:0}
-  @media (max-width:640px){ nav .links a.hide-sm{display:inline-flex} }
-  @media (max-width:480px){
-    nav .brand{display:none}
-    nav .wrap{justify-content:center}
-    nav .links{gap:0;width:100%;justify-content:space-between}
-    nav .links a{padding:0 6px;font-size:.9rem}
-  }
-  @media (max-width:360px){ nav .links a{padding:0 3px;font-size:.84rem} nav .wrap{padding:0 12px} }
+      /* Nav: every link on every screen, finger-sized, shows where you are */
+      nav .links {
+        gap: 4px;
+      }
+      nav .links a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 0 10px;
+        border-radius: 8px;
+        white-space: nowrap;
+      }
+      nav .links a[aria-current="true"] {
+        color: var(--text);
+        box-shadow: inset 0 -2px 0 var(--accent);
+        border-radius: 0;
+      }
+      @media (max-width: 640px) {
+        nav .links a.hide-sm {
+          display: inline-flex;
+        }
+      }
+      @media (max-width: 480px) {
+        nav .brand {
+          display: none;
+        }
+        nav .wrap {
+          justify-content: center;
+        }
+        nav .links {
+          gap: 0;
+          width: 100%;
+          justify-content: space-between;
+        }
+        nav .links a {
+          padding: 0 6px;
+          font-size: 0.9rem;
+        }
+      }
+      @media (max-width: 360px) {
+        nav .links a {
+          padding: 0 3px;
+          font-size: 0.84rem;
+        }
+        nav .wrap {
+          padding: 0 12px;
+        }
+      }
 
-  /* Hero: tighter on small screens */
-  header.hero{padding:64px 0 56px}
-  .eyebrow{border-radius:12px}
-  @media (max-width:640px){
-    header.hero{padding:36px 0 40px}
-    .eyebrow{font-size:.72rem;letter-spacing:.05em;margin-bottom:16px}
-    .hero p.lead{font-size:1.05rem}
-    .cta{margin-top:24px}
-    .cta .btn{flex:1 1 auto;justify-content:center}
-  }
+      /* Hero: tighter on small screens */
+      header.hero {
+        padding: 64px 0 56px;
+      }
+      .eyebrow {
+        border-radius: 12px;
+      }
+      @media (max-width: 640px) {
+        header.hero {
+          padding: 36px 0 40px;
+        }
+        .eyebrow {
+          font-size: 0.72rem;
+          letter-spacing: 0.05em;
+          margin-bottom: 16px;
+        }
+        .hero p.lead {
+          font-size: 1.05rem;
+        }
+        .cta {
+          margin-top: 24px;
+        }
+        .cta .btn {
+          flex: 1 1 auto;
+          justify-content: center;
+        }
+      }
 
+      /* Finger-sized links and buttons */
+      .plinks a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 40px;
+      }
+      .readmore {
+        min-height: 40px;
+      }
+      .pfilter {
+        min-height: 38px;
+        padding: 6px 16px;
+      }
+      @media (max-width: 640px) {
+        .wrap {
+          padding: 0 20px;
+        }
+      }
 
-  /* Finger-sized links and buttons */
-  .plinks a{display:inline-flex;align-items:center;min-height:40px}
-  .readmore{min-height:40px}
-  .pfilter{min-height:38px;padding:6px 16px}
-  @media (max-width:640px){ .wrap{padding:0 20px} }
-
-  /* Wide screens: use the space. Text keeps a readable line length;
+      /* Wide screens: use the space. Text keeps a readable line length;
      the layout, project grid and About spread out. */
-  @media (min-width:1180px){
-    :root{--maxw:1140px}
-    header.hero{padding:88px 0 80px}
-    h1{font-size:3.3rem;max-width:900px}
-    .hero p.lead{font-size:1.25rem;max-width:720px}
-    .pgrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
-    .about .wrap{display:grid;grid-template-columns:minmax(0,1fr) 400px;column-gap:64px;align-items:start}
-    .about .wrap>*{grid-column:1}
-    .about .wrap>.skills{grid-column:2;grid-row:1/span 6;margin-top:0;max-width:none;
-      padding:22px 24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-soft)}
-    .about .skills .chip{background:#fff}
-    .work-intro{max-width:760px}
-  }
-</style>
-</head>
-<body>
-
-<nav>
-  <div class="wrap">
-    <span class="brand">Loo Zong Poh</span>
-    <div class="links">
-      <a href="#projects">Projects</a>
-      <a href="#about">About</a>
-      <a class="hide-sm" href="#work">Earlier work</a>
-      <a class="hide-sm" href="#contact">Contact</a>
-    </div>
-  </div>
-</nav>
-
-<header class="hero">
-  <div class="wrap">
-    <span class="eyebrow">Computer Engineer · Machine Learning · Computer Vision</span>
-    <h1>Hi, I'm Zong Poh.<br />I learn by building&mdash;and build things that learn.</h1>
-    <p class="lead">
-      I&rsquo;m a computer engineer who explores emerging technology by turning it into
-      working systems, from machine learning and computer vision to real-time simulation
-      and multiplayer networking.
-    </p>
-    <div class="cta">
-      <a class="btn primary" href="#projects">View my work</a>
-      <a class="btn" href="https://www.linkedin.com/in/loo-zong-poh" target="_blank" rel="noopener">LinkedIn</a>
-    </div>
-
-  </div>
-</header>
-
-
-<section id="projects">
-  <div class="wrap">
-    <h2>Featured Projects</h2>
-    <p class="section-sub">Things I've built recently. Open any project for the full write-up.</p>
-
-    <div class="pfilters" role="group" aria-label="Filter projects">
-      <button type="button" class="pfilter" data-cat="all" aria-pressed="true">All</button>
-      <button type="button" class="pfilter" data-cat="games" aria-pressed="false">Games</button>
-      <button type="button" class="pfilter" data-cat="ml" aria-pressed="false">ML &amp; CV</button>
-      <button type="button" class="pfilter" data-cat="tools" aria-pressed="false">Tools</button>
-    </div>
-
-    <div class="pgrid">
-    <article class="pcard" id="ml-racing" data-cat="ml">
-      <button type="button" class="pcover video" data-open="ml-racing" aria-label="Open the full write-up for Project ML Racing">
-        <img src="https://i.ytimg.com/vi/n5OL3Fog0ZE/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
-        <span class="pstatus">Demo video</span>
-      </button>
-      <div class="pcard-body">
-        <span class="project-tag">Reinforcement Learning · Computer Vision</span>
-        <h3>Project ML Racing</h3>
-        <p class="p-sum">A Unity racing environment where a PPO reinforcement learning agent learns to drive using computer vision and vehicle telemetry.</p>
-        <div class="p-chips"><span class="chip">Unity</span><span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">OpenCV</span><span class="chip">NumPy</span></div>
-        <div class="plinks">
-          <button type="button" class="readmore" data-open="ml-racing">Read the write-up</button>
-          <a href="https://youtu.be/n5OL3Fog0ZE" target="_blank" rel="noopener">Watch on YouTube &rarr;</a>
+      @media (min-width: 1180px) {
+        :root {
+          --maxw: 1140px;
+        }
+        header.hero {
+          padding: 88px 0 80px;
+        }
+        h1 {
+          font-size: 3.3rem;
+          max-width: 900px;
+        }
+        .hero p.lead {
+          font-size: 1.25rem;
+          max-width: 720px;
+        }
+        .pgrid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 22px;
+        }
+        .work-intro {
+          max-width: 760px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="wrap">
+        <span class="brand">Loo Zong Poh</span>
+        <div class="links">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a class="hide-sm" href="#work">Earlier work</a>
+          <a class="hide-sm" href="#contact">Contact</a>
         </div>
       </div>
-      <div class="pcard-full" hidden>
-      <div class="embed">
-        <iframe src="https://www.youtube.com/embed/n5OL3Fog0ZE"
-          title="Project ML Racing demo"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen loading="lazy"></iframe>
-      </div>
-      <div class="project-body">
-        <p>
-          A personal project where I built a Unity-based racing environment and connected
-          it to a PPO reinforcement learning agent that learns to drive using computer
-          vision and vehicle telemetry. What began as a simple experiment became one of
-          the most engaging learning experiences I've had.
+    </nav>
+
+    <header class="hero">
+      <div class="wrap">
+        <span class="eyebrow"
+          >Computer Engineer · Machine Learning · Computer Vision</span
+        >
+        <h1>Hi, I'm Zong Poh.<br />Curious by nature. An engineer at heart.</h1>
+        <p class="lead">
+          I&rsquo;m a computer engineer who explores technology through hands-on
+          projects, from machine learning and computer vision to real-time
+          simulation and multiplayer systems.
         </p>
-        <p>
-          The agent can currently make its way around the track — though, for now, my
-          keyboard driving still beats it. There's plenty left to do before it can truly
-          race competitively, and that's exactly what makes it fun.
-        </p>
-
-        <div class="explore">
-          <h4>What I explored</h4>
-          <ul>
-            <li>Computer vision with Canny edge detection for lane detection</li>
-            <li>CNN-based lane detection using a MobileNet model</li>
-            <li>Data collection &amp; classification to train the model</li>
-            <li>Unity-to-Python integration for camera &amp; telemetry</li>
-            <li>PPO reinforcement learning &amp; reward shaping</li>
-            <li>Model fine-tuning and debugging the full pipeline</li>
-          </ul>
-        </div>
-
-        <blockquote>
-          The hardest moments came when the model behaved unexpectedly and I had to
-          properly understand the integration between the CNN, the PPO agent, the
-          observations, and the reward structure.
-        </blockquote>
-
-        <div class="stack">
-          <div class="stack-group">
-            <span class="stack-label">Technology</span>
-            <div class="stack-row">
-              <span class="chip">Unity</span>
-              <span class="chip">Python</span>
-              <span class="chip">PyTorch</span>
-              <span class="chip">OpenCV</span>
-              <span class="chip">NumPy</span>
-            </div>
-          </div>
-          <div class="stack-group">
-            <span class="stack-label">Game Assets</span>
-            <div class="stack-row">
-              <span class="chip asset">NWH Vehicle Physics 2</span>
-              <span class="chip asset">EasyRoads3D Pro v3</span>
-              <span class="chip asset">RCC Cartoon Race Track</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      
-      </div>
-    </article>
-    <article class="pcard" id="disaster-response" data-cat="games">
-      <button type="button" class="pcover" data-open="disaster-response" aria-label="Open the full write-up for Multiplayer Disaster Response Simulation">
-        <img src="images/thumbs/drone.jpg" alt="" loading="lazy">
-        <span class="pstatus">7 photos</span>
-      </button>
-      <div class="pcard-body">
-        <span class="project-tag">Multiplayer game · Red Cross Youth</span>
-        <h3>Multiplayer Disaster Response Simulation</h3>
-        <p class="p-sum">A four-player Unity game for a drone workshop. Each role sees only part of the picture, so the team has to talk to find survivors and deliver supplies in time.</p>
-        <div class="p-chips"><span class="chip">Unity</span><span class="chip">C#</span><span class="chip">Netcode for GameObjects</span><span class="chip">Unity Transport</span></div>
-        <div class="plinks">
-          <button type="button" class="readmore" data-open="disaster-response">Read the write-up</button>
-          
+        <div class="cta">
+          <a class="btn primary" href="#projects">View my work</a>
+          <a
+            class="btn"
+            href="https://www.linkedin.com/in/loo-zong-poh"
+            target="_blank"
+            rel="noopener"
+            >LinkedIn</a
+          >
         </div>
       </div>
-      <div class="pcard-full" hidden>
-      <div class="photo-grid">
-        <img class="lead" src="images/drone-1-commander-map.jpg" alt="Commander coordinating the team from the tactical map with a walkie-talkie" data-caption="Commander view: the tactical map shows where each driver is, which survivors and supplies the drone has found, and suggested tasks. The Commander relays orders to the drivers by walkie-talkie." loading="lazy" tabindex="0">
-        <img src="images/drone-2-driver-gamepad.jpg" alt="Participant driving a rescue vehicle with a gamepad" data-caption="A driver steering a rescue vehicle through the flooded town with a gamepad to reach survivors and supply crates." loading="lazy" tabindex="0">
-        <img src="images/drone-3-driver-view.jpg" alt="Driver's view with mission timer and compass HUD" data-caption="Driver's-eye view: the mission timer, rescue counts and compass help drivers head for the objectives the Commander points them to." loading="lazy" tabindex="0">
-        <img src="images/drone-4-handheld-gamepad.jpg" alt="Participant playing on a handheld gaming PC" data-caption="Playing on a handheld gaming PC, with a walkie-talkie close by. The game supports both keyboard and gamepad controls." loading="lazy" tabindex="0">
-        <img src="images/drone-5-four-player-test.jpg" alt="Four-player test running on two monitors during development" data-caption="Testing all four roles at once during development: two drivers on the top screen, and the Commander's tactical map beside the drone operator's view on the bottom screen." loading="lazy" tabindex="0">
-        <img src="images/drone-6-role-briefing.jpg" alt="Role briefing screens for each player" data-caption="Role briefings: before the mission starts, each player sees instructions for their own role only." loading="lazy" tabindex="0">
-        <img src="images/drone-7-countdown.jpg" alt="Mission countdown shown on every player's screen" data-caption="A synchronised countdown runs on every player's screen so the whole team starts the mission together." loading="lazy" tabindex="0">
-      </div>
-      <p class="photo-hint">Click a photo to enlarge it and read what&rsquo;s happening.</p>
-      <div class="project-body">
-        <p>
-          A four-player disaster-response game I built in Unity for a Red Cross Youth drone
-          workshop. Each player takes on a different role and only sees the information
-          relevant to that role, so the team has to talk and coordinate to find survivors
-          and deliver supplies before time runs out.
-        </p>
+    </header>
 
-        <ul class="roles">
-          <li><strong>Drone Operator</strong>Flies the drone to scan for hidden survivors and supply crates.</li>
-          <li><strong>Commander</strong>Receives discoveries on a live tactical map and directs the team.</li>
-          <li><strong>Drivers (×2)</strong>Navigate the flooded area, collect objectives and return them to HQ.</li>
-          <li><strong>Shared mission</strong>Timer, scoring and crash penalties that the whole team works against.</li>
-        </ul>
-
-        <div class="explore">
-          <h4>What I built</h4>
-          <ul>
-            <li>LAN multiplayer with Netcode for GameObjects (direct-IP host/client)</li>
-            <li>Server-authoritative mission state with client-authoritative vehicle movement</li>
-            <li>Role selection, ready-up and countdown synced across clients</li>
-            <li>Role-specific cameras, UI and controls</li>
-            <li>Drone flight, camera control and object scanning</li>
-            <li>Real-time tactical map tracking players and objectives</li>
-            <li>Vehicle driving, collection and delivery mechanics</li>
-            <li>Keyboard and gamepad support</li>
-          </ul>
+    <section class="about">
+      <div class="wrap about-split">
+        <div class="about-visual">
+          <svg
+            viewBox="0 0 400 430"
+            class="net"
+            role="img"
+            aria-label="Illustration of a small neural network with signals moving through it"
+          >
+            <g class="edges">
+              <line x1="70" y1="110" x2="200" y2="80" />
+              <line x1="70" y1="110" x2="200" y2="145" />
+              <line x1="70" y1="110" x2="200" y2="215" />
+              <line x1="70" y1="110" x2="200" y2="285" />
+              <line x1="70" y1="110" x2="200" y2="350" />
+              <line x1="70" y1="180" x2="200" y2="80" />
+              <line x1="70" y1="180" x2="200" y2="145" />
+              <line x1="70" y1="180" x2="200" y2="215" />
+              <line x1="70" y1="180" x2="200" y2="285" />
+              <line x1="70" y1="180" x2="200" y2="350" />
+              <line x1="70" y1="250" x2="200" y2="80" />
+              <line x1="70" y1="250" x2="200" y2="145" />
+              <line x1="70" y1="250" x2="200" y2="215" />
+              <line x1="70" y1="250" x2="200" y2="285" />
+              <line x1="70" y1="250" x2="200" y2="350" />
+              <line x1="70" y1="320" x2="200" y2="80" />
+              <line x1="70" y1="320" x2="200" y2="145" />
+              <line x1="70" y1="320" x2="200" y2="215" />
+              <line x1="70" y1="320" x2="200" y2="285" />
+              <line x1="70" y1="320" x2="200" y2="350" />
+              <line x1="200" y1="80" x2="330" y2="150" />
+              <line x1="200" y1="80" x2="330" y2="215" />
+              <line x1="200" y1="80" x2="330" y2="280" />
+              <line x1="200" y1="145" x2="330" y2="150" />
+              <line x1="200" y1="145" x2="330" y2="215" />
+              <line x1="200" y1="145" x2="330" y2="280" />
+              <line x1="200" y1="215" x2="330" y2="150" />
+              <line x1="200" y1="215" x2="330" y2="215" />
+              <line x1="200" y1="215" x2="330" y2="280" />
+              <line x1="200" y1="285" x2="330" y2="150" />
+              <line x1="200" y1="285" x2="330" y2="215" />
+              <line x1="200" y1="285" x2="330" y2="280" />
+              <line x1="200" y1="350" x2="330" y2="150" />
+              <line x1="200" y1="350" x2="330" y2="215" />
+              <line x1="200" y1="350" x2="330" y2="280" />
+            </g>
+            <g class="pulses">
+              <circle r="5" class="pulse">
+                <animateMotion
+                  dur="2.2s"
+                  begin="0s"
+                  repeatCount="indefinite"
+                  path="M70 110 L200 145 L330 215"
+                  calcMode="linear"
+                />
+                <animate
+                  attributeName="opacity"
+                  values="0;1;1;0"
+                  keyTimes="0;.1;.85;1"
+                  dur="2.2s"
+                  begin="0s"
+                  repeatCount="indefinite"
+                />
+              </circle>
+              <circle r="5" class="pulse">
+                <animateMotion
+                  dur="2.2s"
+                  begin=".7s"
+                  repeatCount="indefinite"
+                  path="M70 250 L200 285 L330 280"
+                  calcMode="linear"
+                />
+                <animate
+                  attributeName="opacity"
+                  values="0;1;1;0"
+                  keyTimes="0;.1;.85;1"
+                  dur="2.2s"
+                  begin=".7s"
+                  repeatCount="indefinite"
+                />
+              </circle>
+              <circle r="5" class="pulse">
+                <animateMotion
+                  dur="2.2s"
+                  begin="1.4s"
+                  repeatCount="indefinite"
+                  path="M70 180 L200 80 L330 150"
+                  calcMode="linear"
+                />
+                <animate
+                  attributeName="opacity"
+                  values="0;1;1;0"
+                  keyTimes="0;.1;.85;1"
+                  dur="2.2s"
+                  begin="1.4s"
+                  repeatCount="indefinite"
+                />
+              </circle>
+              <circle r="5" class="pulse">
+                <animateMotion
+                  dur="2.2s"
+                  begin="2.1s"
+                  repeatCount="indefinite"
+                  path="M70 320 L200 350 L330 280"
+                  calcMode="linear"
+                />
+                <animate
+                  attributeName="opacity"
+                  values="0;1;1;0"
+                  keyTimes="0;.1;.85;1"
+                  dur="2.2s"
+                  begin="2.1s"
+                  repeatCount="indefinite"
+                />
+              </circle>
+              <circle r="5" class="pulse">
+                <animateMotion
+                  dur="2.2s"
+                  begin="2.8s"
+                  repeatCount="indefinite"
+                  path="M70 180 L200 215 L330 215"
+                  calcMode="linear"
+                />
+                <animate
+                  attributeName="opacity"
+                  values="0;1;1;0"
+                  keyTimes="0;.1;.85;1"
+                  dur="2.2s"
+                  begin="2.8s"
+                  repeatCount="indefinite"
+                />
+              </circle>
+              <circle r="5" class="pulse">
+                <animateMotion
+                  dur="2.2s"
+                  begin="3.5s"
+                  repeatCount="indefinite"
+                  path="M70 250 L200 145 L330 150"
+                  calcMode="linear"
+                />
+                <animate
+                  attributeName="opacity"
+                  values="0;1;1;0"
+                  keyTimes="0;.1;.85;1"
+                  dur="2.2s"
+                  begin="3.5s"
+                  repeatCount="indefinite"
+                />
+              </circle>
+            </g>
+            <g class="nodes">
+              <circle cx="70" cy="110" r="11" />
+              <circle cx="70" cy="180" r="11" />
+              <circle cx="70" cy="250" r="11" />
+              <circle cx="70" cy="320" r="11" />
+              <circle cx="200" cy="80" r="11" />
+              <circle cx="200" cy="145" r="11" />
+              <circle cx="200" cy="215" r="11" />
+              <circle cx="200" cy="285" r="11" />
+              <circle cx="200" cy="350" r="11" />
+              <circle cx="330" cy="150" r="11" />
+              <circle cx="330" cy="215" r="11" />
+              <circle cx="330" cy="280" r="11" />
+            </g>
+            <g class="net-labels">
+              <text x="70" y="400">DATA</text>
+              <text x="200" y="400">MODEL</text>
+              <text x="330" y="400">BUILD</text>
+            </g>
+          </svg>
         </div>
+        <div class="about-text">
+          <h2 id="about">About Me</h2>
+          <p>
+            Most of my projects start with something that catches my curiosity. I&rsquo;ll read
+            about it, experiment with it, and eventually find myself trying to build something
+            around it.
+          </p>
+          <p>
+            Over time, that&rsquo;s led me to explore quite a few different areas, from computer
+            vision and AI to simulation and networking. What I enjoy most is figuring out how the
+            different pieces come together to make something actually work.
+          </p>
+          <p>
+            Of course, things don&rsquo;t always go as planned. There&rsquo;s usually plenty of trial
+            and error, debugging, and rethinking along the way. But that&rsquo;s often where I learn
+            the most.
+          </p>
+          <p>
+            This portfolio is a collection of those projects: the ideas I&rsquo;ve explored, the
+            challenges I&rsquo;ve faced, and what I&rsquo;ve learned along the way.
+          </p>
 
-        <blockquote>
-          The biggest challenge wasn't Unity itself but balancing the user experience with
-          the lesson objectives: the game had to be intuitive and fun while still making
-          players rely on one another.
-        </blockquote>
-
-        <div class="stack">
-          <div class="stack-group">
-            <span class="stack-label">Technology</span>
-            <div class="stack-row">
-              <span class="chip">Unity</span>
-              <span class="chip">C#</span>
-              <span class="chip">Netcode for GameObjects</span>
-              <span class="chip">Unity Transport</span>
-              <span class="chip">ParrelSync</span>
-            </div>
-          </div>
-          <div class="stack-group">
-            <span class="stack-label">Game Assets</span>
-            <div class="stack-row">
-              <span class="chip asset">NWH Vehicle Physics 2</span>
-              <span class="chip asset">Flooded Grounds</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      </div>
-    </article>
-    <article class="pcard" id="project-trains" data-cat="games">
-      <button type="button" class="pcover" data-open="project-trains" aria-label="Open the full write-up for Project Trains">
-        <img src="images/thumbs/trains.jpg" alt="" loading="lazy">
-        <span class="pstatus live">Playable</span>
-      </button>
-      <div class="pcard-body">
-        <span class="project-tag">Browser game · Vibe-coded with AI</span>
-        <h3>Project Trains</h3>
-        <p class="p-sum">A virtual toy-train city with a Japanese theme that runs in the browser. Lay track, build stations and watch a town grow around them.</p>
-        <div class="p-chips"><span class="chip">JavaScript</span><span class="chip">three.js</span><span class="chip">Vite</span><span class="chip">GitHub Pages</span></div>
-        <div class="plinks">
-          <button type="button" class="readmore" data-open="project-trains">Read the write-up</button>
-          <a href="https://zongpoh.github.io/project-trains/" target="_blank" rel="noopener" class="go">Play it &rarr;</a><a href="https://github.com/ZongPoh/project-trains" target="_blank" rel="noopener">Code &rarr;</a>
-        </div>
-      </div>
-      <div class="pcard-full" hidden>
-      <div class="photo-grid shots">
-        <img class="lead" src="images/trains-2-build-tools.jpg" alt="The full game screen with the building tools, departure board and train depot" data-caption="The builder: track, ramp, station, road, river, hill and highway tools on the left, a live departure board on the right, and the depot of eleven bullet trains along the bottom." loading="lazy" tabindex="0">
-        <img src="images/trains-1-starter-city.jpg" alt="A toy-train city with bullet trains on viaducts, a highway on pillars and a river" data-caption="The starter city: bullet trains on viaducts, a highway on pillars crossing the river, passengers waiting on a station platform, and cherry blossom in spring." loading="lazy" tabindex="0">
-        <img src="images/trains-3-ride-doctor-yellow.jpg" alt="Chase view behind the yellow Doctor Yellow train among cherry blossom, heading towards Shin-Osaka" data-caption="Riding along behind Doctor Yellow, the track-inspection train, through cherry blossom towards Shin-Osaka, with other bullet trains running on the viaduct above." loading="lazy" tabindex="0">
-        <img src="images/trains-4-passenger-window.jpg" alt="View from a passenger window on a viaduct, looking over the city" data-caption="The passenger-window view from an E6 Komachi on the viaduct, looking out over the city." loading="lazy" tabindex="0">
-        <img src="images/trains-5-night-shin-osaka.jpg" alt="An E5 Hayabusa on a viaduct at night, curving into Shin-Osaka station with lit windows" data-caption="At night the windows light up: an E5 Hayabusa curves along the viaduct into Shin-Osaka." loading="lazy" tabindex="0">
-        <img src="images/trains-6-autumn.jpg" alt="The city in autumn with red and gold trees" data-caption="Autumn: red and gold trees across the city." loading="lazy" tabindex="0">
-        <img src="images/trains-7-winter.jpg" alt="The city covered in snow in winter" data-caption="Winter: the whole board under snow, with the trains still running." loading="lazy" tabindex="0">
-      </div>
-      <p class="photo-hint">Click a screenshot to enlarge it.</p>
-      <div class="project-body">
-        <p>
-          A virtual toy-train city with a Japanese theme, inspired by riding the bullet
-          train and by toy train sets. Lay track on the board, build stations and signals,
-          bridge rivers, tunnel through hills, and watch a town grow around your stations.
-        </p>
-        <p>
-          It runs in the browser with nothing to install, and it opens with a starter city
-          that is already running, so you can simply watch the trains or climb aboard one.
-        </p>
-
-        <div class="explore">
-          <h4>What's in it</h4>
-          <ul>
-            <li>Eleven bullet trains running on a 56&nbsp;&times;&nbsp;56 board with four build levels</li>
-            <li>Express and local services that overtake and couple at stations</li>
-            <li>Stations with platform doors, queueing passengers, staff and departure melodies</li>
-            <li>Rivers with bridges, hills with tunnels, roads and level crossings</li>
-            <li>Highways on pillars with ramps, flyovers and traffic</li>
-            <li>Passengers whose journeys grow the town around each station</li>
-            <li>A ride-along camera with driver, chase and window views</li>
-            <li>Four seasons, day and night, and sound generated in the browser</li>
-          </ul>
-        </div>
-
-        <div class="stack">
-          <div class="stack-group">
-            <span class="stack-label">Technology</span>
-            <div class="stack-row">
-              <span class="chip">JavaScript</span>
-              <span class="chip">three.js</span>
-              <span class="chip">Vite</span>
-              <span class="chip">GitHub Pages</span>
-            </div>
-          </div>
-          <div class="stack-group">
-            <span class="stack-label">How it was built</span>
-            <div class="stack-row">
-              <span class="chip asset">Vibe coded with AI</span>
-            </div>
+          <div class="cta about-cta">
+            <a class="btn primary" href="#contact">Get in touch</a>
           </div>
         </div>
+      </div>
+    </section>
 
-      </div>
-      
-      </div>
-    </article>
-    <article class="pcard" id="hex-farm" data-cat="games">
-      <button type="button" class="pcover" data-open="hex-farm" aria-label="Open the full write-up for Hex Farm">
-        <img src="images/thumbs/hexfarm.jpg" alt="" loading="lazy">
-        <span class="pstatus live">Playable</span>
-      </button>
-      <div class="pcard-body">
-        <span class="project-tag">Browser game &middot; Built with AI</span>
-        <h3>Hex Farm</h3>
-        <p class="p-sum">A 3D hex-tile farming and settlement game in the browser. Grow a camp into a town while rabbits raid your crops, foxes hunt and neighbouring villages trade with you or raid you.</p>
-        <div class="p-chips"><span class="chip">React</span><span class="chip">Three.js</span><span class="chip">Vite</span><span class="chip">GitHub Pages</span></div>
-        <div class="plinks">
-          <button type="button" class="readmore" data-open="hex-farm">Read the write-up</button>
-          <a href="https://zongpoh.github.io/Project-Farmer/" target="_blank" rel="noopener" class="go">Play it &rarr;</a><a href="https://github.com/ZongPoh/Project-Farmer" target="_blank" rel="noopener">Code &rarr;</a>
-        </div>
-      </div>
-      <div class="pcard-full" hidden>
-      <div class="photo-grid shots">
-        <img class="lead" src="images/hexfarm-1-town-overview.jpg" alt="Hex Farm game screen with a large town on a 3D hex map, a minimap and the management panels" data-caption="A Town in its fourth year: 22 workers, farms, quarries and houses across the valley, with the minimap, job queue and settlement inspector alongside." loading="lazy" tabindex="0">
-        <img src="images/hexfarm-2-early-hamlet.jpg" alt="An early hamlet of a few buildings among forests, rivers and rocky hills" data-caption="An early hamlet on day 41, with workers out on the land and a neighbouring village sending a raid." loading="lazy" tabindex="0">
-        <img src="images/hexfarm-3-winter.jpg" alt="The settlement covered in snow in winter" data-caption="Winter: snow covers the valley, and the stores laid by in autumn have to last until spring." loading="lazy" tabindex="0">
-        <img src="images/hexfarm-4-dusk-lamps.jpg" alt="The town at dusk with lamps lit in the buildings" data-caption="Dusk: the sky follows the real sun position, and lamps come on across the town as night falls." loading="lazy" tabindex="0">
-      </div>
-      <p class="photo-hint">Click a screenshot to enlarge it.</p>
-      <div class="project-body">
-        <p>
-          A 3D hex-tile farming and settlement game that runs entirely in the browser.
-          Start with a camp on a hex map and grow it into a town: farm, cut wood, quarry
-          stone, catch horses and claim land, while rabbits raid your crops, foxes hunt,
-          and neighbouring villages trade with you or raid you.
-        </p>
-        <p>
-          The world keeps running while you're away and catches up when you return. Your
-          settlement saves to a small file you can load anywhere, with no account or
-          server needed.
+    <section id="projects">
+      <div class="wrap">
+        <h2>Featured Projects</h2>
+        <p class="section-sub">
+          Things I've built recently. Open any project for the full write-up.
         </p>
 
-        <div class="explore">
-          <h4>What's in it</h4>
-          <ul>
-            <li>An hourly clock, four seasons, a sky driven by real sun position, dusk lamps and moonlight</li>
-            <li>Workers who walk to each job, queue up, mend what breaks and forage when idle</li>
-            <li>Rabbits, foxes, horses, goats and hens, with a predator&ndash;prey balance tuned over three simulated years</li>
-            <li>Territory that grows as you build, plus raiders and peaceful settlers</li>
-            <li>Progression from Camp to Homestead, Hamlet, Village and Town, with tools, skills, healing and defences</li>
-          </ul>
+        <div class="pfilters" role="group" aria-label="Filter projects">
+          <button
+            type="button"
+            class="pfilter"
+            data-cat="all"
+            aria-pressed="true"
+          >
+            All
+          </button>
+          <button
+            type="button"
+            class="pfilter"
+            data-cat="games"
+            aria-pressed="false"
+          >
+            Games
+          </button>
+          <button
+            type="button"
+            class="pfilter"
+            data-cat="ml"
+            aria-pressed="false"
+          >
+            ML &amp; CV
+          </button>
+          <button
+            type="button"
+            class="pfilter"
+            data-cat="tools"
+            aria-pressed="false"
+          >
+            Tools
+          </button>
         </div>
 
-        <div class="explore">
-          <h4>Under the hood</h4>
-          <ul>
-            <li>All game rules live in plain JavaScript with no React or Three.js, so 483 tests run in Node without a browser</li>
-            <li>Live play, idle play and offline catch-up all go through one tick, so 120 days away replays in a fraction of a second</li>
-            <li>Sparse tile storage and windowed instanced rendering keep a game day at 1&ndash;3&nbsp;ms, from 24&nbsp;&times;&nbsp;16 up to 400&nbsp;&times;&nbsp;200 tiles</li>
-            <li>Saves store only changed tiles, so a save is a few KB</li>
-            <li>Balance and performance fixes driven by headless simulations and profiling, including a 55&times; speed-up traced to repeated failed pathfinding</li>
-            <li>Every push runs lint and tests in GitHub Actions before publishing</li>
-          </ul>
-        </div>
-
-        <div class="stack">
-          <div class="stack-group">
-            <span class="stack-label">Technology</span>
-            <div class="stack-row">
-              <span class="chip">React</span>
-              <span class="chip">Three.js</span>
-              <span class="chip">React Three Fiber</span>
-              <span class="chip">Vite</span>
-              <span class="chip">GitHub Actions</span>
-              <span class="chip">GitHub Pages</span>
+        <div class="pgrid">
+          <article class="pcard" id="ml-racing" data-cat="ml">
+            <button
+              type="button"
+              class="pcover video"
+              data-open="ml-racing"
+              aria-label="Open the full write-up for Project ML Racing"
+            >
+              <img
+                src="https://i.ytimg.com/vi/n5OL3Fog0ZE/hqdefault.jpg"
+                alt=""
+                loading="lazy"
+                onerror="this.style.display='none'"
+              />
+              <span class="pstatus">Demo video</span>
+            </button>
+            <div class="pcard-body">
+              <span class="project-tag"
+                >Reinforcement Learning · Computer Vision</span
+              >
+              <h3>Project ML Racing</h3>
+              <p class="p-sum">
+                A Unity racing environment where a PPO reinforcement learning
+                agent learns to drive using computer vision and vehicle
+                telemetry.
+              </p>
+              <div class="p-chips">
+                <span class="chip">Unity</span><span class="chip">Python</span
+                ><span class="chip">PyTorch</span
+                ><span class="chip">OpenCV</span><span class="chip">NumPy</span>
+              </div>
+              <div class="plinks">
+                <button type="button" class="readmore" data-open="ml-racing">
+                  Read the write-up
+                </button>
+                <a
+                  href="https://youtu.be/n5OL3Fog0ZE"
+                  target="_blank"
+                  rel="noopener"
+                  >Watch on YouTube &rarr;</a
+                >
+              </div>
             </div>
-          </div>
-          <div class="stack-group">
-            <span class="stack-label">How it was built</span>
-            <div class="stack-row">
-              <span class="chip asset">Built with AI</span>
-              <span class="chip asset">Automated tests</span>
-              <span class="chip asset">CI-gated deploys</span>
+            <div class="pcard-full" hidden>
+              <div class="embed">
+                <iframe
+                  src="https://www.youtube.com/embed/n5OL3Fog0ZE"
+                  title="Project ML Racing demo"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  loading="lazy"
+                ></iframe>
+              </div>
+              <div class="project-body">
+                <p>
+                  A personal project where I built a Unity-based racing
+                  environment and connected it to a PPO reinforcement learning
+                  agent that learns to drive using computer vision and vehicle
+                  telemetry. What began as a simple experiment became one of the
+                  most engaging learning experiences I've had.
+                </p>
+                <p>
+                  The agent can currently make its way around the track —
+                  though, for now, my keyboard driving still beats it. There's
+                  plenty left to do before it can truly race competitively, and
+                  that's exactly what makes it fun.
+                </p>
+
+                <div class="explore">
+                  <h4>What I explored</h4>
+                  <ul>
+                    <li>
+                      Computer vision with Canny edge detection for lane
+                      detection
+                    </li>
+                    <li>CNN-based lane detection using a MobileNet model</li>
+                    <li>
+                      Data collection &amp; classification to train the model
+                    </li>
+                    <li>
+                      Unity-to-Python integration for camera &amp; telemetry
+                    </li>
+                    <li>PPO reinforcement learning &amp; reward shaping</li>
+                    <li>Model fine-tuning and debugging the full pipeline</li>
+                  </ul>
+                </div>
+
+                <blockquote>
+                  The hardest moments came when the model behaved unexpectedly
+                  and I had to properly understand the integration between the
+                  CNN, the PPO agent, the observations, and the reward
+                  structure.
+                </blockquote>
+
+                <div class="stack">
+                  <div class="stack-group">
+                    <span class="stack-label">Technology</span>
+                    <div class="stack-row">
+                      <span class="chip">Unity</span>
+                      <span class="chip">Python</span>
+                      <span class="chip">PyTorch</span>
+                      <span class="chip">OpenCV</span>
+                      <span class="chip">NumPy</span>
+                    </div>
+                  </div>
+                  <div class="stack-group">
+                    <span class="stack-label">Game Assets</span>
+                    <div class="stack-row">
+                      <span class="chip asset">NWH Vehicle Physics 2</span>
+                      <span class="chip asset">EasyRoads3D Pro v3</span>
+                      <span class="chip asset">RCC Cartoon Race Track</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-
-      </div>
-      
-      </div>
-    </article>
-    <article class="pcard" id="adminhub" data-cat="tools">
-      <button type="button" class="pcover" data-open="adminhub" aria-label="Open the full write-up for AdminHub">
-        <img src="images/thumbs/adminhub.jpg" alt="" loading="lazy">
-        <span class="pstatus live">Open source</span>
-      </button>
-      <div class="pcard-body">
-        <span class="project-tag">Web app · Vibe-coded with AI</span>
-        <h3>AdminHub</h3>
-        <p class="p-sum">A web app for a team&rsquo;s everyday admin work: room bookings, duty rosters, attendance and tasks, all behind one sign-in. Runs on the Python standard library and SQLite.</p>
-        <div class="p-chips"><span class="chip">Python</span><span class="chip">SQLite</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span></div>
-        <div class="plinks">
-          <button type="button" class="readmore" data-open="adminhub">Read the write-up</button>
-        </div>
-      </div>
-      <div class="pcard-full" hidden>
-      <div class="photo-grid shots">
-        <img class="lead" src="images/adminhub-1-home.png" alt="AdminHub home dashboard showing a supervisor's day and the team's status" data-caption="Home dashboard for a supervisor: your own duties, tasks and room bookings on top, then the team's attendance, roster health, approvals, tasks and facility faults at a glance." loading="lazy" tabindex="0">
-        <img src="images/adminhub-2-duty-roster.png" alt="AdminHub duty roster calendar for the month" data-caption="Duty roster: a shared monthly calendar with a Duty Manager, Duty Supervisor and Duty Assistant each day. Clashes are flagged in red, and swap requests wait for approval on the left." loading="lazy" tabindex="0">
-        <img src="images/adminhub-3-meeting-rooms.png" alt="AdminHub meeting room calendar with five rooms" data-caption="Meeting rooms: all five rooms on one calendar, with check-in and check-out, and a reminder for a booking that was never checked out." loading="lazy" tabindex="0">
-        <img src="images/adminhub-4-tasks.png" alt="AdminHub task board with four columns" data-caption="Tasks: a Kanban board with priorities, deadlines, progress and overdue alerts across the team." loading="lazy" tabindex="0">
-      </div>
-      <p class="photo-hint">Click a screenshot to enlarge it. All names and records shown are made-up sample data.</p>
-      <div class="project-body">
-        <p>
-          A web app for a team's everyday admin work: room bookings, duty rosters, shift
-          planning, attendance, fitness tests, vehicles and tasks, all behind one sign-in
-          with a home dashboard that shows what needs your attention today.
-        </p>
-        <p>
-          It runs on nothing but the Python standard library and SQLite, so there is
-          nothing to install: download it, run one command, and it opens in the browser
-          with sample data ready to explore.
-        </p>
-
-        <div class="explore">
-          <h4>What it does</h4>
-          <ul>
-            <li>Meeting rooms on one calendar, bookings that can't clash, check-in and check-out</li>
-            <li>Duty roster with auto-generated drafts, availability checks and duty swaps</li>
-            <li>Shift planning with desk-duty rules and minimum manpower per shift</li>
-            <li>Attendance headcount, plus leave and course approvals</li>
-            <li>Fitness test results, forecasts and session booking</li>
-            <li>Kanban tasks with team workload and deadline alerts</li>
-            <li>Room equipment, fault reports and a repair workflow</li>
-            <li>Role-based permissions and a timestamped activity log</li>
-          </ul>
-        </div>
-
-        <div class="stack">
-          <div class="stack-group">
-            <span class="stack-label">Technology</span>
-            <div class="stack-row">
-              <span class="chip">Python</span>
-              <span class="chip">SQLite</span>
-              <span class="chip">HTML</span>
-              <span class="chip">CSS</span>
-              <span class="chip">JavaScript</span>
+          </article>
+          <article class="pcard" id="disaster-response" data-cat="games">
+            <button
+              type="button"
+              class="pcover"
+              data-open="disaster-response"
+              aria-label="Open the full write-up for Multiplayer Disaster Response Simulation"
+            >
+              <img src="images/thumbs/drone.jpg" alt="" loading="lazy" />
+              <span class="pstatus">7 photos</span>
+            </button>
+            <div class="pcard-body">
+              <span class="project-tag"
+                >Multiplayer game · Red Cross Youth</span
+              >
+              <h3>Multiplayer Disaster Response Simulation</h3>
+              <p class="p-sum">
+                A four-player Unity game for a drone workshop. Each role sees
+                only part of the picture, so the team has to talk to find
+                survivors and deliver supplies in time.
+              </p>
+              <div class="p-chips">
+                <span class="chip">Unity</span><span class="chip">C#</span
+                ><span class="chip">Netcode for GameObjects</span
+                ><span class="chip">Unity Transport</span>
+              </div>
+              <div class="plinks">
+                <button
+                  type="button"
+                  class="readmore"
+                  data-open="disaster-response"
+                >
+                  Read the write-up
+                </button>
+              </div>
             </div>
-          </div>
-          <div class="stack-group">
-            <span class="stack-label">How it was built</span>
-            <div class="stack-row">
-              <span class="chip asset">Vibe coded with AI</span>
-              <span class="chip asset">No frameworks</span>
-              <span class="chip asset">Automated tests</span>
-            </div>
-          </div>
-        </div>
+            <div class="pcard-full" hidden>
+              <div class="photo-grid">
+                <img
+                  class="lead"
+                  src="images/drone-1-commander-map.jpg"
+                  alt="Commander coordinating the team from the tactical map with a walkie-talkie"
+                  data-caption="Commander view: the tactical map shows where each driver is, which survivors and supplies the drone has found, and suggested tasks. The Commander relays orders to the drivers by walkie-talkie."
+                  loading="lazy"
+                  tabindex="0"
+                />
+                <img
+                  src="images/drone-2-driver-gamepad.jpg"
+                  alt="Participant driving a rescue vehicle with a gamepad"
+                  data-caption="A driver steering a rescue vehicle through the flooded town with a gamepad to reach survivors and supply crates."
+                  loading="lazy"
+                  tabindex="0"
+                />
+                <img
+                  src="images/drone-3-driver-view.jpg"
+                  alt="Driver's view with mission timer and compass HUD"
+                  data-caption="Driver's-eye view: the mission timer, rescue counts and compass help drivers head for the objectives the Commander points them to."
+                  loading="lazy"
+                  tabindex="0"
+                />
+                <img
+                  src="images/drone-4-handheld-gamepad.jpg"
+                  alt="Participant playing on a handheld gaming PC"
+                  data-caption="Playing on a handheld gaming PC, with a walkie-talkie close by. The game supports both keyboard and gamepad controls."
+                  loading="lazy"
+                  tabindex="0"
+                />
+                <img
+                  src="images/drone-5-four-player-test.jpg"
+                  alt="Four-player test running on two monitors during development"
+                  data-caption="Testing all four roles at once during development: two drivers on the top screen, and the Commander's tactical map beside the drone operator's view on the bottom screen."
+                  loading="lazy"
+                  tabindex="0"
+                />
+                <img
+                  src="images/drone-6-role-briefing.jpg"
+                  alt="Role briefing screens for each player"
+                  data-caption="Role briefings: before the mission starts, each player sees instructions for their own role only."
+                  loading="lazy"
+                  tabindex="0"
+                />
+                <img
+                  src="images/drone-7-countdown.jpg"
+                  alt="Mission countdown shown on every player's screen"
+                  data-caption="A synchronised countdown runs on every player's screen so the whole team starts the mission together."
+                  loading="lazy"
+                  tabindex="0"
+                />
+              </div>
+              <p class="photo-hint">
+                Click a photo to enlarge it and read what&rsquo;s happening.
+              </p>
+              <div class="project-body">
+                <p>
+                  A four-player disaster-response game I built in Unity for a
+                  Red Cross Youth drone workshop. Each player takes on a
+                  different role and only sees the information relevant to that
+                  role, so the team has to talk and coordinate to find survivors
+                  and deliver supplies before time runs out.
+                </p>
 
-      </div>
-      
-      </div>
-    </article>
-    <!-- UNRELEASED GAME: copy this block, fill it in and remove the comment marks to show it.
+                <ul class="roles">
+                  <li>
+                    <strong>Drone Operator</strong>Flies the drone to scan for
+                    hidden survivors and supply crates.
+                  </li>
+                  <li>
+                    <strong>Commander</strong>Receives discoveries on a live
+                    tactical map and directs the team.
+                  </li>
+                  <li>
+                    <strong>Drivers (×2)</strong>Navigate the flooded area,
+                    collect objectives and return them to HQ.
+                  </li>
+                  <li>
+                    <strong>Shared mission</strong>Timer, scoring and crash
+                    penalties that the whole team works against.
+                  </li>
+                </ul>
+
+                <div class="explore">
+                  <h4>What I built</h4>
+                  <ul>
+                    <li>
+                      LAN multiplayer with Netcode for GameObjects (direct-IP
+                      host/client)
+                    </li>
+                    <li>
+                      Server-authoritative mission state with
+                      client-authoritative vehicle movement
+                    </li>
+                    <li>
+                      Role selection, ready-up and countdown synced across
+                      clients
+                    </li>
+                    <li>Role-specific cameras, UI and controls</li>
+                    <li>Drone flight, camera control and object scanning</li>
+                    <li>
+                      Real-time tactical map tracking players and objectives
+                    </li>
+                    <li>Vehicle driving, collection and delivery mechanics</li>
+                    <li>Keyboard and gamepad support</li>
+                  </ul>
+                </div>
+
+                <blockquote>
+                  The biggest challenge wasn't Unity itself but balancing the
+                  user experience with the lesson objectives: the game had to be
+                  intuitive and fun while still making players rely on one
+                  another.
+                </blockquote>
+
+                <div class="stack">
+                  <div class="stack-group">
+                    <span class="stack-label">Technology</span>
+                    <div class="stack-row">
+                      <span class="chip">Unity</span>
+                      <span class="chip">C#</span>
+                      <span class="chip">Netcode for GameObjects</span>
+                      <span class="chip">Unity Transport</span>
+                      <span class="chip">ParrelSync</span>
+                    </div>
+                  </div>
+                  <div class="stack-group">
+                    <span class="stack-label">Game Assets</span>
+                    <div class="stack-row">
+                      <span class="chip asset">NWH Vehicle Physics 2</span>
+                      <span class="chip asset">Flooded Grounds</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="pcard" id="project-trains" data-cat="games">
+            <button
+              type="button"
+              class="pcover"
+              data-open="project-trains"
+              aria-label="Open the full write-up for Project Trains"
+            >
+              <img src="images/thumbs/trains.jpg" alt="" loading="lazy" />
+              <span class="pstatus live">Playable</span>
+            </button>
+            <div class="pcard-body">
+              <span class="project-tag">Browser game · Vibe-coded with AI</span>
+              <h3>Project Trains</h3>
+              <p class="p-sum">
+                A virtual toy-train city with a Japanese theme that runs in the
+                browser. Lay track, build stations and watch a town grow around
+                them.
+              </p>
+              <div class="p-chips">
+                <span class="chip">JavaScript</span
+                ><span class="chip">three.js</span><span class="chip">Vite</span
+                ><span class="chip">GitHub Pages</span>
+              </div>
+              <div class="plinks">
+                <button
+                  type="button"
+                  class="readmore"
+                  data-open="project-trains"
+                >
+                  Read the write-up
+                </button>
+                <a
+                  href="https://zongpoh.github.io/project-trains/"
+                  target="_blank"
+                  rel="noopener"
+                  class="go"
+                  >Play it &rarr;</a
+                ><a
+                  href="https://github.com/ZongPoh/project-trains"
+                  target="_blank"
+                  rel="noopener"
+                  >Code &rarr;</a
+                >
+              </div>
+            </div>
+            <div class="pcard-full" hidden>
+              <div class="photo-grid shots">
+                <img
+                  class="lead"
+                  src="images/trains-2-build-tools.jpg"
+                  alt="The full game screen with the building tools, departure board and train depot"
+                  data-caption="The builder: track, ramp, station, road, river, hill and highway tools on the left, a live departure board on the right, and the depot of eleven bullet trains along the bottom."
+                  loading="lazy"
+                  tabindex="0"
+                />
+                <img
+                  src="images/trains-1-starter-city.jpg"
+                  alt="A toy-train city with bullet trains on viaducts, a highway on pillars and a river"
+                  data-caption="The starter city: bullet trains on viaducts, a highway on pillars crossing the river, passengers waiting on a station platform, and cherry blossom in spring."
+                  loading="lazy"
+                  tabindex="0"
+                />
+                <img
+                  src="images/trains-3-ride-doctor-yellow.jpg"
+                  alt="Chase view behind the yellow Doctor Yellow train among cherry blossom, heading towards Shin-Osaka"
+                  data-caption="Riding along behind Doctor Yellow, the track-inspection train, through cherry blossom towards Shin-Osaka, with other bullet trains running on the viaduct above."
+                  loading="lazy"
+                  tabindex="0"
+                />
+                <img
+                  src="images/trains-4-passenger-window.jpg"
+                  alt="View from a passenger window on a viaduct, looking over the city"
+                  data-caption="The passenger-window view from an E6 Komachi on the viaduct, looking out over the city."
+                  loading="lazy"
+                  tabindex="0"
+                />
+                <img
+                  src="images/trains-5-night-shin-osaka.jpg"
+                  alt="An E5 Hayabusa on a viaduct at night, curving into Shin-Osaka station with lit windows"
+                  data-caption="At night the windows light up: an E5 Hayabusa curves along the viaduct into Shin-Osaka."
+                  loading="lazy"
+                  tabindex="0"
+                />
+                <img
+                  src="images/trains-6-autumn.jpg"
+                  alt="The city in autumn with red and gold trees"
+                  data-caption="Autumn: red and gold trees across the city."
+                  loading="lazy"
+                  tabindex="0"
+                />
+                <img
+                  src="images/trains-7-winter.jpg"
+                  alt="The city covered in snow in winter"
+                  data-caption="Winter: the whole board under snow, with the trains still running."
+                  loading="lazy"
+                  tabindex="0"
+                />
+              </div>
+              <p class="photo-hint">Click a screenshot to enlarge it.</p>
+              <div class="project-body">
+                <p>
+                  A virtual toy-train city with a Japanese theme, inspired by
+                  riding the bullet train and by toy train sets. Lay track on
+                  the board, build stations and signals, bridge rivers, tunnel
+                  through hills, and watch a town grow around your stations.
+                </p>
+                <p>
+                  It runs in the browser with nothing to install, and it opens
+                  with a starter city that is already running, so you can simply
+                  watch the trains or climb aboard one.
+                </p>
+
+                <div class="explore">
+                  <h4>What's in it</h4>
+                  <ul>
+                    <li>
+                      Eleven bullet trains running on a 56&nbsp;&times;&nbsp;56
+                      board with four build levels
+                    </li>
+                    <li>
+                      Express and local services that overtake and couple at
+                      stations
+                    </li>
+                    <li>
+                      Stations with platform doors, queueing passengers, staff
+                      and departure melodies
+                    </li>
+                    <li>
+                      Rivers with bridges, hills with tunnels, roads and level
+                      crossings
+                    </li>
+                    <li>
+                      Highways on pillars with ramps, flyovers and traffic
+                    </li>
+                    <li>
+                      Passengers whose journeys grow the town around each
+                      station
+                    </li>
+                    <li>
+                      A ride-along camera with driver, chase and window views
+                    </li>
+                    <li>
+                      Four seasons, day and night, and sound generated in the
+                      browser
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="stack">
+                  <div class="stack-group">
+                    <span class="stack-label">Technology</span>
+                    <div class="stack-row">
+                      <span class="chip">JavaScript</span>
+                      <span class="chip">three.js</span>
+                      <span class="chip">Vite</span>
+                      <span class="chip">GitHub Pages</span>
+                    </div>
+                  </div>
+                  <div class="stack-group">
+                    <span class="stack-label">How it was built</span>
+                    <div class="stack-row">
+                      <span class="chip asset">Vibe coded with AI</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="pcard" id="hex-farm" data-cat="games">
+            <button
+              type="button"
+              class="pcover"
+              data-open="hex-farm"
+              aria-label="Open the full write-up for Hex Farm"
+            >
+              <img src="images/thumbs/hexfarm.jpg" alt="" loading="lazy" />
+              <span class="pstatus live">Playable</span>
+            </button>
+            <div class="pcard-body">
+              <span class="project-tag"
+                >Browser game &middot; Built with AI</span
+              >
+              <h3>Hex Farm</h3>
+              <p class="p-sum">
+                A 3D hex-tile farming and settlement game in the browser. Grow a
+                camp into a town while rabbits raid your crops, foxes hunt and
+                neighbouring villages trade with you or raid you.
+              </p>
+              <div class="p-chips">
+                <span class="chip">React</span><span class="chip">Three.js</span
+                ><span class="chip">Vite</span
+                ><span class="chip">GitHub Pages</span>
+              </div>
+              <div class="plinks">
+                <button type="button" class="readmore" data-open="hex-farm">
+                  Read the write-up
+                </button>
+                <a
+                  href="https://zongpoh.github.io/Project-Farmer/"
+                  target="_blank"
+                  rel="noopener"
+                  class="go"
+                  >Play it &rarr;</a
+                ><a
+                  href="https://github.com/ZongPoh/Project-Farmer"
+                  target="_blank"
+                  rel="noopener"
+                  >Code &rarr;</a
+                >
+              </div>
+            </div>
+            <div class="pcard-full" hidden>
+              <div class="photo-grid shots">
+                <img
+                  class="lead"
+                  src="images/hexfarm-1-town-overview.jpg"
+                  alt="Hex Farm game screen with a large town on a 3D hex map, a minimap and the management panels"
+                  data-caption="A Town in its fourth year: 22 workers, farms, quarries and houses across the valley, with the minimap, job queue and settlement inspector alongside."
+                  loading="lazy"
+                  tabindex="0"
+                />
+                <img
+                  src="images/hexfarm-2-early-hamlet.jpg"
+                  alt="An early hamlet of a few buildings among forests, rivers and rocky hills"
+                  data-caption="An early hamlet on day 41, with workers out on the land and a neighbouring village sending a raid."
+                  loading="lazy"
+                  tabindex="0"
+                />
+                <img
+                  src="images/hexfarm-3-winter.jpg"
+                  alt="The settlement covered in snow in winter"
+                  data-caption="Winter: snow covers the valley, and the stores laid by in autumn have to last until spring."
+                  loading="lazy"
+                  tabindex="0"
+                />
+                <img
+                  src="images/hexfarm-4-dusk-lamps.jpg"
+                  alt="The town at dusk with lamps lit in the buildings"
+                  data-caption="Dusk: the sky follows the real sun position, and lamps come on across the town as night falls."
+                  loading="lazy"
+                  tabindex="0"
+                />
+              </div>
+              <p class="photo-hint">Click a screenshot to enlarge it.</p>
+              <div class="project-body">
+                <p>
+                  A 3D hex-tile farming and settlement game that runs entirely
+                  in the browser. Start with a camp on a hex map and grow it
+                  into a town: farm, cut wood, quarry stone, catch horses and
+                  claim land, while rabbits raid your crops, foxes hunt, and
+                  neighbouring villages trade with you or raid you.
+                </p>
+                <p>
+                  The world keeps running while you're away and catches up when
+                  you return. Your settlement saves to a small file you can load
+                  anywhere, with no account or server needed.
+                </p>
+
+                <div class="explore">
+                  <h4>What's in it</h4>
+                  <ul>
+                    <li>
+                      An hourly clock, four seasons, a sky driven by real sun
+                      position, dusk lamps and moonlight
+                    </li>
+                    <li>
+                      Workers who walk to each job, queue up, mend what breaks
+                      and forage when idle
+                    </li>
+                    <li>
+                      Rabbits, foxes, horses, goats and hens, with a
+                      predator&ndash;prey balance tuned over three simulated
+                      years
+                    </li>
+                    <li>
+                      Territory that grows as you build, plus raiders and
+                      peaceful settlers
+                    </li>
+                    <li>
+                      Progression from Camp to Homestead, Hamlet, Village and
+                      Town, with tools, skills, healing and defences
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="explore">
+                  <h4>Under the hood</h4>
+                  <ul>
+                    <li>
+                      All game rules live in plain JavaScript with no React or
+                      Three.js, so 483 tests run in Node without a browser
+                    </li>
+                    <li>
+                      Live play, idle play and offline catch-up all go through
+                      one tick, so 120 days away replays in a fraction of a
+                      second
+                    </li>
+                    <li>
+                      Sparse tile storage and windowed instanced rendering keep
+                      a game day at 1&ndash;3&nbsp;ms, from
+                      24&nbsp;&times;&nbsp;16 up to 400&nbsp;&times;&nbsp;200
+                      tiles
+                    </li>
+                    <li>
+                      Saves store only changed tiles, so a save is a few KB
+                    </li>
+                    <li>
+                      Balance and performance fixes driven by headless
+                      simulations and profiling, including a 55&times; speed-up
+                      traced to repeated failed pathfinding
+                    </li>
+                    <li>
+                      Every push runs lint and tests in GitHub Actions before
+                      publishing
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="stack">
+                  <div class="stack-group">
+                    <span class="stack-label">Technology</span>
+                    <div class="stack-row">
+                      <span class="chip">React</span>
+                      <span class="chip">Three.js</span>
+                      <span class="chip">React Three Fiber</span>
+                      <span class="chip">Vite</span>
+                      <span class="chip">GitHub Actions</span>
+                      <span class="chip">GitHub Pages</span>
+                    </div>
+                  </div>
+                  <div class="stack-group">
+                    <span class="stack-label">How it was built</span>
+                    <div class="stack-row">
+                      <span class="chip asset">Built with AI</span>
+                      <span class="chip asset">Automated tests</span>
+                      <span class="chip asset">CI-gated deploys</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="pcard" id="adminhub" data-cat="tools">
+            <button
+              type="button"
+              class="pcover"
+              data-open="adminhub"
+              aria-label="Open the full write-up for AdminHub"
+            >
+              <img src="images/thumbs/adminhub.jpg" alt="" loading="lazy" />
+              <span class="pstatus">4 photos</span>
+            </button>
+            <div class="pcard-body">
+              <span class="project-tag">Web app · Vibe-coded with AI</span>
+              <h3>AdminHub</h3>
+              <p class="p-sum">
+                A web app for a team&rsquo;s everyday admin work: room bookings,
+                duty rosters, attendance and tasks, all behind one sign-in. Runs
+                on the Python standard library and SQLite.
+              </p>
+              <div class="p-chips">
+                <span class="chip">Python</span><span class="chip">SQLite</span
+                ><span class="chip">HTML</span><span class="chip">CSS</span
+                ><span class="chip">JavaScript</span>
+              </div>
+              <div class="plinks">
+                <button type="button" class="readmore" data-open="adminhub">
+                  Read the write-up
+                </button>
+              </div>
+            </div>
+            <div class="pcard-full" hidden>
+              <div class="photo-grid shots">
+                <img
+                  class="lead"
+                  src="images/adminhub-1-home.png"
+                  alt="AdminHub home dashboard showing a supervisor's day and the team's status"
+                  data-caption="Home dashboard for a supervisor: your own duties, tasks and room bookings on top, then the team's attendance, roster health, approvals, tasks and facility faults at a glance."
+                  loading="lazy"
+                  tabindex="0"
+                />
+                <img
+                  src="images/adminhub-2-duty-roster.png"
+                  alt="AdminHub duty roster calendar for the month"
+                  data-caption="Duty roster: a shared monthly calendar with a Duty Manager, Duty Supervisor and Duty Assistant each day. Clashes are flagged in red, and swap requests wait for approval on the left."
+                  loading="lazy"
+                  tabindex="0"
+                />
+                <img
+                  src="images/adminhub-3-meeting-rooms.png"
+                  alt="AdminHub meeting room calendar with five rooms"
+                  data-caption="Meeting rooms: all five rooms on one calendar, with check-in and check-out, and a reminder for a booking that was never checked out."
+                  loading="lazy"
+                  tabindex="0"
+                />
+                <img
+                  src="images/adminhub-4-tasks.png"
+                  alt="AdminHub task board with four columns"
+                  data-caption="Tasks: a Kanban board with priorities, deadlines, progress and overdue alerts across the team."
+                  loading="lazy"
+                  tabindex="0"
+                />
+              </div>
+              <p class="photo-hint">
+                Click a screenshot to enlarge it. All names and records shown
+                are made-up sample data.
+              </p>
+              <div class="project-body">
+                <p>
+                  A web app for a team's everyday admin work: room bookings,
+                  duty rosters, shift planning, attendance, fitness tests,
+                  vehicles and tasks, all behind one sign-in with a home
+                  dashboard that shows what needs your attention today.
+                </p>
+                <p>
+                  It runs on nothing but the Python standard library and SQLite,
+                  so it needs nothing extra installed: one command starts it in
+                  the browser, with sample data ready to explore.
+                </p>
+
+                <div class="explore">
+                  <h4>What it does</h4>
+                  <ul>
+                    <li>
+                      Meeting rooms on one calendar, bookings that can't clash,
+                      check-in and check-out
+                    </li>
+                    <li>
+                      Duty roster with auto-generated drafts, availability
+                      checks and duty swaps
+                    </li>
+                    <li>
+                      Shift planning with desk-duty rules and minimum manpower
+                      per shift
+                    </li>
+                    <li>
+                      Attendance headcount, plus leave and course approvals
+                    </li>
+                    <li>Fitness test results, forecasts and session booking</li>
+                    <li>Kanban tasks with team workload and deadline alerts</li>
+                    <li>Room equipment, fault reports and a repair workflow</li>
+                    <li>
+                      Role-based permissions and a timestamped activity log
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="stack">
+                  <div class="stack-group">
+                    <span class="stack-label">Technology</span>
+                    <div class="stack-row">
+                      <span class="chip">Python</span>
+                      <span class="chip">SQLite</span>
+                      <span class="chip">HTML</span>
+                      <span class="chip">CSS</span>
+                      <span class="chip">JavaScript</span>
+                    </div>
+                  </div>
+                  <div class="stack-group">
+                    <span class="stack-label">How it was built</span>
+                    <div class="stack-row">
+                      <span class="chip asset">Vibe coded with AI</span>
+                      <span class="chip asset">No frameworks</span>
+                      <span class="chip asset">Automated tests</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+          <!-- UNRELEASED GAME: copy this block, fill it in and remove the comment marks to show it.
          Dashed outline + "In development" status. When the game ships, turn it into a normal card like the ones above.
     <article class="pcard plan" data-cat="games">
       <div class="pcover"><span class="pstatus dev">In development</span></div>
@@ -793,324 +2252,480 @@
       </div>
     </article>
     -->
-    </div>
-  </div>
-</section>
+        </div>
+      </div>
+    </section>
 
-<!-- Project write-up viewer (filled from the card's hidden .pcard-full when opened) -->
-<div class="pmodal" id="pmodal" hidden>
-  <div class="pmodal-box" role="dialog" aria-modal="true" aria-labelledby="pmodal-title">
-    <div class="pmodal-head">
-      <h3 id="pmodal-title"></h3>
-      <button type="button" class="pmodal-close" aria-label="Close">&times;</button>
-    </div>
-    <div class="pmodal-body"></div>
-  </div>
-</div>
-
-<section id="about" class="about">
-  <div class="wrap">
-    <h2>About</h2>
-    <p class="section-sub">Who I am and how I work.</p>
-    <p>
-      I&rsquo;m a computer engineer who learns best by building. When a new technology
-      catches my attention&mdash;whether it&rsquo;s a machine-learning architecture, a
-      computer-vision technique, a simulation framework, or a multiplayer networking
-      feature&mdash;my first instinct is to open an editor and put it to work.
-    </p>
-    <p>
-      I enjoy going beyond the surface to understand how the entire system fits together:
-      from data and models to engines, infrastructure, and networks. I&rsquo;m not
-      interested in treating technology as a black box; I want to understand what makes
-      it work, where it breaks, and how it can be improved.
-    </p>
-    <p>
-      Some of my most valuable lessons have come from experiments that didn&rsquo;t go as
-      planned. That cycle of building, breaking, debugging, and refining is what keeps me
-      curious&mdash;and helps me grow in a field that never stands still.
-    </p>
-    <!-- Skills, grouped under labels. To add a group, copy one .stack-group block. -->
-    <div class="skills stack">
-      <div class="stack-group">
-        <span class="stack-label">Languages</span>
-        <div class="stack-row">
-          <span class="chip">Python</span>
-          <span class="chip">C#</span>
-          <span class="chip">JavaScript</span>
+    <!-- Project write-up viewer (filled from the card's hidden .pcard-full when opened) -->
+    <div class="pmodal" id="pmodal" hidden>
+      <div
+        class="pmodal-box"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="pmodal-title"
+      >
+        <div class="pmodal-head">
+          <h3 id="pmodal-title"></h3>
+          <button type="button" class="pmodal-close" aria-label="Close">
+            &times;
+          </button>
         </div>
-      </div>
-      <div class="stack-group">
-        <span class="stack-label">Machine Learning &amp; Computer Vision</span>
-        <div class="stack-row">
-          <span class="chip">PyTorch</span>
-          <span class="chip">OpenCV</span>
-          <span class="chip">NumPy</span>
-          <span class="chip">Reinforcement Learning</span>
-          <span class="chip">Computer Vision</span>
-          <span class="chip">CNNs</span>
-        </div>
-      </div>
-      <div class="stack-group">
-        <span class="stack-label">Simulation &amp; Games</span>
-        <div class="stack-row">
-          <span class="chip">Unity</span>
-          <span class="chip">Simulation</span>
-          <span class="chip">Multiplayer Networking</span>
-          <span class="chip">Netcode for GameObjects</span>
-        </div>
-      </div>
-      <div class="stack-group">
-        <span class="stack-label">Web</span>
-        <div class="stack-row">
-          <span class="chip">three.js</span>
-          <span class="chip">SQLite</span>
-        </div>
+        <div class="pmodal-body"></div>
       </div>
     </div>
-  </div>
-</section>
 
-<section id="work">
-  <div class="wrap">
-    <h2>Earlier Work</h2>
-    <p class="section-sub">Internship · PTV Group</p>
-    <p class="work-intro">
-      During my internship at PTV Group, I worked on the software integration between
-      PTV VISSIM and Unity 3D — connecting VISSIM's microscopic traffic simulation with
-      an interactive Unity environment so that the two could run together in real time.
-    </p>
-    <p class="work-intro">
-      The clips below come from two team projects I contributed to during that time: a
-      bus simulator and an autonomous-vehicle simulation.
-    </p>
+    <section id="work">
+      <div class="wrap">
+        <h2>Earlier Work</h2>
+        <p class="section-sub">Internship · PTV Group</p>
+        <p class="work-intro">
+          During my internship at PTV Group, I worked on the software
+          integration between PTV VISSIM and Unity 3D — connecting VISSIM's
+          microscopic traffic simulation with an interactive Unity environment
+          so that the two could run together in real time.
+        </p>
+        <p class="work-intro">
+          The clips below come from two team projects I contributed to during
+          that time: a bus simulator and an autonomous-vehicle simulation.
+        </p>
 
-    <article class="project" id="bus-simulator">
-      <div class="p-row">
-        <a class="p-thumb video" href="#bus-simulator" aria-label="Show the clip for Bus Simulator">
-          <img src="https://i.ytimg.com/vi/tRKfI3aIPDM/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
-          <span class="p-badge">1 clip</span>
-        </a>
-        <div class="p-info">
-          <span class="project-tag">PTV Group · Team project</span>
-          <h3>Bus Simulator</h3>
-          <p class="p-sum">A bus simulator designed to give an immersive experience for both driver
-          training and traffic-behaviour analysis, with live traffic streamed from PTV
-          VISSIM into Unity.</p>
-          <div class="p-chips">
-            <span class="chip">Unity</span>
-            <span class="chip">PTV VISSIM</span>
-          </div>
-          <div class="p-links">
-            <a class="btn" href="https://youtu.be/tRKfI3aIPDM" target="_blank" rel="noopener">Watch on YouTube</a>
-          </div>
-        </div>
-      </div>
-      <details class="p-more">
-        <summary><span class="when-closed">Watch the clip here</span><span class="when-open">Hide the clip</span></summary>
-        <div class="embed">
-          <iframe src="https://www.youtube.com/embed/tRKfI3aIPDM"
-            title="Driving Simulator with VISSIM Integration in Unity"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen loading="lazy"></iframe>
-        </div>
-        <p class="clip-title">Driving Simulator with VISSIM Integration in Unity</p>
-      </details>
-    </article>
-
-    <article class="project" id="av-simulation">
-      <div class="p-row">
-        <a class="p-thumb video" href="#av-simulation" aria-label="Show the clips for Autonomous Vehicle Simulation">
-          <img src="https://i.ytimg.com/vi/EM7AHhyWbNg/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
-          <span class="p-badge">2 clips</span>
-        </a>
-        <div class="p-info">
-          <span class="project-tag">PTV Group · Team project</span>
-          <h3>Autonomous Vehicle Simulation</h3>
-          <p class="p-sum">An autonomous-vehicle simulation used to test edge cases against realistic VISSIM
-          traffic behaviour.</p>
-          <div class="p-chips">
-            <span class="chip">Unity</span>
-            <span class="chip">PTV VISSIM</span>
-          </div>
-        </div>
-      </div>
-      <details class="p-more">
-        <summary><span class="when-closed">Watch the clips here</span><span class="when-open">Hide the clips</span></summary>
-        <div class="project-body">
-          <div class="video-grid">
-            <div class="video-card">
-              <div class="embed">
-                <iframe src="https://www.youtube.com/embed/EM7AHhyWbNg"
-                  title="Autonomous Vehicles in Unity with VISSIM traffic — Stopping for jaywalkers"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen loading="lazy"></iframe>
+        <article class="project" id="bus-simulator">
+          <div class="p-row">
+            <a
+              class="p-thumb video"
+              href="#bus-simulator"
+              aria-label="Show the clip for Bus Simulator"
+            >
+              <img
+                src="https://i.ytimg.com/vi/tRKfI3aIPDM/hqdefault.jpg"
+                alt=""
+                loading="lazy"
+                onerror="this.style.display='none'"
+              />
+              <span class="p-badge">1 clip</span>
+            </a>
+            <div class="p-info">
+              <span class="project-tag">PTV Group · Team project</span>
+              <h3>Bus Simulator</h3>
+              <p class="p-sum">
+                A bus simulator designed to give an immersive experience for
+                both driver training and traffic-behaviour analysis, with live
+                traffic streamed from PTV VISSIM into Unity.
+              </p>
+              <div class="p-chips">
+                <span class="chip">Unity</span>
+                <span class="chip">PTV VISSIM</span>
               </div>
-              <div class="caption">
-                <h4>Stopping for jaywalkers</h4>
-                <p>An edge-case scenario where the autonomous vehicle detects and stops for
-                jaywalking pedestrians.</p>
-              </div>
-            </div>
-
-            <div class="video-card">
-              <div class="embed">
-                <iframe src="https://www.youtube.com/embed/LF9YIEZRR3M"
-                  title="Autonomous Vehicles in Unity with VISSIM traffic — Failing to give way"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen loading="lazy"></iframe>
-              </div>
-              <div class="caption">
-                <h4>Failing to give way</h4>
-                <p>An edge-case study of give-way behaviour and where the logic breaks down.</p>
+              <div class="p-links">
+                <a
+                  class="btn"
+                  href="https://youtu.be/tRKfI3aIPDM"
+                  target="_blank"
+                  rel="noopener"
+                  >Watch on YouTube</a
+                >
               </div>
             </div>
           </div>
+          <details class="p-more">
+            <summary>
+              <span class="when-closed">Watch the clip here</span
+              ><span class="when-open">Hide the clip</span>
+            </summary>
+            <div class="embed">
+              <iframe
+                src="https://www.youtube.com/embed/tRKfI3aIPDM"
+                title="Driving Simulator with VISSIM Integration in Unity"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy"
+              ></iframe>
+            </div>
+            <p class="clip-title">
+              Driving Simulator with VISSIM Integration in Unity
+            </p>
+          </details>
+        </article>
+
+        <article class="project" id="av-simulation">
+          <div class="p-row">
+            <a
+              class="p-thumb video"
+              href="#av-simulation"
+              aria-label="Show the clips for Autonomous Vehicle Simulation"
+            >
+              <img
+                src="https://i.ytimg.com/vi/EM7AHhyWbNg/hqdefault.jpg"
+                alt=""
+                loading="lazy"
+                onerror="this.style.display='none'"
+              />
+              <span class="p-badge">2 clips</span>
+            </a>
+            <div class="p-info">
+              <span class="project-tag">PTV Group · Team project</span>
+              <h3>Autonomous Vehicle Simulation</h3>
+              <p class="p-sum">
+                An autonomous-vehicle simulation used to test edge cases against
+                realistic VISSIM traffic behaviour.
+              </p>
+              <div class="p-chips">
+                <span class="chip">Unity</span>
+                <span class="chip">PTV VISSIM</span>
+              </div>
+            </div>
+          </div>
+          <details class="p-more">
+            <summary>
+              <span class="when-closed">Watch the clips here</span
+              ><span class="when-open">Hide the clips</span>
+            </summary>
+            <div class="project-body">
+              <div class="video-grid">
+                <div class="video-card">
+                  <div class="embed">
+                    <iframe
+                      src="https://www.youtube.com/embed/EM7AHhyWbNg"
+                      title="Autonomous Vehicles in Unity with VISSIM traffic — Stopping for jaywalkers"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                      loading="lazy"
+                    ></iframe>
+                  </div>
+                  <div class="caption">
+                    <h4>Stopping for jaywalkers</h4>
+                    <p>
+                      An edge-case scenario where the autonomous vehicle detects
+                      and stops for jaywalking pedestrians.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="video-card">
+                  <div class="embed">
+                    <iframe
+                      src="https://www.youtube.com/embed/LF9YIEZRR3M"
+                      title="Autonomous Vehicles in Unity with VISSIM traffic — Failing to give way"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                      loading="lazy"
+                    ></iframe>
+                  </div>
+                  <div class="caption">
+                    <h4>Failing to give way</h4>
+                    <p>
+                      An edge-case study of give-way behaviour and where the
+                      logic breaks down.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </details>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="wrap">
+        <h2>Get in touch</h2>
+        <p>
+          Let's connect and explore opportunities to create meaningful,
+          technology-driven advancements together. I'm always happy to talk
+          machine learning, robotics, or interesting side projects.
+        </p>
+        <div class="contact-links">
+          <a
+            class="btn primary"
+            href="https://www.linkedin.com/in/loo-zong-poh"
+            target="_blank"
+            rel="noopener"
+            >Connect on LinkedIn</a
+          >
         </div>
-      </details>
-    </article>
-  </div>
-</section>
+      </div>
+    </section>
 
-<section id="contact" class="contact">
-  <div class="wrap">
-    <h2>Get in touch</h2>
-    <p>
-      Let's connect and explore opportunities to create meaningful, technology-driven
-      advancements together. I'm always happy to talk machine learning, robotics, or
-      interesting side projects.
-    </p>
-    <div class="contact-links">
-      <a class="btn primary" href="https://www.linkedin.com/in/loo-zong-poh" target="_blank" rel="noopener">Connect on LinkedIn</a>
-    </div>
-  </div>
-</section>
+    <footer>
+      <div class="wrap">
+        © <span id="year"></span> Loo Zong Poh. Built with curiosity.
+      </div>
+    </footer>
 
-<footer>
-  <div class="wrap">
-    © <span id="year"></span> Loo Zong Poh. Built with curiosity.
-  </div>
-</footer>
-
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-<script>
-/* Earlier Work cards: clicking a thumbnail, or arriving on a link like #bus-simulator, opens that card.
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    <script>
+      /* Earlier Work cards: clicking a thumbnail, or arriving on a link like #bus-simulator, opens that card.
    Featured Projects: clicking a card opens its write-up in the viewer; links like #adminhub open it too. */
-(function(){
-  var modal=document.getElementById('pmodal'), body=modal.querySelector('.pmodal-body'),
-      title=document.getElementById('pmodal-title'), current=null, lastFocus=null;
-  function openCard(card){
-    if(current) closeCard(true);
-    var full=card.querySelector('.pcard-full'); if(!full) return;
-    lastFocus=document.activeElement; current=card;
-    title.textContent=card.querySelector('h3').textContent;
-    full.hidden=false; body.appendChild(full);
-    modal.hidden=false; document.body.style.overflow='hidden';
-    modal.scrollTop=0; modal.querySelector('.pmodal-close').focus();
-    if(history.replaceState) history.replaceState(null,'','#'+card.id);
-  }
-  function closeCard(silent){
-    if(!current) return;
-    var full=body.querySelector('.pcard-full');
-    if(full){ full.hidden=true; current.appendChild(full); }
-    modal.hidden=true; document.body.style.overflow='';
-    current=null;
-    if(!silent){ if(history.replaceState) history.replaceState(null,'',location.pathname+location.search);
-      if(lastFocus) lastFocus.focus(); }
-  }
-  window.__pmodalOpen=function(){return !modal.hidden;};
-  [].forEach.call(document.querySelectorAll('[data-open]'),function(b){
-    b.addEventListener('click',function(){ openCard(document.getElementById(b.dataset.open)); });
-  });
-  modal.querySelector('.pmodal-close').addEventListener('click',function(){closeCard();});
-  modal.addEventListener('click',function(e){ if(e.target===modal) closeCard(); });
-  document.addEventListener('keydown',function(e){
-    var lb=document.getElementById('lightbox');
-    if(e.key==='Escape'&&!modal.hidden&&!(lb&&lb.classList.contains('open'))) closeCard();
-  });
+      (function () {
+        var modal = document.getElementById("pmodal"),
+          body = modal.querySelector(".pmodal-body"),
+          title = document.getElementById("pmodal-title"),
+          current = null,
+          lastFocus = null;
+        function openCard(card) {
+          if (current) closeCard(true);
+          var full = card.querySelector(".pcard-full");
+          if (!full) return;
+          lastFocus = document.activeElement;
+          current = card;
+          title.textContent = card.querySelector("h3").textContent;
+          full.hidden = false;
+          body.appendChild(full);
+          modal.hidden = false;
+          document.body.style.overflow = "hidden";
+          modal.scrollTop = 0;
+          modal.querySelector(".pmodal-close").focus();
+          if (history.replaceState)
+            history.replaceState(null, "", "#" + card.id);
+        }
+        function closeCard(silent) {
+          if (!current) return;
+          var full = body.querySelector(".pcard-full");
+          if (full) {
+            full.hidden = true;
+            current.appendChild(full);
+          }
+          modal.hidden = true;
+          document.body.style.overflow = "";
+          current = null;
+          if (!silent) {
+            if (history.replaceState)
+              history.replaceState(
+                null,
+                "",
+                location.pathname + location.search,
+              );
+            if (lastFocus) lastFocus.focus();
+          }
+        }
+        window.__pmodalOpen = function () {
+          return !modal.hidden;
+        };
+        [].forEach.call(document.querySelectorAll("[data-open]"), function (b) {
+          b.addEventListener("click", function () {
+            openCard(document.getElementById(b.dataset.open));
+          });
+        });
+        modal
+          .querySelector(".pmodal-close")
+          .addEventListener("click", function () {
+            closeCard();
+          });
+        modal.addEventListener("click", function (e) {
+          if (e.target === modal) closeCard();
+        });
+        document.addEventListener("keydown", function (e) {
+          var lb = document.getElementById("lightbox");
+          if (
+            e.key === "Escape" &&
+            !modal.hidden &&
+            !(lb && lb.classList.contains("open"))
+          )
+            closeCard();
+        });
 
-  /* filters */
-  var filters=[].slice.call(document.querySelectorAll('.pfilter'));
-  filters.forEach(function(f){ f.addEventListener('click',function(){
-    filters.forEach(function(x){x.setAttribute('aria-pressed',x===f);});
-    [].forEach.call(document.querySelectorAll('.pcard'),function(c){
-      c.hidden=!(f.dataset.cat==='all'||c.dataset.cat===f.dataset.cat); });
-    document.querySelector('.pgrid').classList.toggle('is-filtered',f.dataset.cat!=='all');
-  }); });
+        /* filters */
+        var filters = [].slice.call(document.querySelectorAll(".pfilter"));
+        filters.forEach(function (f) {
+          f.addEventListener("click", function () {
+            filters.forEach(function (x) {
+              x.setAttribute("aria-pressed", x === f);
+            });
+            [].forEach.call(document.querySelectorAll(".pcard"), function (c) {
+              c.hidden = !(
+                f.dataset.cat === "all" || c.dataset.cat === f.dataset.cat
+              );
+            });
+          });
+        });
 
-  /* Earlier Work cards keep the original open/close behaviour */
-  function more(id){ var a=id&&document.getElementById(id);
-    return a&&a.classList.contains('project')?a.querySelector('.p-more'):null; }
-  function fromHash(){ var id=decodeURIComponent(location.hash.slice(1)), el=id&&document.getElementById(id);
-    if(el&&el.classList.contains('pcard')){ openCard(el); return; }
-    var d=more(id); if(d) d.open=true; }
-  [].forEach.call(document.querySelectorAll('.p-thumb'),function(t){
-    t.addEventListener('click',function(e){
-      e.preventDefault();
-      var card=t.closest('.project'), d=card.querySelector('.p-more');
-      d.open=!d.open;
-      if(d.open&&history.replaceState) history.replaceState(null,'','#'+card.id);
-    });
-  });
-  window.addEventListener('hashchange',fromHash); fromHash();
-})();
-</script>
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
-  <button class="lb-close" aria-label="Close">&times;</button>
-  <button class="lb-prev" aria-label="Previous photo">&#8249;</button>
-  <img alt="">
-  <p class="lb-caption"></p>
-  <p class="lb-count"></p>
-  <button class="lb-next" aria-label="Next photo">&#8250;</button>
-</div>
-<script>
-(function(){
-  var all=[].slice.call(document.querySelectorAll('.photo-grid img')), imgs=all;
-  var lb=document.getElementById('lightbox'); if(!all.length||!lb) return;
-  var big=lb.querySelector('img'), cap=lb.querySelector('.lb-caption'), cnt=lb.querySelector('.lb-count');
-  var i=0, last=null;
-  function show(n){ i=(n+imgs.length)%imgs.length; var t=imgs[i];
-    big.src=t.src; big.alt=t.alt; cap.textContent=t.dataset.caption||t.alt;
-    cnt.textContent=(i+1)+' / '+imgs.length; }
-  function open(el){ last=document.activeElement;
-    imgs=[].slice.call(el.closest('.photo-grid').querySelectorAll('img'));
-    lb.classList.toggle('single',imgs.length<2); show(imgs.indexOf(el)); lb.classList.add('open');
-    document.body.style.overflow='hidden'; lb.querySelector('.lb-close').focus(); }
-  function close(){ lb.classList.remove('open'); document.body.style.overflow=''; if(last) last.focus(); }
-  all.forEach(function(im){
-    im.addEventListener('click',function(){open(im);});
-    im.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();open(im);} });
-  });
-  lb.querySelector('.lb-close').onclick=close;
-  lb.querySelector('.lb-prev').onclick=function(){show(i-1);};
-  lb.querySelector('.lb-next').onclick=function(){show(i+1);};
-  lb.addEventListener('click',function(e){ if(e.target===lb) close(); });
-  document.addEventListener('keydown',function(e){ if(!lb.classList.contains('open')) return;
-    if(e.key==='Escape'){ e.stopImmediatePropagation(); close(); } else if(e.key==='ArrowLeft') show(i-1); else if(e.key==='ArrowRight') show(i+1); });
-  var x0=null;
-  lb.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
-  lb.addEventListener('touchend',function(e){ if(x0===null) return; var dx=e.changedTouches[0].clientX-x0;
-    if(Math.abs(dx)>50) show(dx<0?i+1:i-1); x0=null; });
-})();
-</script>
-<script>
-/* Nav: underline the section you are reading */
-(function(){
-  var links=[].slice.call(document.querySelectorAll('nav .links a'));
-  if(!('IntersectionObserver' in window)) return;
-  var map={}; links.forEach(function(a){ map[a.getAttribute('href').slice(1)]=a; });
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(!e.isIntersecting) return;
-      links.forEach(function(a){ a.removeAttribute('aria-current'); });
-      var a=map[e.target.id]; if(a) a.setAttribute('aria-current','true'); });
-  },{rootMargin:'-45% 0px -50% 0px'});
-  Object.keys(map).forEach(function(id){ var el=document.getElementById(id); if(el) io.observe(el); });
-  /* the last section is short, so mark it once the page is scrolled to the bottom */
-  window.addEventListener('scroll',function(){
-    if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4){
-      links.forEach(function(a){ a.removeAttribute('aria-current'); });
-      links[links.length-1].setAttribute('aria-current','true'); }
-  },{passive:true});
-})();
-</script>
-</body>
+        /* Earlier Work cards keep the original open/close behaviour */
+        function more(id) {
+          var a = id && document.getElementById(id);
+          return a && a.classList.contains("project")
+            ? a.querySelector(".p-more")
+            : null;
+        }
+        function fromHash() {
+          var id = decodeURIComponent(location.hash.slice(1)),
+            el = id && document.getElementById(id);
+          if (el && el.classList.contains("pcard")) {
+            openCard(el);
+            return;
+          }
+          var d = more(id);
+          if (d) d.open = true;
+        }
+        [].forEach.call(document.querySelectorAll(".p-thumb"), function (t) {
+          t.addEventListener("click", function (e) {
+            e.preventDefault();
+            var card = t.closest(".project"),
+              d = card.querySelector(".p-more");
+            d.open = !d.open;
+            if (d.open && history.replaceState)
+              history.replaceState(null, "", "#" + card.id);
+          });
+        });
+        window.addEventListener("hashchange", fromHash);
+        fromHash();
+      })();
+    </script>
+    <div
+      class="lightbox"
+      id="lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Photo viewer"
+    >
+      <button class="lb-close" aria-label="Close">&times;</button>
+      <button class="lb-prev" aria-label="Previous photo">&#8249;</button>
+      <img alt="" />
+      <p class="lb-caption"></p>
+      <p class="lb-count"></p>
+      <button class="lb-next" aria-label="Next photo">&#8250;</button>
+    </div>
+    <script>
+      (function () {
+        var all = [].slice.call(document.querySelectorAll(".photo-grid img")),
+          imgs = all;
+        var lb = document.getElementById("lightbox");
+        if (!all.length || !lb) return;
+        var big = lb.querySelector("img"),
+          cap = lb.querySelector(".lb-caption"),
+          cnt = lb.querySelector(".lb-count");
+        var i = 0,
+          last = null;
+        function show(n) {
+          i = (n + imgs.length) % imgs.length;
+          var t = imgs[i];
+          big.src = t.src;
+          big.alt = t.alt;
+          cap.textContent = t.dataset.caption || t.alt;
+          cnt.textContent = i + 1 + " / " + imgs.length;
+        }
+        function open(el) {
+          last = document.activeElement;
+          imgs = [].slice.call(
+            el.closest(".photo-grid").querySelectorAll("img"),
+          );
+          lb.classList.toggle("single", imgs.length < 2);
+          show(imgs.indexOf(el));
+          lb.classList.add("open");
+          document.body.style.overflow = "hidden";
+          lb.querySelector(".lb-close").focus();
+        }
+        function close() {
+          lb.classList.remove("open");
+          document.body.style.overflow = "";
+          if (last) last.focus();
+        }
+        all.forEach(function (im) {
+          im.addEventListener("click", function () {
+            open(im);
+          });
+          im.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              open(im);
+            }
+          });
+        });
+        lb.querySelector(".lb-close").onclick = close;
+        lb.querySelector(".lb-prev").onclick = function () {
+          show(i - 1);
+        };
+        lb.querySelector(".lb-next").onclick = function () {
+          show(i + 1);
+        };
+        lb.addEventListener("click", function (e) {
+          if (e.target === lb) close();
+        });
+        document.addEventListener("keydown", function (e) {
+          if (!lb.classList.contains("open")) return;
+          if (e.key === "Escape") {
+            e.stopImmediatePropagation();
+            close();
+          } else if (e.key === "ArrowLeft") show(i - 1);
+          else if (e.key === "ArrowRight") show(i + 1);
+        });
+        var x0 = null;
+        lb.addEventListener(
+          "touchstart",
+          function (e) {
+            x0 = e.touches[0].clientX;
+          },
+          { passive: true },
+        );
+        lb.addEventListener("touchend", function (e) {
+          if (x0 === null) return;
+          var dx = e.changedTouches[0].clientX - x0;
+          if (Math.abs(dx) > 50) show(dx < 0 ? i + 1 : i - 1);
+          x0 = null;
+        });
+      })();
+    </script>
+    <script>
+      /* respect "reduce motion": freeze the About illustration */
+      (function () {
+        var net = document.querySelector(".net");
+        if (
+          net &&
+          window.matchMedia &&
+          matchMedia("(prefers-reduced-motion: reduce)").matches &&
+          net.pauseAnimations
+        )
+          net.pauseAnimations();
+      })();
+    </script>
+    <script>
+      /* Nav: underline the section you are reading */
+      (function () {
+        var links = [].slice.call(document.querySelectorAll("nav .links a"));
+        if (!("IntersectionObserver" in window)) return;
+        var map = {};
+        links.forEach(function (a) {
+          map[a.getAttribute("href").slice(1)] = a;
+        });
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (!e.isIntersecting) return;
+              links.forEach(function (a) {
+                a.removeAttribute("aria-current");
+              });
+              var a = map[e.target._navId || e.target.id];
+              if (a) a.setAttribute("aria-current", "true");
+            });
+          },
+          { rootMargin: "-45% 0px -50% 0px" },
+        );
+        /* watch the whole section, even when the link points at a heading inside it */
+        Object.keys(map).forEach(function (id) {
+          var el = document.getElementById(id);
+          if (!el) return;
+          var box = el.closest("section,header") || el;
+          box._navId = id;
+          io.observe(box);
+        });
+        /* the last section is short, so mark it once the page is scrolled to the bottom */
+        window.addEventListener(
+          "scroll",
+          function () {
+            if (
+              window.innerHeight + window.scrollY >=
+              document.documentElement.scrollHeight - 4
+            ) {
+              links.forEach(function (a) {
+                a.removeAttribute("aria-current");
+              });
+              links[links.length - 1].setAttribute("aria-current", "true");
+            }
+          },
+          { passive: true },
+        );
+      })();
+    </script>
+  </body>
 </html>
