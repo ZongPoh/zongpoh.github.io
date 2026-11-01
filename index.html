@@ -472,6 +472,16 @@
         left: 0;
         color: var(--accent);
       }
+      .explore.learned ul {
+        grid-template-columns: 1fr;
+      }
+      .explore li strong {
+        color: var(--text);
+      }
+      .explore.learned li strong {
+        display: block;
+        margin-bottom: 2px;
+      }
       .stack {
         display: flex;
         flex-direction: column;
@@ -710,7 +720,8 @@
         padding-top: 56.25%;
         background: #000;
       }
-      .embed iframe {
+      .embed iframe,
+      .embed video {
         position: absolute;
         inset: 0;
         width: 100%;
@@ -1020,6 +1031,7 @@
         border-bottom: 1px solid var(--line);
       }
       .pmodal-head h3 {
+        flex: 1;
         font-size: 1.1rem;
         letter-spacing: -0.01em;
       }
@@ -1037,6 +1049,26 @@
       }
       .pmodal-close:hover {
         border-color: var(--text);
+      }
+      .pmodal-play {
+        flex: none;
+        display: inline-flex;
+        align-items: center;
+        min-height: 36px;
+        padding: 0 14px;
+        border-radius: 8px;
+        background: var(--accent);
+        color: #fff;
+        font-weight: 600;
+        font-size: 0.88rem;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .pmodal-play[hidden] {
+        display: none;
+      }
+      .pmodal-play:hover {
+        filter: brightness(1.1);
       }
       @media (max-width: 640px) {
         .pmodal {
@@ -1479,6 +1511,221 @@
         </div>
 
         <div class="pgrid">
+          <article class="pcard" id="alamak-zombies" data-cat="games">
+            <button
+              type="button"
+              class="pcover video"
+              data-open="alamak-zombies"
+              aria-label="Open the full write-up for Alamak! Zombies Ah?"
+            >
+              <img src="images/thumbs/zombies.jpg" alt="" loading="lazy" />
+              <span class="pstatus live">Playable</span>
+            </button>
+            <div class="pcard-body">
+              <span class="project-tag"
+                >Browser game &middot; Built with AI</span
+              >
+              <h3>Alamak! Zombies Ah?</h3>
+              <p class="p-sum">
+                A first-person zombie survival game in a blocky city that keeps
+                generating as you explore. Play alone or with up to three
+                friends, and your score is how long you stay alive.
+              </p>
+              <div class="p-chips">
+                <span class="chip">Three.js</span><span class="chip">Vite</span
+                ><span class="chip">Cloudflare Workers</span
+                ><span class="chip">Durable Objects</span>
+              </div>
+              <div class="plinks">
+                <button
+                  type="button"
+                  class="readmore"
+                  data-open="alamak-zombies"
+                >
+                  Read the write-up
+                </button>
+                <a
+                  href="https://kampongstudio.dev/alamakzombies/"
+                  target="_blank"
+                  rel="noopener"
+                  class="go"
+                  >Play it &rarr;</a
+                >
+              </div>
+            </div>
+            <div class="pcard-full" hidden>
+              <div class="embed">
+                <iframe
+                  src="https://www.youtube.com/embed/-tA4wtoHkFA"
+                  title="Alamak! Zombies Ah? trailer"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  loading="lazy"
+                ></iframe>
+              </div>
+              <div class="photo-grid shots">
+                <img
+                  class="lead"
+                  src="images/zombies-1-platform-brute.jpg"
+                  alt="A brute zombie lunging at the player on a train platform, with another zombie behind it and a No durians on board sign"
+                  data-caption="A brute right in your face on the Loop Line platform, under the &ldquo;No durians on board&rdquo; sign."
+                  loading="lazy"
+                  tabindex="0"
+                />
+                <img
+                  src="images/zombies-2-durian-bomb.jpg"
+                  alt="A durian bomb exploding in the middle of a group of zombies on a grass field"
+                  data-caption="A durian bomb going off in the middle of the horde. Very shiok, very smelly."
+                  loading="lazy"
+                  tabindex="0"
+                />
+                <img
+                  src="images/zombies-3-void-deck.jpg"
+                  alt="Firing a shotgun from under an HDB void deck at zombies crossing the field"
+                  data-caption="Holding the HDB void deck while the horde crosses the field."
+                  loading="lazy"
+                  tabindex="0"
+                />
+                <img
+                  src="images/zombies-4-city-aerial.jpg"
+                  alt="Aerial view over the blocky city with the Loop Line viaduct and a station"
+                  data-caption="The city from above: the Loop Line viaduct and a station, with more city generating past the fog."
+                  loading="lazy"
+                  tabindex="0"
+                />
+              </div>
+              <p class="photo-hint">Click a screenshot to enlarge it.</p>
+              <div class="project-body">
+                <p>
+                  A first-person zombie survival game that runs in the browser.
+                  You wake up on a train platform with a baseball bat and a
+                  zombie coming for you. From there the city keeps generating
+                  as you explore: downtown towers, suburbs, industrial yards,
+                  forest, subway stations and underground labs. Your score is
+                  how long you stay alive.
+                </p>
+                <p>
+                  It has a Singapore flavour: HDB estates with working lifts,
+                  hawker food, a durian bomb and a tissue packet to chope your
+                  spot. Play alone, or start a co-op room for up to four
+                  players. The game is built with Three.js and Vite and has no
+                  other dependencies. Every sound is synthesised in the
+                  browser, so there are no audio files to host.
+                </p>
+
+                <div class="explore learned">
+                  <h4>What I learned</h4>
+                  <ul>
+                    <li>
+                      <strong>Choosing a cloud</strong>
+                      I compared the main
+                      cloud providers and picked Cloudflare for its low cost
+                      and its strong name in security. The game uses several of
+                      its services: Workers for the API, Durable Objects for
+                      each co-op room, D1 as the database, Turnstile to keep
+                      bots out, and rate limits on every endpoint.
+                    </li>
+                    <li>
+                      <strong>Client and server</strong>
+                      Anything that runs in
+                      the browser can be changed by the player, so it can't be
+                      trusted. The browser only draws the game and sends what you
+                      pressed. The server keeps score: it runs every co-op
+                      room and times every ranked run, so its result is the
+                      one that counts.
+                    </li>
+                    <li>
+                      <strong>Personal data (PDPA)</strong>
+                      Collect only what
+                      the game needs. It keeps a random ID, a display name and
+                      your scores. It stores no email and no IP address, keeps
+                      the transfer code only as a hash, and lets you delete
+                      your profile at any time.
+                    </li>
+                    <li>
+                      <strong>Copyright and credits</strong>
+                      Every library and
+                      font is open source and credited with its licence:
+                      three.js under MIT, and the fonts under the SIL Open Font
+                      License. The sounds are generated in code and the models
+                      are built from code, so nothing is borrowed without
+                      permission.
+                    </li>
+                    <li>
+                      <strong>Checking the AI's work</strong>
+                      Claude made it
+                      possible for me to build a game that would normally take
+                      years. I still read the code, checked the logic, wrote
+                      tests and played every change. AI can write a game, but
+                      knowing what makes it fun and fair still needs a human
+                      touch.
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="explore">
+                  <h4>What's in it</h4>
+                  <ul>
+                    <li>
+                      An endless city built from chunks around you, with loop
+                      trains on viaducts, a subway, office towers and labs
+                    </li>
+                    <li>
+                      Zombie types from shamblers and runners to brutes,
+                      bloaters and screamers, sent in waves by a director that
+                      reacts to how you play
+                    </li>
+                    <li>
+                      Scavenge guns, ammo, durian bombs and medkits, drive the
+                      cars you find, barricade doorways, and hunt and cook
+                      when you get hungry
+                    </li>
+                    <li>
+                      A day/night cycle, AI survivor squads, army bases under
+                      siege and keycard vaults
+                    </li>
+                    <li>
+                      Co-op for up to four players, with monthly leaderboards
+                      and a hall of fame
+                    </li>
+                    <li>
+                      Touch controls for phones and tablets, switched on
+                      automatically
+                    </li>
+                  </ul>
+                </div>
+
+                <blockquote>
+                  In co-op the server decides everything. Browsers only send
+                  what you pressed and where you're aiming, so a run can't be
+                  faked from the browser.
+                </blockquote>
+
+                <div class="stack">
+                  <div class="stack-group">
+                    <span class="stack-label">Technology</span>
+                    <div class="stack-row">
+                      <span class="chip">Three.js</span>
+                      <span class="chip">Vite</span>
+                      <span class="chip">Web Audio</span>
+                      <span class="chip">Cloudflare Workers</span>
+                      <span class="chip">Durable Objects</span>
+                      <span class="chip">D1</span>
+                      <span class="chip">Turnstile</span>
+                    </div>
+                  </div>
+                  <div class="stack-group">
+                    <span class="stack-label">How it was built</span>
+                    <div class="stack-row">
+                      <span class="chip asset">Built with AI</span>
+                      <span class="chip asset">Automated tests</span>
+                      <span class="chip asset">Server-authoritative co-op</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
           <article class="pcard" id="ml-racing" data-cat="ml">
             <button
               type="button"
@@ -2234,6 +2481,13 @@
       >
         <div class="pmodal-head">
           <h3 id="pmodal-title"></h3>
+          <a
+            class="pmodal-play"
+            target="_blank"
+            rel="noopener"
+            hidden
+            >Play it &rarr;</a
+          >
           <button type="button" class="pmodal-close" aria-label="Close">
             &times;
           </button>
@@ -2430,6 +2684,7 @@
         var modal = document.getElementById("pmodal"),
           body = modal.querySelector(".pmodal-body"),
           title = document.getElementById("pmodal-title"),
+          play = modal.querySelector(".pmodal-play"),
           current = null,
           lastFocus = null;
         function openCard(card) {
@@ -2439,6 +2694,9 @@
           lastFocus = document.activeElement;
           current = card;
           title.textContent = card.querySelector("h3").textContent;
+          var go = card.querySelector(".plinks a.go");
+          play.hidden = !go;
+          if (go) play.href = go.href;
           full.hidden = false;
           body.appendChild(full);
           modal.hidden = false;
@@ -2452,6 +2710,9 @@
           if (!current) return;
           var full = body.querySelector(".pcard-full");
           if (full) {
+            [].forEach.call(full.querySelectorAll("video"), function (v) {
+              v.pause();
+            });
             full.hidden = true;
             current.appendChild(full);
           }
