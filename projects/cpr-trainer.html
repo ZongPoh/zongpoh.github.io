@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://i.ytimg.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com; connect-src 'self'; base-uri 'self'; form-action 'none'; object-src 'none'; upgrade-insecure-requests" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CPR Training Kit: development write-up | Loo Zong Poh</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+<meta name="description" content="An Arduino CPR trainer I built in 2019 for secondary school first aid training: a micro switch, an LCD, a buzzer and a lot of hot glue. What worked, what broke, and what I would do differently." />
+<style>
+  :root{--bg:#fff;--bg-soft:#f6f7f9;--text:#1a1d21;--muted:#5c636e;--line:#e6e8ec;--accent:#2f6df6;--accent-soft:#eaf0fe;--radius:14px;--maxw:1040px;--note:#fff7e0;--note-line:#f0d68a}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--text);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .narrow{max-width:720px}
+  button{font:inherit;cursor:pointer}
+
+  .demo-bar{background:#1a1d21;color:#e8eaee;font-size:.85rem;padding:9px 0}
+  .demo-bar .wrap{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .demo-bar b{color:#fff}
+  .layer{display:inline-flex;align-items:center;gap:6px;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8a6200;background:var(--note);border:1px solid var(--note-line);padding:3px 9px;border-radius:999px}
+
+  nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.88);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+  nav .brand{font-weight:700;color:var(--text)}
+  nav .links{display:flex;gap:22px} nav .links a{color:var(--muted);font-size:.95rem;font-weight:500}
+
+  /* ---------- Layer 1: main page ---------- */
+  .section-head{padding:56px 0 8px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+  h2{font-size:1.9rem;letter-spacing:-.02em;line-height:1.2}
+  .section-sub{color:var(--muted);margin-top:6px}
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 22px}
+  .filters button{border:1px solid var(--line);background:#fff;color:var(--muted);padding:6px 14px;border-radius:999px;font-size:.88rem;font-weight:500}
+  .filters button[aria-pressed=true]{background:var(--text);border-color:var(--text);color:#fff}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px;padding-bottom:70px}
+  .card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;background:#fff;transition:transform .15s,box-shadow .15s}
+  .card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(20,30,50,.08)}
+  .cover{aspect-ratio:16/9;background:var(--bg-soft) center/cover;position:relative;border:0;display:block;width:100%}
+  .cover.ml{background:linear-gradient(135deg,#0f1f3d,#2f6df6);display:grid;place-items:center;color:#fff;font-weight:700;letter-spacing:.06em;font-size:.85rem}
+  .status{position:absolute;top:10px;left:10px;font-size:.72rem;font-weight:600;background:rgba(255,255,255,.92);color:var(--text);padding:3px 9px;border-radius:999px}
+  .status.live::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#1fb26b;margin-right:6px;vertical-align:1px}
+  .card-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .tag{font-size:.75rem;font-weight:600;color:var(--accent);letter-spacing:.02em}
+  .how{align-self:flex-start;font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:6px;background:#f1ecfb;color:#5b3fa8}
+  .how.hand{background:#e8f6ee;color:#1b7a46}
+  .card h3{font-size:1.12rem;line-height:1.3}
+  .card p{color:var(--muted);font-size:.93rem}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+  .chip{font-size:.75rem;background:var(--bg-soft);border:1px solid var(--line);color:#3a4048;padding:2px 9px;border-radius:999px}
+  .card .open{margin-top:auto;align-self:flex-start;background:none;border:0;color:var(--accent);font-weight:600;font-size:.92rem;padding-top:6px}
+
+  /* ---------- Layer 2: highlight modal ---------- */
+  .modal{position:fixed;inset:0;z-index:50;background:rgba(15,20,30,.55);display:flex;align-items:center;justify-content:center;padding:20px}
+  .modal[hidden]{display:none}
+  .mbox{background:#fff;border-radius:18px;max-width:640px;width:100%;max-height:92vh;overflow:auto;box-shadow:0 30px 80px rgba(0,0,0,.25)}
+  .mcover{aspect-ratio:21/9;background:center/cover;position:relative}
+  .mcover.ml{background:linear-gradient(135deg,#0f1f3d,#2f6df6)}
+  .mclose{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.95);font-size:1.3rem;line-height:1}
+  .mbody{padding:22px 26px 26px}
+  .mbody h3{font-size:1.5rem;letter-spacing:-.01em;margin:6px 0 10px}
+  .mbody .overview{color:#33383f}
+  .mbody h4{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:22px 0 10px}
+  .built{list-style:none;display:grid;gap:9px}
+  .built li{padding-left:22px;position:relative;font-size:.95rem}
+  .built li::before{content:"";position:absolute;left:4px;top:.6em;width:8px;height:8px;border-radius:2px;background:var(--accent)}
+  .stack{display:grid;grid-template-columns:110px 1fr;gap:8px 12px;font-size:.9rem;align-items:start}
+  .stack dt{color:var(--muted);padding-top:2px}
+  .stack dd{display:flex;flex-wrap:wrap;gap:6px}
+  .mactions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px;padding-top:18px;border-top:1px solid var(--line)}
+  .btn{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:10px;font-weight:600;font-size:.92rem;border:1px solid var(--line);color:var(--text);background:#fff}
+  .btn:hover{text-decoration:none;background:var(--bg-soft)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.primary:hover{background:#2459d8}
+  .btn.disabled{color:#9aa1ab;pointer-events:none;background:var(--bg-soft)}
+
+  /* ---------- Layer 3: write-up page ---------- */
+  .back{display:inline-block;margin:28px 0 0;font-size:.92rem;font-weight:500}
+  .w-hero{padding:22px 0 26px}
+  .w-hero h1{font-size:2.4rem;line-height:1.1;letter-spacing:-.02em;margin:10px 0 12px}
+  .w-hero .lead{font-size:1.15rem;color:var(--muted)}
+  .meta{display:flex;gap:22px;flex-wrap:wrap;margin-top:18px;font-size:.88rem;color:var(--muted)}
+  .meta b{display:block;color:var(--text);font-weight:600}
+  .w-img{width:100%;border-radius:var(--radius);aspect-ratio:16/8;object-fit:cover;display:block}
+  .layout{display:grid;grid-template-columns:190px 1fr;gap:44px;padding:36px 0 80px}
+  .toc{position:sticky;top:84px;align-self:start;font-size:.88rem}
+  .toc p{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px}
+  .toc a{display:block;color:var(--muted);padding:5px 0 5px 12px;border-left:2px solid var(--line)}
+  .toc a:hover{color:var(--text);text-decoration:none;border-color:var(--accent)}
+  article.w section{margin-bottom:44px;scroll-margin-top:80px}
+  article.w h2{font-size:1.45rem;margin-bottom:12px}
+  article.w h3{font-size:1.05rem;margin:22px 0 6px}
+  article.w p{margin-bottom:12px;color:#2d3238}
+  article.w ul{margin:0 0 12px 20px} article.w li{margin-bottom:6px}
+  .decision{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0;background:#fff}
+  .decision .q{font-weight:700;margin-bottom:8px}
+  .decision .row{display:grid;grid-template-columns:96px 1fr;gap:4px 12px;font-size:.93rem}
+  .decision .row span:nth-child(odd){color:var(--muted)}
+  .todo{background:var(--note);border:1px dashed var(--note-line);border-radius:10px;padding:12px 14px;font-size:.9rem;color:#6b5000;margin:12px 0}
+  .todo b{color:#8a6200}
+  figure{margin:18px 0}
+  figure img{width:100%;border-radius:12px;display:block}
+  .fig-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}
+  .fig-row figure{margin:0}
+  @media (max-width:640px){.fig-row{grid-template-columns:1fr}}
+  figcaption{font-size:.85rem;color:var(--muted);margin-top:6px}
+  .next-proj{border-top:1px solid var(--line);padding-top:22px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+
+  footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:.88rem}
+  @media(max-width:760px){.layout{grid-template-columns:1fr}.toc{display:none}.w-hero h1{font-size:1.9rem}.stack{grid-template-columns:1fr}.mbody{padding:20px}}
+
+  .kicker{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:4px 10px;border-radius:999px}
+  .results{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+  .results div{border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+  .results b{display:block;font-size:1.6rem;letter-spacing:-.02em}
+  .results span{font-size:.82rem;color:var(--muted)}
+  .results div.best{border-color:var(--accent);background:var(--accent-soft)}
+  .cmp{width:100%;border-collapse:collapse;margin:14px 0;font-size:.95rem}.cmp th,.cmp td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line)}.cmp th{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}.cmp tr.mine td{background:var(--accent-soft);font-weight:600}
+  .fig2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:760px){.results,.fig2{grid-template-columns:1fr}}
+  .layout>*{min-width:0}
+  .cmp-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  @media(max-width:480px){.cmp th,.cmp td{padding:8px 8px;font-size:.88rem}}
+  pre{background:#0f1218;color:#e6e8ec;border-radius:12px;padding:14px 16px;overflow-x:auto;font-size:.86rem;line-height:1.55;margin:14px 0}
+  pre .c{color:#8b93a1}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  p code,li code{background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;padding:1px 5px;font-size:.88em}
+  .fig-row img{aspect-ratio:4/3;object-fit:cover}
+  video.demo{display:block;width:100%;max-height:560px;background:#0b0f19;border-radius:12px}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="../">Loo Zong Poh</a>
+  <div class="links"><a href="../#about">About</a><a href="../#projects">Projects</a><a href="../#games">Games</a><a href="../#contact">Contact</a></div>
+</div></nav>
+<main>
+  <div class="wrap">
+    <a class="back" href="../#projects">&larr; All projects</a>
+    <div class="w-hero">
+      <span class="kicker">Development write-up</span>
+      <h1>CPR Training Kit</h1>
+      <p class="lead">The ugliest thing I’ve ever built, and the project I’m most proud of.</p>
+      <div class="meta">
+        <div><b>Type</b>Personal project</div>
+        <div><b>When</b>2019</div>
+        <div><b>Hardware</b>Arduino Nano · micro switch · 16×2 LCD · buzzer</div>
+        <div><b>Stack</b>Arduino C++ · Processing</div>
+      </div>
+    </div>
+    <img class="w-img" src="../images/cpr-3.jpg" alt="The finished CPR trainer unit: LCD in the lid, Arduino, buzzer and AA batteries in the base" />
+
+    <div class="layout">
+      <aside class="toc">
+        <p>On this page</p>
+        <a href="#w-why">Why I built it</a>
+        <a href="#w-click">Version 1: listening for the click</a>
+        <a href="#w-maths">Checking my maths</a>
+        <a href="#w-force">The force sensor that didn’t survive</a>
+        <a href="#w-box">From breadboard to box</a>
+        <a href="#w-cost">Built on an allowance</a>
+        <a href="#w-end">Why it stopped</a>
+        <a href="#w-back">Looking back</a>
+      </aside>
+
+      <article class="w">
+        <section id="w-why">
+          <h2>Why I built it</h2>
+          <p>With my peers, I helped plan first aid training for secondary school students. CPR was the hard part to teach. Good CPR depends on pushing deep enough and keeping a steady pace of 100 to 120 compressions a minute, but as instructors we had no real way to measure a student’s pace. We were counting and guessing.</p>
+          <p>Meanwhile, the competitions the students trained for used an off-the-shelf CPR feedback tool. If that was how they’d be judged, they needed to practise with something similar. We didn’t have one, so I decided to build one.</p>
+        </section>
+
+        <section id="w-click">
+          <h2>Version 1: listening for the click</h2>
+          <p>Our training dummy already did half the job: it gives a click when a compression reaches about the right depth. So I didn’t need to measure depth at all. I just needed to catch the click.</p>
+          <p>I started on a breadboard with an Arduino and a micro switch, positioned the switch inside the dummy so the chest plate presses it at that same depth, and hot-glued it in place. The Arduino counts each press. After 30 presses, one CPR cycle, it takes the time since the first press and works out the rate in compressions per minute (BPM).</p>
+          <figure><img src="../images/cpr-0-inside-dummy.jpg" alt="Inside the CPR dummy's chest plate, with the micro switch wired and glued in place" loading="lazy"><figcaption>Inside the dummy, February 2019: the micro switch glued where the chest plate reaches the right depth.</figcaption></figure>
+          <p>It worked. Here it is counting a full cycle (sound removed, subtitles added):</p>
+          <figure><video class="demo" src="../images/cpr-demo.mp4" poster="../images/cpr-demo-poster.jpg" controls muted playsinline preload="metadata" aria-label="Demo: 30 compressions counted live, ending at 112 BPM"></video><figcaption>30 compressions, counted live on the LCD. The kit reports 112 BPM at the end.</figcaption></figure>
+        </section>
+
+        <section id="w-maths">
+          <h2>Checking my maths</h2>
+          <p>Looking at the code again years later, the formula has two small bugs:</p>
+<pre><code><span class="c">// what the kit ran</span>
+totalTime = (timeEnd - timeBegin) / 1000;   <span class="c">// whole seconds only</span>
+BPM = (30.0 / totalTime) * 60.0;            <span class="c">// 30 presses</span></code></pre>
+          <ul>
+            <li><b>The time is rounded down to whole seconds.</b> <code>timeEnd - timeBegin</code> is a whole number of milliseconds, so dividing by <code>1000</code> throws away the fraction before it ever reaches the decimal variable. 16.5 seconds becomes 16.</li>
+            <li><b>30 presses are only 29 gaps.</b> The clock starts on press 1 and stops on press 30, so the time covers 29 intervals, not 30.</li>
+          </ul>
+          <p>Both errors push the number up. In the demo, the presses span 16.5 seconds, which is really <b>105 BPM</b>. The kit rounded that to 16 seconds and divided 30 into it, and showed <b>112</b>. Both are inside the 100–120 target, so the feedback was right, but the number was a few percent high. The fix is one line:</p>
+<pre><code>BPM = 29.0 * 60000.0 / (timeEnd - timeBegin);   <span class="c">// 29 gaps, time in exact milliseconds</span></code></pre>
+        </section>
+
+        <section id="w-force">
+          <h2>The force sensor that didn’t survive</h2>
+          <p>The click only tells you a press was deep enough. I wanted to know how hard each press was too, so I tried a square force-sensitive resistor (FSR) under the chest plate, with the LCD showing “good” for a hard enough push.</p>
+          <p>I broke two of them in a single training session. Only then did I check properly and realise they’re designed for far less force than a real chest compression. I took the force sensor out and went back to the click.</p>
+        </section>
+
+        <section id="w-box">
+          <h2>From breadboard to box</h2>
+          <p>Once the click version worked, I moved it off the breadboard: an Arduino Nano soldered onto stripboard, screw terminals for the wires to the dummy, a 16×2 LCD in the lid, a buzzer, and four AA batteries so it didn’t need a laptop.</p>
+          <div class="fig-row">
+            <figure><img src="../images/cpr-1-board.jpg" alt="Arduino Nano on stripboard inside a project box, wired to an LCD" loading="lazy"><figcaption>The first board: Arduino Nano on stripboard, in a cheap project box.</figcaption></figure>
+            <figure><img src="../images/cpr-2-powered.jpg" alt="The trainer powered on and connected to a laptop for testing" loading="lazy"><figcaption>Powered up and plugged into a laptop for testing.</figcaption></figure>
+          </div>
+          <ul>
+            <li><b>LCD:</b> shows “Begin CPR”, then the count as you press, then the BPM and cycle number after every 30.</li>
+            <li><b>Buzzer:</b> sounds when a cycle’s rate falls outside 100–120.</li>
+            <li><b>Reset button:</b> starts again for the next student.</li>
+          </ul>
+          <p>Later I tried a Bluetooth version that sent the count, cycle and BPM to a PC app I wrote in Processing, with big numbers for a class to watch and a cycle limit an instructor could set. I also designed a 3D-printable case for it.</p>
+        </section>
+
+        <section id="w-cost">
+          <h2>Built on an allowance</h2>
+          <p>I put it together in a few weeks, mostly at night: learning, coding and wiring after school. The sensors came out of my own allowance, and everything else came from what I could find and borrow in the lab. It’s where I learned to solder and put my electronics lessons to real use.</p>
+          <p>The timeline was short. I was balancing school, this project and planning the first aid training with my peers, all at once.</p>
+        </section>
+
+        <section id="w-end">
+          <h2>Why it stopped</h2>
+          <p>The project ended for a good reason. The first aid course started training with smart CPR dummies, and that kind of equipment became much easier to get. The problem I built it for had been solved properly.</p>
+        </section>
+
+        <section id="w-back">
+          <h2>Looking back</h2>
+          <p>I laugh at how ugly it is. Hot glue, a project box and wires everywhere. But it did the job it was built for, with what I had. If I built it again, I would:</p>
+          <ul>
+            <li><b>Use an ESP32 and pair it with a phone.</b> Built-in Bluetooth and Wi-Fi, and every student’s phone becomes the display.</li>
+            <li><b>Use a proper sensor, made for the force involved.</b> And check its rating before a training session, not after breaking two.</li>
+            <li><b>Spend more time on the hardware design.</b> For example, a linear sensor inside the dummy’s spring, which slides as the chest is pressed and returns as it’s released. That measures real depth on every compression, not just a click at one point.</li>
+            <li><b>Fix the BPM maths</b> above, and test the numbers against a stopwatch.</li>
+          </ul>
+        </section>
+
+        <div class="next-proj">
+          <a href="../#projects">&larr; All projects</a>
+          <a href="deskos.html">DeskOS &rarr;</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</main>
+
+<footer><div class="wrap">© <span id="year">2026</span> Loo Zong Poh. Built with curiosity.</div></footer>
+<script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+</body>
+</html>

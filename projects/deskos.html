@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://i.ytimg.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com; connect-src 'self'; base-uri 'self'; form-action 'none'; object-src 'none'; upgrade-insecure-requests" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DeskOS: development write-up | Loo Zong Poh</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+<meta name="description" content="How a Raspberry Pi 3 photo frame grew into DeskOS: a desk dashboard with live traffic, buses, news, encrypted photo transfer and a cat that knocks things over." />
+<style>
+  :root{--bg:#fff;--bg-soft:#f6f7f9;--text:#1a1d21;--muted:#5c636e;--line:#e6e8ec;--accent:#2f6df6;--accent-soft:#eaf0fe;--radius:14px;--maxw:1040px;--note:#fff7e0;--note-line:#f0d68a}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--text);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .narrow{max-width:720px}
+  button{font:inherit;cursor:pointer}
+
+  .demo-bar{background:#1a1d21;color:#e8eaee;font-size:.85rem;padding:9px 0}
+  .demo-bar .wrap{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .demo-bar b{color:#fff}
+  .layer{display:inline-flex;align-items:center;gap:6px;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8a6200;background:var(--note);border:1px solid var(--note-line);padding:3px 9px;border-radius:999px}
+
+  nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.88);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+  nav .brand{font-weight:700;color:var(--text)}
+  nav .links{display:flex;gap:22px} nav .links a{color:var(--muted);font-size:.95rem;font-weight:500}
+
+  /* ---------- Layer 1: main page ---------- */
+  .section-head{padding:56px 0 8px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+  h2{font-size:1.9rem;letter-spacing:-.02em;line-height:1.2}
+  .section-sub{color:var(--muted);margin-top:6px}
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 22px}
+  .filters button{border:1px solid var(--line);background:#fff;color:var(--muted);padding:6px 14px;border-radius:999px;font-size:.88rem;font-weight:500}
+  .filters button[aria-pressed=true]{background:var(--text);border-color:var(--text);color:#fff}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px;padding-bottom:70px}
+  .card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;background:#fff;transition:transform .15s,box-shadow .15s}
+  .card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(20,30,50,.08)}
+  .cover{aspect-ratio:16/9;background:var(--bg-soft) center/cover;position:relative;border:0;display:block;width:100%}
+  .cover.ml{background:linear-gradient(135deg,#0f1f3d,#2f6df6);display:grid;place-items:center;color:#fff;font-weight:700;letter-spacing:.06em;font-size:.85rem}
+  .status{position:absolute;top:10px;left:10px;font-size:.72rem;font-weight:600;background:rgba(255,255,255,.92);color:var(--text);padding:3px 9px;border-radius:999px}
+  .status.live::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#1fb26b;margin-right:6px;vertical-align:1px}
+  .card-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .tag{font-size:.75rem;font-weight:600;color:var(--accent);letter-spacing:.02em}
+  .how{align-self:flex-start;font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:6px;background:#f1ecfb;color:#5b3fa8}
+  .how.hand{background:#e8f6ee;color:#1b7a46}
+  .card h3{font-size:1.12rem;line-height:1.3}
+  .card p{color:var(--muted);font-size:.93rem}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+  .chip{font-size:.75rem;background:var(--bg-soft);border:1px solid var(--line);color:#3a4048;padding:2px 9px;border-radius:999px}
+  .card .open{margin-top:auto;align-self:flex-start;background:none;border:0;color:var(--accent);font-weight:600;font-size:.92rem;padding-top:6px}
+
+  /* ---------- Layer 2: highlight modal ---------- */
+  .modal{position:fixed;inset:0;z-index:50;background:rgba(15,20,30,.55);display:flex;align-items:center;justify-content:center;padding:20px}
+  .modal[hidden]{display:none}
+  .mbox{background:#fff;border-radius:18px;max-width:640px;width:100%;max-height:92vh;overflow:auto;box-shadow:0 30px 80px rgba(0,0,0,.25)}
+  .mcover{aspect-ratio:21/9;background:center/cover;position:relative}
+  .mcover.ml{background:linear-gradient(135deg,#0f1f3d,#2f6df6)}
+  .mclose{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.95);font-size:1.3rem;line-height:1}
+  .mbody{padding:22px 26px 26px}
+  .mbody h3{font-size:1.5rem;letter-spacing:-.01em;margin:6px 0 10px}
+  .mbody .overview{color:#33383f}
+  .mbody h4{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:22px 0 10px}
+  .built{list-style:none;display:grid;gap:9px}
+  .built li{padding-left:22px;position:relative;font-size:.95rem}
+  .built li::before{content:"";position:absolute;left:4px;top:.6em;width:8px;height:8px;border-radius:2px;background:var(--accent)}
+  .stack{display:grid;grid-template-columns:110px 1fr;gap:8px 12px;font-size:.9rem;align-items:start}
+  .stack dt{color:var(--muted);padding-top:2px}
+  .stack dd{display:flex;flex-wrap:wrap;gap:6px}
+  .mactions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px;padding-top:18px;border-top:1px solid var(--line)}
+  .btn{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:10px;font-weight:600;font-size:.92rem;border:1px solid var(--line);color:var(--text);background:#fff}
+  .btn:hover{text-decoration:none;background:var(--bg-soft)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.primary:hover{background:#2459d8}
+  .btn.disabled{color:#9aa1ab;pointer-events:none;background:var(--bg-soft)}
+
+  /* ---------- Layer 3: write-up page ---------- */
+  .back{display:inline-block;margin:28px 0 0;font-size:.92rem;font-weight:500}
+  .w-hero{padding:22px 0 26px}
+  .w-hero h1{font-size:2.4rem;line-height:1.1;letter-spacing:-.02em;margin:10px 0 12px}
+  .w-hero .lead{font-size:1.15rem;color:var(--muted)}
+  .meta{display:flex;gap:22px;flex-wrap:wrap;margin-top:18px;font-size:.88rem;color:var(--muted)}
+  .meta b{display:block;color:var(--text);font-weight:600}
+  .w-img{width:100%;border-radius:var(--radius);aspect-ratio:16/8;object-fit:cover;display:block}
+  .layout{display:grid;grid-template-columns:190px 1fr;gap:44px;padding:36px 0 80px}
+  .toc{position:sticky;top:84px;align-self:start;font-size:.88rem}
+  .toc p{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:10px}
+  .toc a{display:block;color:var(--muted);padding:5px 0 5px 12px;border-left:2px solid var(--line)}
+  .toc a:hover{color:var(--text);text-decoration:none;border-color:var(--accent)}
+  article.w section{margin-bottom:44px;scroll-margin-top:80px}
+  article.w h2{font-size:1.45rem;margin-bottom:12px}
+  article.w h3{font-size:1.05rem;margin:22px 0 6px}
+  article.w p{margin-bottom:12px;color:#2d3238}
+  article.w ul{margin:0 0 12px 20px} article.w li{margin-bottom:6px}
+  .decision{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0;background:#fff}
+  .decision .q{font-weight:700;margin-bottom:8px}
+  .decision .row{display:grid;grid-template-columns:96px 1fr;gap:4px 12px;font-size:.93rem}
+  .decision .row span:nth-child(odd){color:var(--muted)}
+  .todo{background:var(--note);border:1px dashed var(--note-line);border-radius:10px;padding:12px 14px;font-size:.9rem;color:#6b5000;margin:12px 0}
+  .todo b{color:#8a6200}
+  figure{margin:18px 0}
+  figure img{width:100%;border-radius:12px;display:block}
+  .fig-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}
+  .fig-row figure{margin:0}
+  @media (max-width:640px){.fig-row{grid-template-columns:1fr}}
+  figcaption{font-size:.85rem;color:var(--muted);margin-top:6px}
+  .next-proj{border-top:1px solid var(--line);padding-top:22px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+
+  footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:.88rem}
+  @media(max-width:760px){.layout{grid-template-columns:1fr}.toc{display:none}.w-hero h1{font-size:1.9rem}.stack{grid-template-columns:1fr}.mbody{padding:20px}}
+
+  .kicker{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:4px 10px;border-radius:999px}
+  .results{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+  .results div{border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+  .results b{display:block;font-size:1.6rem;letter-spacing:-.02em}
+  .results span{font-size:.82rem;color:var(--muted)}
+  .results div.best{border-color:var(--accent);background:var(--accent-soft)}
+  .cmp{width:100%;border-collapse:collapse;margin:14px 0;font-size:.95rem}.cmp th,.cmp td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line)}.cmp th{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}.cmp tr.mine td{background:var(--accent-soft);font-weight:600}
+  .fig2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:760px){.results,.fig2{grid-template-columns:1fr}}
+  .layout>*{min-width:0}
+  .cmp-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  @media(max-width:480px){.cmp th,.cmp td{padding:8px 8px;font-size:.88rem}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="../">Loo Zong Poh</a>
+  <div class="links"><a href="../#about">About</a><a href="../#projects">Projects</a><a href="../#games">Games</a><a href="../#contact">Contact</a></div>
+</div></nav>
+<main>
+  <div class="wrap">
+    <a class="back" href="../#projects">&larr; All projects</a>
+    <div class="w-hero">
+      <span class="kicker">Development write-up</span>
+      <h1>DeskOS</h1>
+      <p class="lead">A Raspberry Pi 3 that was supposed to be a photo frame, and turned into the screen I check before I leave home. Plus a cat.</p>
+      <div class="meta">
+        <div><b>Type</b>Personal project</div>
+        <div><b>Status</b>Work in progress</div>
+        <div><b>Hardware</b>Raspberry Pi 3 · 800×480 touchscreen</div>
+        <div><b>Stack</b>JavaScript · Leaflet · LTA and data.gov.sg APIs</div>
+      </div>
+    </div>
+    <img class="w-img" style="aspect-ratio:auto;object-fit:contain" src="../images/deskos-1-dashboard.jpg" alt="The DeskOS dashboard with cat, traffic, weather and photo cards" />
+
+    <div class="layout">
+      <aside class="toc">
+        <p>On this page</p>
+        <a href="#w-idea">The idea</a>
+        <a href="#w-what">What it does</a>
+        <a href="#w-how">How it’s put together</a>
+        <a href="#w-photos">Photos from a phone</a>
+        <a href="#w-cat">The cat</a>
+        <a href="#w-security">Security so far</a>
+        <a href="#w-next">What’s next</a>
+      </aside>
+
+      <article class="w">
+        <section id="w-idea">
+          <h2>The idea</h2>
+          <p>I’ve always wanted a photo slider on my desk, and I had a Raspberry Pi 3 and a small screen doing nothing. But a whole computer that only cycles through photos felt like a waste.</p>
+          <p>So I asked what else that screen could tell me at a glance. Before I leave home: is it going to rain, is traffic bad, when’s my bus? When I get back: what’s happening, from Singapore news to tech. And then, because a desk should have some personality, a cat.</p>
+        </section>
+
+        <section id="w-what">
+          <h2>What it does</h2>
+          <ul>
+            <li><b>Weather:</b> the current two-hour forecast for my area and today’s outlook, from NEA.</li>
+            <li><b>Traffic:</b> one card that sums up the whole island: jams, accidents, flash floods and where it’s raining, from LTA and PUB.</li>
+            <li><b>Buses and trains:</b> live arrivals at the stops near home, counting down between updates, plus MRT and LRT disruption alerts.</li>
+            <li><b>News:</b> four categories (Singapore, World, Cyber security, Tech) with a clean reader view.</li>
+            <li><b>Photos:</b> a photo clock when nobody’s using it, a gallery with delete and undo, and photos sent straight from a phone.</li>
+            <li><b>Cats:</b> virtual pets that live in a room and wander onto the dashboard.</li>
+          </ul>
+          <figure><img src="../images/deskos-3-photo-clock.jpg" alt="The DeskOS photo clock with weather and a flood alert"><figcaption>The idle screen: a big clock over a photo, with one line for the weather and any traffic alert.</figcaption></figure>
+          <p>Tap the traffic card and it opens an island map with three tabs: traffic, weather and cameras.</p>
+          <div class="fig-row">
+            <figure><img src="../images/deskos-5-traffic.jpg" alt="DeskOS island map with traffic jams marked in pink and a list of slow expressways" loading="lazy"><figcaption>Traffic: every jam on the map, with the slowest stretches of each expressway listed.</figcaption></figure>
+            <figure><img src="../images/deskos-4-weather.jpg" alt="DeskOS weather map with rain, lightning and flood status" loading="lazy"><figcaption>Weather: rain radar, recent lightning, flood alerts and which areas are raining now.</figcaption></figure>
+          </div>
+          <figure><img src="../images/deskos-6-cameras.jpg" alt="DeskOS camera view showing a live LTA traffic camera image on the AYE" loading="lazy"><figcaption>Cameras: tap a camera on the map, or step through them by expressway, to see the road for yourself.</figcaption></figure>
+        </section>
+
+        <section id="w-how">
+          <h2>How it’s put together</h2>
+          <p>DeskOS is a web page running full screen in the Pi’s browser, with a small server on the same Pi doing the work the page shouldn’t do itself.</p>
+          <div class="decision">
+            <div class="q">Where should the calls to LTA and the other APIs happen?</div>
+            <div class="row">
+              <span>Chose</span><span>On the server. The page only ever talks to the Pi, and the Pi calls LTA, data.gov.sg and the news sites</span>
+              <span>Why</span><span>My API keys stay on the Pi instead of in the page. The server keeps recent results, so DeskOS doesn’t hammer anyone’s API (bus times refresh at most every 25 seconds), and one Refresh button clears them all at once.</span>
+            </div>
+          </div>
+          <div class="decision">
+            <div class="q">How do you read a news article on a 5-inch screen?</div>
+            <div class="row">
+              <span>Chose</span><span>A reader view. The Pi downloads the article and sends the page only the headline, main picture and text</span>
+              <span>Why</span><span>Full news sites are slow and cluttered on a screen this small. If a site is paywalled or blocks automated readers, DeskOS shows the feed’s summary instead and explains why.</span>
+            </div>
+          </div>
+          <div class="decision">
+            <div class="q">How do I work on it when the Pi isn’t in front of me?</div>
+            <div class="row">
+              <span>Chose</span><span>A preview mode with built-in sample data that scales to fit any window</span>
+              <span>Why</span><span>I can build and test every screen on my PC or phone. Updates reach the Pi by USB, and the page reloads itself when it sees a new version.</span>
+            </div>
+          </div>
+          <p>The Pi has no keyboard, so everything is tap-only, including Settings. Choices are saved on the device and override the defaults in a config file.</p>
+        </section>
+
+        <section id="w-photos">
+          <h2>Photos from a phone</h2>
+          <p>The photo frame was the original point, so getting photos onto it had to be easy. Tap <b>Add from phone</b>, and DeskOS shows a QR code. Scan it on the same Wi-Fi, pick photos, done.</p>
+          <p>The transfer runs over plain HTTP on the local network, so I didn’t want photos crossing the Wi-Fi readable. Each image is encrypted on the phone before it’s sent. The key travels inside the QR code, in the part of the link after the <code>#</code>, which browsers never send over the network. Each code also expires, so an old one can’t be reused.</p>
+        </section>
+
+        <section id="w-cat">
+          <h2>The cat</h2>
+          <p>I’ve always liked desktop pets like Desktop Goose: apps that wander around your screen and get in the way. DeskOS has its own version.</p>
+          <p>The cats live in a room where you can feed them, play with a laser pointer, or catch one and give it a shower (it does not want a shower). Each cat has a personality and needs that keep changing in real time, even while the screen is off.</p>
+          <p>The fun part is when a cat leaves the room. It walks onto the dashboard, knocks cards askew, leaves scratch marks, and at bedtime curls up on the weather card because that one is “warm”. Tap a messy card to tidy it, and shove the cat off.</p>
+          <figure><img src="../images/deskos-2-cat-room.jpg" alt="The DeskOS cat room with a sleeping cat"><figcaption>The cat room. Mochi is asleep, which means no shower tonight.</figcaption></figure>
+          <figure><img src="../images/deskos-7-mochi-smack.jpg" alt="A giant cat paw smacking the DeskOS dashboard, with Mochi saying Bold move, human" loading="lazy"><figcaption>Poke Mochi one time too many and you get the paw. (Bus stops and a photo blurred.)</figcaption></figure>
+        </section>
+
+        <section id="w-security">
+          <h2>Security so far</h2>
+          <p>This is the part that’s still in progress, and I’d rather be clear about where it stands:</p>
+          <ul>
+            <li>Calls to outside services go over HTTPS.</li>
+            <li>I manage the Pi over SSH.</li>
+            <li>Photo uploads use local HTTP, with each image encrypted before it leaves the phone.</li>
+          </ul>
+          <p>I haven’t yet tested how well this holds up. A proper hardening pass is next: reviewing the encryption, locking down SSH, closing every port the Pi doesn’t need, and running the screen as a restricted user.</p>
+        </section>
+
+        <section id="w-next">
+          <h2>What’s next</h2>
+          <ul>
+            <li>The security review above.</li>
+            <li>Summarise and Read aloud buttons in the news reader, once I pick an on-device summariser that the Pi 3 can actually run.</li>
+          </ul>
+        </section>
+
+        <div class="next-proj">
+          <a href="../#projects">&larr; All projects</a>
+          <a href="cpr-trainer.html">CPR Training Kit &rarr;</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</main>
+
+<footer><div class="wrap">© <span id="year">2026</span> Loo Zong Poh. Built with curiosity.</div></footer>
+<script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+</body>
+</html>

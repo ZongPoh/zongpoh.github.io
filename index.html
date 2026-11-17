@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://i.ytimg.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com; connect-src 'self'; base-uri 'self'; form-action 'none'; object-src 'none'; upgrade-insecure-requests" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Loo Zong Poh — Portfolio</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
@@ -555,6 +557,15 @@
         grid-column: 1/-1;
         aspect-ratio: 16/9;
       }
+      /* A portrait demo video in the lead spot: shown whole, on a dark band */
+      .photo-grid video.lead-video {
+        grid-column: 1/-1;
+        width: 100%;
+        height: min(62vh, 540px);
+        object-fit: contain;
+        background: #0b0f19;
+        display: block;
+      }
       @media (max-width: 640px) {
         .photo-grid {
           grid-template-columns: 1fr 1fr;
@@ -580,6 +591,15 @@
       .photo-grid.shots img {
         aspect-ratio: 16/9;
         object-position: left top;
+      }
+      /* The lead screenshot is shown whole, at its own shape (e.g. the wide DeskOS dashboard) */
+      .photo-grid.shots img.lead {
+        aspect-ratio: auto;
+        height: auto;
+      }
+      /* Photos of a real screen: crop evenly around the middle, not from the top-left */
+      .photo-grid.shots img.photo {
+        object-position: center;
       }
       @media (max-width: 640px) {
         .photo-grid.shots {
@@ -693,6 +713,10 @@
       }
       .work-intro:last-of-type {
         margin-bottom: 34px;
+      }
+      /* Internship: the intro text follows straight on from the subtitle */
+      #work .section-sub {
+        margin-bottom: 16px;
       }
       .clip-title {
         padding: 14px 20px;
@@ -1229,6 +1253,45 @@
           max-width: 760px;
         }
       }
+    /* ===== Projects: art covers, AI labels, highlight extras ===== */
+      .pcover.art { display: grid; place-items: center; }
+      .pcover-art { color: #fff; font-weight: 700; letter-spacing: 0.08em; font-size: 0.9rem; }
+      .bg-pi { background: linear-gradient(135deg, #7a1636, #c2185b); }
+      .how { align-self: flex-start; font-size: 0.72rem; font-weight: 600; padding: 3px 8px; border-radius: 6px; background: #f1ecfb; color: #5b3fa8; }
+      .how.hand { background: #e8f6ee; color: #1b7a46; }
+      .wu-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--line); }
+      .wu-soon { color: var(--muted); background: var(--bg-soft); cursor: default; }
+      .wu-soon:hover { border-color: var(--line); }
+      .wu-figure { background: #fff; border-bottom: 1px solid var(--line); text-align: center; }
+      .wu-figure img { max-width: 420px; width: 100%; }
+
+      /* ===== Games: a different feel, pointing to Kampong Studio ===== */
+      section.games { background: #fbf6ee; border-top-color: #efe4d2; }
+      .games h2 { color: #3b2418; }
+      .games .section-sub { color: #7a5a44; }
+      .pcard.kampong { flex-direction: row; align-items: center; gap: 8px; border-color: #efe4d2; padding: 18px; margin-bottom: 18px; }
+      .kampong-logo { flex: 0 0 150px; aspect-ratio: 1; border: 0; border-radius: 14px; background: #f3e6cf; display: grid; place-items: center; cursor: pointer; }
+      .kampong-logo img { width: 74%; }
+      .kampong .project-tag, .kampong .plinks a.go { color: #8a5a3b; }
+      .kampong h3 { color: #3b2418; }
+      .kampong-banner { background: #f3e6cf; display: grid; place-items: center; padding: 22px; }
+      .kampong-banner img { width: 160px; }
+      .ggrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+      .gcard { display: flex; flex-direction: column; border: 1px solid #efe4d2; border-radius: 12px; overflow: hidden; background: #fff; color: var(--text); transition: transform 0.18s; }
+      .gcard:hover { transform: translateY(-2px); text-decoration: none; }
+      .gcover { aspect-ratio: 16/9; background: #f3e6cf; overflow: hidden; }
+      .gcover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .gtext { padding: 12px 14px; display: flex; flex-direction: column; gap: 2px; }
+      .gtext b { font-size: 0.98rem; }
+      .gtext small { color: var(--muted); font-size: 0.82rem; }
+      .gtext em { font-style: normal; color: #8a5a3b; font-weight: 600; font-size: 0.82rem; margin-top: 4px; }
+      @media (max-width: 760px) {
+        .ggrid { grid-template-columns: 1fr 1fr; }
+        .pcard.kampong { flex-direction: column; align-items: stretch; }
+        .kampong-logo { flex-basis: auto; width: 120px; }
+      }
+      @media (prefers-reduced-motion: reduce) { .gcard { transition: none; } .gcard:hover { transform: none; } }
+    
     </style>
   </head>
   <body>
@@ -1238,7 +1301,8 @@
         <div class="links">
           <a href="#about">About</a>
           <a href="#projects">Projects</a>
-          <a class="hide-sm" href="#work">Earlier work</a>
+          <a href="#games">Games</a>
+          <a class="hide-sm" href="#work">Internship work</a>
           <a class="hide-sm" href="#contact">Contact</a>
         </div>
       </div>
@@ -1470,411 +1534,180 @@
 
     <section id="projects">
       <div class="wrap">
-        <h2>Featured Projects</h2>
-        <p class="section-sub">
-          Things I've built recently. Open any project for the full write-up.
-        </p>
+        <h2>Projects</h2>
+        <p class="section-sub">Pick a project to see what it does and how it’s built.</p>
 
         <div class="pfilters" role="group" aria-label="Filter projects">
-          <button
-            type="button"
-            class="pfilter"
-            data-cat="all"
-            aria-pressed="true"
-          >
-            All
-          </button>
-          <button
-            type="button"
-            class="pfilter"
-            data-cat="games"
-            aria-pressed="false"
-          >
-            Games
-          </button>
-          <button
-            type="button"
-            class="pfilter"
-            data-cat="ml"
-            aria-pressed="false"
-          >
-            ML &amp; CV
-          </button>
-          <button
-            type="button"
-            class="pfilter"
-            data-cat="tools"
-            aria-pressed="false"
-          >
-            Tools
-          </button>
+          <button type="button" class="pfilter" data-cat="all" aria-pressed="true">All</button>
+          <button type="button" class="pfilter" data-cat="ml" aria-pressed="false">ML &amp; AI</button>
+          <button type="button" class="pfilter" data-cat="iot" aria-pressed="false">Hardware &amp; IoT</button>
+          <button type="button" class="pfilter" data-cat="sw" aria-pressed="false">Software &amp; Multiplayer</button>
         </div>
 
         <div class="pgrid">
-          <article class="pcard" id="alamak-zombies" data-cat="games">
-            <button
-              type="button"
-              class="pcover video"
-              data-open="alamak-zombies"
-              aria-label="Open the full write-up for Alamak! Zombies Ah?"
-            >
-              <img src="images/thumbs/zombies.jpg" alt="" loading="lazy" />
-              <span class="pstatus live">Playable</span>
+          <article class="pcard" id="deskos" data-cat="iot">
+            <button type="button" class="pcover" data-open="deskos" aria-label="Open the highlight for DeskOS">
+              <img src="images/thumbs/deskos.jpg" alt="" loading="lazy" />
+              <span class="pstatus dev">Work in progress</span>
             </button>
             <div class="pcard-body">
-              <span class="project-tag"
-                >Browser game &middot; Built with AI</span
-              >
-              <h3>Alamak! Zombies Ah?</h3>
-              <p class="p-sum">
-                A first-person zombie survival game in a blocky city that keeps
-                generating as you explore. Play alone or with up to three
-                friends, and your score is how long you stay alive.
-              </p>
-              <div class="p-chips">
-                <span class="chip">Three.js</span><span class="chip">Vite</span
-                ><span class="chip">Cloudflare Workers</span
-                ><span class="chip">Durable Objects</span>
-              </div>
+              <span class="project-tag">IoT · Raspberry Pi</span>
+              <h3>DeskOS</h3>
+              <p class="p-sum">A Raspberry Pi 3 desk screen that started as a photo frame and grew into a dashboard with traffic, buses, news and a very annoying cat.</p>
+              <div class="p-chips"><span class="chip">Raspberry Pi</span><span class="chip">JavaScript</span><span class="chip">REST APIs</span><span class="chip">Encryption</span></div>
               <div class="plinks">
-                <button
-                  type="button"
-                  class="readmore"
-                  data-open="alamak-zombies"
-                >
-                  Read the write-up
-                </button>
-                <a
-                  href="https://kampongstudio.dev/alamakzombies/"
-                  target="_blank"
-                  rel="noopener"
-                  class="go"
-                  >Play it &rarr;</a
-                >
+                <button type="button" class="readmore" data-open="deskos">View project</button>
               </div>
             </div>
             <div class="pcard-full" hidden>
-              <div class="embed">
-                <iframe
-                  src="https://www.youtube.com/embed/-tA4wtoHkFA"
-                  title="Alamak! Zombies Ah? trailer"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                  loading="lazy"
-                ></iframe>
+              <div class="photo-grid shots"><img class="lead" src="images/deskos-1-dashboard.jpg" alt="DeskOS dashboard with cat, traffic, weather and photo cards" data-caption="The dashboard: cats, island-wide traffic, weather and photos. The cat has fallen asleep on the warm weather card." loading="lazy" tabindex="0" /><img src="images/deskos-2-cat-room.jpg" alt="The DeskOS cat room with a sleeping cat" data-caption="The cat room: feed, shower or play laser with your cats. Their needs keep changing in real time, even while the screen is off." loading="lazy" tabindex="0" /><img src="images/deskos-3-photo-clock.jpg" alt="DeskOS idle photo clock with weather and a flood alert" data-caption="The idle screen: a photo clock with a one-line status for the weather and any traffic alerts." loading="lazy" tabindex="0" /><img class="photo" src="images/deskos-5-traffic.jpg" alt="DeskOS island map with traffic jams and slow expressways" data-caption="Island map, traffic tab: every jam on the map, with the slowest stretches of each expressway listed." loading="lazy" tabindex="0" /><img class="photo" src="images/deskos-4-weather.jpg" alt="DeskOS weather map with rain, lightning and flood status" data-caption="Weather tab: rain radar, recent lightning, PUB flood alerts and the areas where it's raining now." loading="lazy" tabindex="0" /><img class="photo" src="images/deskos-6-cameras.jpg" alt="DeskOS live LTA traffic camera view" data-caption="Cameras tab: tap a camera on the map, or step through them by expressway." loading="lazy" tabindex="0" /><img class="photo" src="images/deskos-7-mochi-smack.jpg" alt="A giant cat paw smacking the DeskOS dashboard" data-caption="Poke Mochi one time too many and you get the paw. (Bus stops and a photo blurred.)" loading="lazy" tabindex="0" /></div><p class="photo-hint">The first three are from the DeskOS preview on sample data; the rest are photos of the real screen. Click a photo to enlarge it.</p>
+              <div class="project-body">
+                <p>It started with a spare Raspberry Pi 3, a small screen and the idea of a photo slider for my desk. But a whole computer just cycling photos felt like a waste, so it grew. Now it shows what I check before I leave home, the news I read when I get back, and a cat that gets in the way.</p>
+                <div class="explore">
+                  <h4>What I built</h4>
+                  <ul><li>A dashboard for the moments before I leave home: weather, island-wide traffic with flood and jam alerts, and live bus arrivals from LTA</li><li>News from Singapore, the world, cyber security and tech, with a reader view: the Pi fetches the article and strips out ads and menus</li><li>A photo clock when idle, plus photo transfer from a phone: scan a QR code, and images are encrypted on the phone before they’re sent</li><li>Desk cats in the spirit of Desktop Goose: they get hungry, nap on the warm weather card, and knock your dashboard cards askew</li></ul>
+                </div>
+                <div class="explore learned">
+                  <h4>Security, still in progress</h4>
+                  <ul><li>Calls to outside APIs go over HTTPS, and I manage the Pi over SSH. Photo transfer runs over local HTTP, but each image is encrypted before it leaves the phone, with the key carried in the QR code. A proper hardening review is next on the list.</li></ul>
+                </div>
+                <div class="stack"><div class="stack-group"><span class="stack-label">Device</span><div class="stack-row"><span class="chip">Raspberry Pi 3</span><span class="chip">Touchscreen</span></div></div><div class="stack-group"><span class="stack-label">Frontend</span><div class="stack-row"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">Leaflet</span></div></div><div class="stack-group"><span class="stack-label">Data</span><div class="stack-row"><span class="chip">LTA DataMall</span><span class="chip">data.gov.sg (NEA, PUB)</span><span class="chip">News feeds</span></div></div><div class="stack-group"><span class="stack-label">Security</span><div class="stack-row"><span class="chip">HTTPS</span><span class="chip">SSH</span><span class="chip">Encrypted upload</span></div></div></div>
+                <div class="wu-actions"><a class="btn primary" href="projects/deskos.html">Read the development write-up &rarr;</a></div>
               </div>
+            </div>
+          </article>
+          <article class="pcard" id="adminhub" data-cat="sw">
+            <button type="button" class="pcover" data-open="adminhub" aria-label="Open the highlight for AdminHub">
+              <img src="images/thumbs/adminhub.jpg" alt="" loading="lazy" />
+              <span class="pstatus">Web app</span>
+            </button>
+            <div class="pcard-body">
+              <span class="project-tag">Web app · No frameworks</span>
+              <h3>AdminHub</h3>
+              <p class="p-sum">Room bookings, rosters and tasks behind one sign-in, on just the Python standard library and SQLite.</p>
+              <div class="p-chips"><span class="chip">Python</span><span class="chip">SQLite</span><span class="chip">JavaScript</span></div>
+              <div class="plinks">
+                <button type="button" class="readmore" data-open="adminhub">View project</button>
+                
+              </div>
+            </div>
+            <div class="pcard-full" hidden>
               <div class="photo-grid shots">
                 <img
                   class="lead"
-                  src="images/zombies-1-platform-brute.jpg"
-                  alt="A brute zombie lunging at the player on a train platform, with another zombie behind it and a No durians on board sign"
-                  data-caption="A brute right in your face on the Loop Line platform, under the &ldquo;No durians on board&rdquo; sign."
+                  src="images/adminhub-1-home.png"
+                  alt="AdminHub home dashboard showing a supervisor's day and the team's status"
+                  data-caption="Home dashboard for a supervisor: your own duties, tasks and room bookings on top, then the team's attendance, roster health, approvals, tasks and facility faults at a glance."
                   loading="lazy"
                   tabindex="0"
                 />
                 <img
-                  src="images/zombies-2-durian-bomb.jpg"
-                  alt="A durian bomb exploding in the middle of a group of zombies on a grass field"
-                  data-caption="A durian bomb going off in the middle of the horde. Very shiok, very smelly."
+                  src="images/adminhub-2-duty-roster.png"
+                  alt="AdminHub duty roster calendar for the month"
+                  data-caption="Duty roster: a shared monthly calendar with a Duty Manager, Duty Supervisor and Duty Assistant each day. Clashes are flagged in red, and swap requests wait for approval on the left."
                   loading="lazy"
                   tabindex="0"
                 />
                 <img
-                  src="images/zombies-3-void-deck.jpg"
-                  alt="Firing a shotgun from under an HDB void deck at zombies crossing the field"
-                  data-caption="Holding the HDB void deck while the horde crosses the field."
+                  src="images/adminhub-3-meeting-rooms.png"
+                  alt="AdminHub meeting room calendar with five rooms"
+                  data-caption="Meeting rooms: all five rooms on one calendar, with check-in and check-out, and a reminder for a booking that was never checked out."
                   loading="lazy"
                   tabindex="0"
                 />
                 <img
-                  src="images/zombies-4-city-aerial.jpg"
-                  alt="Aerial view over the blocky city with the Loop Line viaduct and a station"
-                  data-caption="The city from above: the Loop Line viaduct and a station, with more city generating past the fog."
+                  src="images/adminhub-4-tasks.png"
+                  alt="AdminHub task board with four columns"
+                  data-caption="Tasks: a Kanban board with priorities, deadlines, progress and overdue alerts across the team."
                   loading="lazy"
                   tabindex="0"
                 />
-              </div>
-              <p class="photo-hint">Click a screenshot to enlarge it.</p>
+              </div><p class="photo-hint">
+                Click a screenshot to enlarge it. All names and records shown
+                are made-up sample data.
+              </p>
               <div class="project-body">
                 <p>
-                  A first-person zombie survival game that runs in the browser.
-                  You wake up on a train platform with a baseball bat and a
-                  zombie coming for you. From there the city keeps generating
-                  as you explore: downtown towers, suburbs, industrial yards,
-                  forest, subway stations and underground labs. Your score is
-                  how long you stay alive.
+                  A web app for a team's everyday admin work: room bookings,
+                  duty rosters, shift planning, attendance, fitness tests,
+                  vehicles and tasks, all behind one sign-in with a home
+                  dashboard that shows what needs your attention today.
                 </p>
                 <p>
-                  It has a Singapore flavour: HDB estates with working lifts,
-                  hawker food, a durian bomb and a tissue packet to chope your
-                  spot. Play alone, or start a co-op room for up to four
-                  players. The game is built with Three.js and Vite and has no
-                  other dependencies. Every sound is synthesised in the
-                  browser, so there are no audio files to host.
+                  It runs on nothing but the Python standard library and SQLite,
+                  so it needs nothing extra installed: one command starts it in
+                  the browser, with sample data ready to explore.
+                </p>
+                <p>
+                  I built it with AI as a coding partner, which let one person
+                  build what would normally take a small team. I still decided
+                  how each workflow should behave, read through the code and
+                  tested every feature myself.
                 </p>
 
-                <div class="explore learned">
-                  <h4>What I learned</h4>
-                  <ul>
-                    <li>
-                      <strong>Choosing a cloud</strong>
-                      I compared the main
-                      cloud providers and picked Cloudflare for its low cost
-                      and its strong name in security. The game uses several of
-                      its services: Workers for the API, Durable Objects for
-                      each co-op room, D1 as the database, Turnstile to keep
-                      bots out, and rate limits on every endpoint.
-                    </li>
-                    <li>
-                      <strong>Client and server</strong>
-                      Anything that runs in
-                      the browser can be changed by the player, so it can't be
-                      trusted. The browser only draws the game and sends what you
-                      pressed. The server keeps score: it runs every co-op
-                      room and times every ranked run, so its result is the
-                      one that counts.
-                    </li>
-                    <li>
-                      <strong>Personal data (PDPA)</strong>
-                      Collect only what
-                      the game needs. It keeps a random ID, a display name and
-                      your scores. It stores no email and no IP address, keeps
-                      the transfer code only as a hash, and lets you delete
-                      your profile at any time.
-                    </li>
-                    <li>
-                      <strong>Copyright and credits</strong>
-                      Every library and
-                      font is open source and credited with its licence:
-                      three.js under MIT, and the fonts under the SIL Open Font
-                      License. The sounds are generated in code and the models
-                      are built from code, so nothing is borrowed without
-                      permission.
-                    </li>
-                    <li>
-                      <strong>Checking the AI's work</strong>
-                      Claude made it
-                      possible for me to build a game that would normally take
-                      years. I still read the code, checked the logic, wrote
-                      tests and played every change. AI can write a game, but
-                      knowing what makes it fun and fair still needs a human
-                      touch.
-                    </li>
-                  </ul>
-                </div>
-
                 <div class="explore">
-                  <h4>What's in it</h4>
+                  <h4>What it does</h4>
                   <ul>
                     <li>
-                      An endless city built from chunks around you, with loop
-                      trains on viaducts, a subway, office towers and labs
+                      Meeting rooms on one calendar, bookings that can't clash,
+                      check-in and check-out
                     </li>
                     <li>
-                      Zombie types from shamblers and runners to brutes,
-                      bloaters and screamers, sent in waves by a director that
-                      reacts to how you play
+                      Duty roster with auto-generated drafts, availability
+                      checks and duty swaps
                     </li>
                     <li>
-                      Scavenge guns, ammo, durian bombs and medkits, drive the
-                      cars you find, barricade doorways, and hunt and cook
-                      when you get hungry
+                      Shift planning with desk-duty rules and minimum manpower
+                      per shift
                     </li>
                     <li>
-                      A day/night cycle, AI survivor squads, army bases under
-                      siege and keycard vaults
+                      Attendance headcount, plus leave and course approvals
                     </li>
+                    <li>Fitness test results, forecasts and session booking</li>
+                    <li>Kanban tasks with team workload and deadline alerts</li>
+                    <li>Room equipment, fault reports and a repair workflow</li>
                     <li>
-                      Co-op for up to four players, with monthly leaderboards
-                      and a hall of fame
-                    </li>
-                    <li>
-                      Touch controls for phones and tablets, switched on
-                      automatically
+                      Role-based permissions and a timestamped activity log
                     </li>
                   </ul>
                 </div>
-
-                <blockquote>
-                  In co-op the server decides everything. Browsers only send
-                  what you pressed and where you're aiming, so a run can't be
-                  faked from the browser.
-                </blockquote>
 
                 <div class="stack">
                   <div class="stack-group">
                     <span class="stack-label">Technology</span>
                     <div class="stack-row">
-                      <span class="chip">Three.js</span>
-                      <span class="chip">Vite</span>
-                      <span class="chip">Web Audio</span>
-                      <span class="chip">Cloudflare Workers</span>
-                      <span class="chip">Durable Objects</span>
-                      <span class="chip">D1</span>
-                      <span class="chip">Turnstile</span>
+                      <span class="chip">Python</span>
+                      <span class="chip">SQLite</span>
+                      <span class="chip">HTML</span>
+                      <span class="chip">CSS</span>
+                      <span class="chip">JavaScript</span>
                     </div>
                   </div>
                   <div class="stack-group">
                     <span class="stack-label">How it was built</span>
                     <div class="stack-row">
-                      <span class="chip asset">Built with AI</span>
+                      <span class="chip asset">AI-assisted, tested by me</span>
+                      <span class="chip asset">No frameworks</span>
                       <span class="chip asset">Automated tests</span>
-                      <span class="chip asset">Server-authoritative co-op</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </article>
-          <article class="pcard" id="ml-racing" data-cat="ml">
-            <button
-              type="button"
-              class="pcover video"
-              data-open="ml-racing"
-              aria-label="Open the full write-up for Project ML Racing"
-            >
-              <img
-                src="https://i.ytimg.com/vi/n5OL3Fog0ZE/hqdefault.jpg"
-                alt=""
-                loading="lazy"
-                onerror="this.style.display='none'"
-              />
-              <span class="pstatus">Demo video</span>
-            </button>
-            <div class="pcard-body">
-              <span class="project-tag"
-                >Reinforcement Learning · Computer Vision</span
-              >
-              <h3>Project ML Racing</h3>
-              <p class="p-sum">
-                A Unity racing environment where a PPO reinforcement learning
-                agent learns to drive using computer vision and vehicle
-                telemetry.
-              </p>
-              <div class="p-chips">
-                <span class="chip">Unity</span><span class="chip">Python</span
-                ><span class="chip">PyTorch</span
-                ><span class="chip">OpenCV</span><span class="chip">NumPy</span>
-              </div>
-              <div class="plinks">
-                <button type="button" class="readmore" data-open="ml-racing">
-                  Read the write-up
-                </button>
-                <a
-                  href="https://youtu.be/n5OL3Fog0ZE"
-                  target="_blank"
-                  rel="noopener"
-                  >Watch on YouTube &rarr;</a
-                >
-              </div>
-            </div>
-            <div class="pcard-full" hidden>
-              <div class="embed">
-                <iframe
-                  src="https://www.youtube.com/embed/n5OL3Fog0ZE"
-                  title="Project ML Racing demo"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                  loading="lazy"
-                ></iframe>
-              </div>
-              <div class="project-body">
-                <p>
-                  A personal project where I built a Unity-based racing
-                  environment and connected it to a PPO reinforcement learning
-                  agent that learns to drive using computer vision and vehicle
-                  telemetry. What began as a simple experiment became one of the
-                  most engaging learning experiences I've had.
-                </p>
-                <p>
-                  The agent can currently make its way around the track —
-                  though, for now, my keyboard driving still beats it. There's
-                  plenty left to do before it can truly race competitively, and
-                  that's exactly what makes it fun.
-                </p>
-
-                <div class="explore">
-                  <h4>What I explored</h4>
-                  <ul>
-                    <li>
-                      Computer vision with Canny edge detection for lane
-                      detection
-                    </li>
-                    <li>CNN-based lane detection using a MobileNet model</li>
-                    <li>
-                      Data collection &amp; classification to train the model
-                    </li>
-                    <li>
-                      Unity-to-Python integration for camera &amp; telemetry
-                    </li>
-                    <li>PPO reinforcement learning &amp; reward shaping</li>
-                    <li>Model fine-tuning and debugging the full pipeline</li>
-                  </ul>
-                </div>
-
-                <blockquote>
-                  The hardest moments came when the model behaved unexpectedly
-                  and I had to properly understand the integration between the
-                  CNN, the PPO agent, the observations, and the reward
-                  structure.
-                </blockquote>
-
-                <div class="stack">
-                  <div class="stack-group">
-                    <span class="stack-label">Technology</span>
-                    <div class="stack-row">
-                      <span class="chip">Unity</span>
-                      <span class="chip">Python</span>
-                      <span class="chip">PyTorch</span>
-                      <span class="chip">OpenCV</span>
-                      <span class="chip">NumPy</span>
-                    </div>
-                  </div>
-                  <div class="stack-group">
-                    <span class="stack-label">Game Assets</span>
-                    <div class="stack-row">
-                      <span class="chip asset">NWH Vehicle Physics 2</span>
-                      <span class="chip asset">EasyRoads3D Pro v3</span>
-                      <span class="chip asset">RCC Cartoon Race Track</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </article>
-          <article class="pcard" id="disaster-response" data-cat="games">
-            <button
-              type="button"
-              class="pcover"
-              data-open="disaster-response"
-              aria-label="Open the full write-up for Multiplayer Disaster Response Simulation"
-            >
+          <article class="pcard" id="disaster-response" data-cat="sw">
+            <button type="button" class="pcover" data-open="disaster-response" aria-label="Open the highlight for Multiplayer Disaster Response">
               <img src="images/thumbs/drone.jpg" alt="" loading="lazy" />
-              <span class="pstatus">7 photos</span>
+              <span class="pstatus">Workshop</span>
             </button>
             <div class="pcard-body">
-              <span class="project-tag"
-                >Multiplayer game · Red Cross Youth</span
-              >
-              <h3>Multiplayer Disaster Response Simulation</h3>
-              <p class="p-sum">
-                A four-player Unity game for a drone workshop. Each role sees
-                only part of the picture, so the team has to talk to find
-                survivors and deliver supplies in time.
-              </p>
-              <div class="p-chips">
-                <span class="chip">Unity</span><span class="chip">C#</span
-                ><span class="chip">Netcode for GameObjects</span
-                ><span class="chip">Unity Transport</span>
-              </div>
+              <span class="project-tag">LAN multiplayer · Red Cross Youth</span>
+              <h3>Multiplayer Disaster Response</h3>
+              <p class="p-sum">A four-player Unity training game where each role sees only part of the picture, so the team has to talk.</p>
+              <div class="p-chips"><span class="chip">Unity</span><span class="chip">C#</span><span class="chip">Netcode for GameObjects</span></div>
               <div class="plinks">
-                <button
-                  type="button"
-                  class="readmore"
-                  data-open="disaster-response"
-                >
-                  Read the write-up
-                </button>
+                <button type="button" class="readmore" data-open="disaster-response">View project</button>
+                
               </div>
             </div>
             <div class="pcard-full" hidden>
@@ -1929,8 +1762,7 @@
                   loading="lazy"
                   tabindex="0"
                 />
-              </div>
-              <p class="photo-hint">
+              </div><p class="photo-hint">
                 Click a photo to enlarge it and read what&rsquo;s happening.
               </p>
               <div class="project-body">
@@ -2015,463 +1847,123 @@
               </div>
             </div>
           </article>
-          <article class="pcard" id="project-trains" data-cat="games">
-            <button
-              type="button"
-              class="pcover"
-              data-open="project-trains"
-              aria-label="Open the full write-up for Project Trains"
-            >
-              <img src="images/thumbs/trains.jpg" alt="" loading="lazy" />
-              <span class="pstatus live">Playable</span>
+          <article class="pcard" id="ml-racing" data-cat="ml">
+            <button type="button" class="pcover video" data-open="ml-racing" aria-label="Open the highlight for Project ML Racing">
+              <img src="https://i.ytimg.com/vi/n5OL3Fog0ZE/hqdefault.jpg" alt="" loading="lazy" />
+              <span class="pstatus">Research</span>
             </button>
             <div class="pcard-body">
-              <span class="project-tag">Browser game · Vibe-coded with AI</span>
-              <h3>Project Trains</h3>
-              <p class="p-sum">
-                A virtual toy-train city with a Japanese theme that runs in the
-                browser. Lay track, build stations and watch a town grow around
-                them.
-              </p>
-              <div class="p-chips">
-                <span class="chip">JavaScript</span
-                ><span class="chip">three.js</span><span class="chip">Vite</span
-                ><span class="chip">GitHub Pages</span>
-              </div>
+              <span class="project-tag">Reinforcement learning · Computer vision</span>
+              <h3>Project ML Racing</h3>
+              <p class="p-sum">A PPO agent that learns to drive a Unity race car from camera images and vehicle telemetry.</p>
+              <div class="p-chips"><span class="chip">Unity</span><span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">OpenCV</span></div>
               <div class="plinks">
-                <button
-                  type="button"
-                  class="readmore"
-                  data-open="project-trains"
-                >
-                  Read the write-up
-                </button>
-                <a
-                  href="https://zongpoh.github.io/project-trains/"
-                  target="_blank"
-                  rel="noopener"
-                  class="go"
-                  >Play it &rarr;</a
-                ><a
-                  href="https://github.com/ZongPoh/project-trains"
-                  target="_blank"
-                  rel="noopener"
-                  >Code &rarr;</a
-                >
+                <button type="button" class="readmore" data-open="ml-racing">View project</button>
+                <a href="https://youtu.be/n5OL3Fog0ZE" target="_blank" rel="noopener" class="go" data-cta="Watch on YouTube &rarr;">Watch on YouTube &rarr;</a>
               </div>
             </div>
             <div class="pcard-full" hidden>
-              <div class="photo-grid shots">
-                <img
-                  class="lead"
-                  src="images/trains-2-build-tools.jpg"
-                  alt="The full game screen with the building tools, departure board and train depot"
-                  data-caption="The builder: track, ramp, station, road, river, hill and highway tools on the left, a live departure board on the right, and the depot of eleven bullet trains along the bottom."
-                  loading="lazy"
-                  tabindex="0"
-                />
-                <img
-                  src="images/trains-1-starter-city.jpg"
-                  alt="A toy-train city with bullet trains on viaducts, a highway on pillars and a river"
-                  data-caption="The starter city: bullet trains on viaducts, a highway on pillars crossing the river, passengers waiting on a station platform, and cherry blossom in spring."
-                  loading="lazy"
-                  tabindex="0"
-                />
-                <img
-                  src="images/trains-3-ride-doctor-yellow.jpg"
-                  alt="Chase view behind the yellow Doctor Yellow train among cherry blossom, heading towards Shin-Osaka"
-                  data-caption="Riding along behind Doctor Yellow, the track-inspection train, through cherry blossom towards Shin-Osaka, with other bullet trains running on the viaduct above."
-                  loading="lazy"
-                  tabindex="0"
-                />
-                <img
-                  src="images/trains-4-passenger-window.jpg"
-                  alt="View from a passenger window on a viaduct, looking over the city"
-                  data-caption="The passenger-window view from an E6 Komachi on the viaduct, looking out over the city."
-                  loading="lazy"
-                  tabindex="0"
-                />
-                <img
-                  src="images/trains-5-night-shin-osaka.jpg"
-                  alt="An E5 Hayabusa on a viaduct at night, curving into Shin-Osaka station with lit windows"
-                  data-caption="At night the windows light up: an E5 Hayabusa curves along the viaduct into Shin-Osaka."
-                  loading="lazy"
-                  tabindex="0"
-                />
-                <img
-                  src="images/trains-6-autumn.jpg"
-                  alt="The city in autumn with red and gold trees"
-                  data-caption="Autumn: red and gold trees across the city."
-                  loading="lazy"
-                  tabindex="0"
-                />
-                <img
-                  src="images/trains-7-winter.jpg"
-                  alt="The city covered in snow in winter"
-                  data-caption="Winter: the whole board under snow, with the trains still running."
-                  loading="lazy"
-                  tabindex="0"
-                />
-              </div>
-              <p class="photo-hint">Click a screenshot to enlarge it.</p>
+              <div class="embed"><iframe src="https://www.youtube.com/embed/n5OL3Fog0ZE" title="Project ML Racing demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
               <div class="project-body">
-                <p>
-                  A virtual toy-train city with a Japanese theme, inspired by
-                  riding the bullet train and by toy train sets. Lay track on
-                  the board, build stations and signals, bridge rivers, tunnel
-                  through hills, and watch a town grow around your stations.
-                </p>
-                <p>
-                  It runs in the browser with nothing to install, and it opens
-                  with a starter city that is already running, so you can simply
-                  watch the trains or climb aboard one.
-                </p>
-
+                <p>A personal project where I built a Unity-based racing environment and connected it to a PPO reinforcement learning agent that learns to drive using computer vision and vehicle telemetry. What began as a simple experiment became one of the most engaging learning experiences I've had.</p>
+                <p>The agent can currently make its way around the track — though, for now, my keyboard driving still beats it. There's plenty left to do before it can truly race competitively, and that's exactly what makes it fun.</p>
                 <div class="explore">
-                  <h4>What's in it</h4>
-                  <ul>
-                    <li>
-                      Eleven bullet trains running on a 56&nbsp;&times;&nbsp;56
-                      board with four build levels
-                    </li>
-                    <li>
-                      Express and local services that overtake and couple at
-                      stations
-                    </li>
-                    <li>
-                      Stations with platform doors, queueing passengers, staff
-                      and departure melodies
-                    </li>
-                    <li>
-                      Rivers with bridges, hills with tunnels, roads and level
-                      crossings
-                    </li>
-                    <li>
-                      Highways on pillars with ramps, flyovers and traffic
-                    </li>
-                    <li>
-                      Passengers whose journeys grow the town around each
-                      station
-                    </li>
-                    <li>
-                      A ride-along camera with driver, chase and window views
-                    </li>
-                    <li>
-                      Four seasons, day and night, and sound generated in the
-                      browser
-                    </li>
-                  </ul>
+                  <h4>What I explored</h4>
+                  <ul><li>Computer vision with Canny edge detection for lane detection</li><li>CNN-based lane detection using a MobileNet model</li><li>Data collection &amp; classification to train the model</li><li>Unity-to-Python integration for camera &amp; telemetry</li><li>PPO reinforcement learning &amp; reward shaping</li><li>Model fine-tuning and debugging the full pipeline</li></ul>
                 </div>
-
-                <div class="stack">
-                  <div class="stack-group">
-                    <span class="stack-label">Technology</span>
-                    <div class="stack-row">
-                      <span class="chip">JavaScript</span>
-                      <span class="chip">three.js</span>
-                      <span class="chip">Vite</span>
-                      <span class="chip">GitHub Pages</span>
-                    </div>
-                  </div>
-                  <div class="stack-group">
-                    <span class="stack-label">How it was built</span>
-                    <div class="stack-row">
-                      <span class="chip asset">Vibe coded with AI</span>
-                    </div>
-                  </div>
-                </div>
+                <blockquote>The hardest moments came when the model behaved unexpectedly and I had to properly understand the integration between the CNN, the PPO agent, the observations, and the reward structure.</blockquote>
+                <div class="stack"><div class="stack-group"><span class="stack-label">Simulation</span><div class="stack-row"><span class="chip">Unity</span><span class="chip">NWH Vehicle Physics 2</span><span class="chip">EasyRoads3D Pro</span></div></div><div class="stack-group"><span class="stack-label">ML</span><div class="stack-row"><span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">OpenCV</span><span class="chip">NumPy</span></div></div></div>
+                <div class="wu-actions"><span class="btn wu-soon">Development write-up coming soon</span></div>
               </div>
             </div>
           </article>
-          <article class="pcard" id="hex-farm" data-cat="games">
-            <button
-              type="button"
-              class="pcover"
-              data-open="hex-farm"
-              aria-label="Open the full write-up for Hex Farm"
-            >
-              <img src="images/thumbs/hexfarm.jpg" alt="" loading="lazy" />
-              <span class="pstatus live">Playable</span>
+          <article class="pcard" id="cpr-trainer" data-cat="iot">
+            <button type="button" class="pcover" data-open="cpr-trainer" aria-label="Open the highlight for CPR Training Kit">
+              <img src="images/thumbs/cpr.jpg" alt="" loading="lazy" />
+              <span class="pstatus">2019</span>
             </button>
             <div class="pcard-body">
-              <span class="project-tag"
-                >Browser game &middot; Built with AI</span
-              >
-              <h3>Hex Farm</h3>
-              <p class="p-sum">
-                A 3D hex-tile farming and settlement game in the browser. Grow a
-                camp into a town while rabbits raid your crops, foxes hunt and
-                neighbouring villages trade with you or raid you.
-              </p>
-              <div class="p-chips">
-                <span class="chip">React</span><span class="chip">Three.js</span
-                ><span class="chip">Vite</span
-                ><span class="chip">GitHub Pages</span>
-              </div>
+              <span class="project-tag">Embedded · Low-cost training aid</span>
+              <h3>CPR Training Kit</h3>
+              <p class="p-sum">An Arduino add-on that turns a basic CPR dummy into a trainer that counts compressions and checks their pace.</p>
+              <div class="p-chips"><span class="chip">Arduino</span><span class="chip">Micro switch</span><span class="chip">Bluetooth</span><span class="chip">Processing</span></div>
               <div class="plinks">
-                <button type="button" class="readmore" data-open="hex-farm">
-                  Read the write-up
-                </button>
-                <a
-                  href="https://zongpoh.github.io/Project-Farmer/"
-                  target="_blank"
-                  rel="noopener"
-                  class="go"
-                  >Play it &rarr;</a
-                ><a
-                  href="https://github.com/ZongPoh/Project-Farmer"
-                  target="_blank"
-                  rel="noopener"
-                  >Code &rarr;</a
-                >
-              </div>
-            </div>
-            <div class="pcard-full" hidden>
-              <div class="photo-grid shots">
-                <img
-                  class="lead"
-                  src="images/hexfarm-1-town-overview.jpg"
-                  alt="Hex Farm game screen with a large town on a 3D hex map, a minimap and the management panels"
-                  data-caption="A Town in its fourth year: 22 workers, farms, quarries and houses across the valley, with the minimap, job queue and settlement inspector alongside."
-                  loading="lazy"
-                  tabindex="0"
-                />
-                <img
-                  src="images/hexfarm-2-early-hamlet.jpg"
-                  alt="An early hamlet of a few buildings among forests, rivers and rocky hills"
-                  data-caption="An early hamlet on day 41, with workers out on the land and a neighbouring village sending a raid."
-                  loading="lazy"
-                  tabindex="0"
-                />
-                <img
-                  src="images/hexfarm-3-winter.jpg"
-                  alt="The settlement covered in snow in winter"
-                  data-caption="Winter: snow covers the valley, and the stores laid by in autumn have to last until spring."
-                  loading="lazy"
-                  tabindex="0"
-                />
-                <img
-                  src="images/hexfarm-4-dusk-lamps.jpg"
-                  alt="The town at dusk with lamps lit in the buildings"
-                  data-caption="Dusk: the sky follows the real sun position, and lamps come on across the town as night falls."
-                  loading="lazy"
-                  tabindex="0"
-                />
-              </div>
-              <p class="photo-hint">Click a screenshot to enlarge it.</p>
-              <div class="project-body">
-                <p>
-                  A 3D hex-tile farming and settlement game that runs entirely
-                  in the browser. Start with a camp on a hex map and grow it
-                  into a town: farm, cut wood, quarry stone, catch horses and
-                  claim land, while rabbits raid your crops, foxes hunt, and
-                  neighbouring villages trade with you or raid you.
-                </p>
-                <p>
-                  The world keeps running while you're away and catches up when
-                  you return. Your settlement saves to a small file you can load
-                  anywhere, with no account or server needed.
-                </p>
-
-                <div class="explore">
-                  <h4>What's in it</h4>
-                  <ul>
-                    <li>
-                      An hourly clock, four seasons, a sky driven by real sun
-                      position, dusk lamps and moonlight
-                    </li>
-                    <li>
-                      Workers who walk to each job, queue up, mend what breaks
-                      and forage when idle
-                    </li>
-                    <li>
-                      Rabbits, foxes, horses, goats and hens, with a
-                      predator&ndash;prey balance tuned over three simulated
-                      years
-                    </li>
-                    <li>
-                      Territory that grows as you build, plus raiders and
-                      peaceful settlers
-                    </li>
-                    <li>
-                      Progression from Camp to Homestead, Hamlet, Village and
-                      Town, with tools, skills, healing and defences
-                    </li>
-                  </ul>
-                </div>
+                <button type="button" class="readmore" data-open="cpr-trainer">View project</button>
                 
-                <div class="stack">
-                  <div class="stack-group">
-                    <span class="stack-label">Technology</span>
-                    <div class="stack-row">
-                      <span class="chip">React</span>
-                      <span class="chip">Three.js</span>
-                      <span class="chip">React Three Fiber</span>
-                      <span class="chip">Vite</span>
-                      <span class="chip">GitHub Actions</span>
-                      <span class="chip">GitHub Pages</span>
-                    </div>
-                  </div>
-                  <div class="stack-group">
-                    <span class="stack-label">How it was built</span>
-                    <div class="stack-row">
-                      <span class="chip asset">Built with AI</span>
-                      <span class="chip asset">Automated tests</span>
-                      <span class="chip asset">CI-gated deploys</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </article>
-          <article class="pcard" id="adminhub" data-cat="tools">
-            <button
-              type="button"
-              class="pcover"
-              data-open="adminhub"
-              aria-label="Open the full write-up for AdminHub"
-            >
-              <img src="images/thumbs/adminhub.jpg" alt="" loading="lazy" />
-              <span class="pstatus">4 photos</span>
-            </button>
-            <div class="pcard-body">
-              <span class="project-tag">Web app · Vibe-coded with AI</span>
-              <h3>AdminHub</h3>
-              <p class="p-sum">
-                A web app for a team&rsquo;s everyday admin work: room bookings,
-                duty rosters, attendance and tasks, all behind one sign-in. Runs
-                on the Python standard library and SQLite.
-              </p>
-              <div class="p-chips">
-                <span class="chip">Python</span><span class="chip">SQLite</span
-                ><span class="chip">HTML</span><span class="chip">CSS</span
-                ><span class="chip">JavaScript</span>
-              </div>
-              <div class="plinks">
-                <button type="button" class="readmore" data-open="adminhub">
-                  Read the write-up
-                </button>
               </div>
             </div>
             <div class="pcard-full" hidden>
-              <div class="photo-grid shots">
-                <img
-                  class="lead"
-                  src="images/adminhub-1-home.png"
-                  alt="AdminHub home dashboard showing a supervisor's day and the team's status"
-                  data-caption="Home dashboard for a supervisor: your own duties, tasks and room bookings on top, then the team's attendance, roster health, approvals, tasks and facility faults at a glance."
-                  loading="lazy"
-                  tabindex="0"
-                />
-                <img
-                  src="images/adminhub-2-duty-roster.png"
-                  alt="AdminHub duty roster calendar for the month"
-                  data-caption="Duty roster: a shared monthly calendar with a Duty Manager, Duty Supervisor and Duty Assistant each day. Clashes are flagged in red, and swap requests wait for approval on the left."
-                  loading="lazy"
-                  tabindex="0"
-                />
-                <img
-                  src="images/adminhub-3-meeting-rooms.png"
-                  alt="AdminHub meeting room calendar with five rooms"
-                  data-caption="Meeting rooms: all five rooms on one calendar, with check-in and check-out, and a reminder for a booking that was never checked out."
-                  loading="lazy"
-                  tabindex="0"
-                />
-                <img
-                  src="images/adminhub-4-tasks.png"
-                  alt="AdminHub task board with four columns"
-                  data-caption="Tasks: a Kanban board with priorities, deadlines, progress and overdue alerts across the team."
-                  loading="lazy"
-                  tabindex="0"
-                />
-              </div>
-              <p class="photo-hint">
-                Click a screenshot to enlarge it. All names and records shown
-                are made-up sample data.
-              </p>
+              <div class="photo-grid"><video class="lead-video" src="images/cpr-demo.mp4" poster="images/cpr-demo-poster.jpg" controls muted playsinline preload="metadata" aria-label="Demo: 30 compressions on a dummy, counted live, ending at 112 BPM"></video><img src="images/cpr-1-board.jpg" alt="Arduino Nano soldered onto stripboard inside a project box, with an LCD connected" data-caption="The first build: an Arduino Nano on stripboard with screw terminals for the sensors, wired to an LCD, in a cheap project box." loading="lazy" tabindex="0" /><img src="images/cpr-2-powered.jpg" alt="The trainer powered on and connected to a laptop" data-caption="Powered up and connected to a laptop for testing, with the buzzer and on/off switch on the side." loading="lazy" tabindex="0" /><img src="images/cpr-3.jpg" alt="Inside the finished unit: LCD in the lid, Arduino, buzzer and AA batteries in the base" data-caption="The finished unit: LCD in the lid, Arduino and buzzer on the board, and four AA batteries so it runs without a laptop." loading="lazy" tabindex="0" /></div><p class="photo-hint">Click a photo to enlarge it.</p>
               <div class="project-body">
-                <p>
-                  A web app for a team's everyday admin work: room bookings,
-                  duty rosters, shift planning, attendance, fitness tests,
-                  vehicles and tasks, all behind one sign-in with a home
-                  dashboard that shows what needs your attention today.
-                </p>
-                <p>
-                  It runs on nothing but the Python standard library and SQLite,
-                  so it needs nothing extra installed: one command starts it in
-                  the browser, with sample data ready to explore.
-                </p>
-
+                <p>A low-cost Arduino add-on that turns a basic CPR dummy into a feedback trainer. As students practise, it counts every compression that reaches the right depth, works out their pace, and warns them when it drifts off target: the kind of feedback that usually needs an expensive manikin.</p>
                 <div class="explore">
-                  <h4>What it does</h4>
-                  <ul>
-                    <li>
-                      Meeting rooms on one calendar, bookings that can't clash,
-                      check-in and check-out
-                    </li>
-                    <li>
-                      Duty roster with auto-generated drafts, availability
-                      checks and duty swaps
-                    </li>
-                    <li>
-                      Shift planning with desk-duty rules and minimum manpower
-                      per shift
-                    </li>
-                    <li>
-                      Attendance headcount, plus leave and course approvals
-                    </li>
-                    <li>Fitness test results, forecasts and session booking</li>
-                    <li>Kanban tasks with team workload and deadline alerts</li>
-                    <li>Room equipment, fault reports and a repair workflow</li>
-                    <li>
-                      Role-based permissions and a timestamped activity log
-                    </li>
-                  </ul>
+                  <h4>What I built</h4>
+                  <ul><li>Counts compressions in cycles of 30 and works out the rate in BPM</li><li>A micro switch inside the dummy catches its built-in click at the right depth, with the count shown live on an LCD</li><li>A buzzer warns when the rate falls outside 100–120 per minute</li><li>A Bluetooth version that sends the count to a PC app I wrote in Processing</li></ul>
                 </div>
-
-                <div class="stack">
-                  <div class="stack-group">
-                    <span class="stack-label">Technology</span>
-                    <div class="stack-row">
-                      <span class="chip">Python</span>
-                      <span class="chip">SQLite</span>
-                      <span class="chip">HTML</span>
-                      <span class="chip">CSS</span>
-                      <span class="chip">JavaScript</span>
-                    </div>
-                  </div>
-                  <div class="stack-group">
-                    <span class="stack-label">How it was built</span>
-                    <div class="stack-row">
-                      <span class="chip asset">Vibe coded with AI</span>
-                      <span class="chip asset">No frameworks</span>
-                      <span class="chip asset">Automated tests</span>
-                    </div>
-                  </div>
-                </div>
+                <div class="stack"><div class="stack-group"><span class="stack-label">Hardware</span><div class="stack-row"><span class="chip">Arduino Nano</span><span class="chip">Micro switch</span><span class="chip">16×2 LCD</span><span class="chip">Buzzer</span><span class="chip">Bluetooth module</span></div></div><div class="stack-group"><span class="stack-label">Software</span><div class="stack-row"><span class="chip">Arduino C++</span><span class="chip">Processing</span></div></div><div class="stack-group"><span class="stack-label">Build</span><div class="stack-row"><span class="chip">Stripboard</span><span class="chip">3D-printed case</span></div></div></div>
+                <div class="wu-actions"><a class="btn primary" href="projects/cpr-trainer.html">Read the development write-up &rarr;</a></div>
               </div>
             </div>
           </article>
-          <!-- UNRELEASED GAME: copy this block, fill it in and remove the comment marks to show it.
-         Dashed outline + "In development" status. When the game ships, turn it into a normal card like the ones above.
-    <article class="pcard plan" data-cat="games">
-      <div class="pcover"><span class="pstatus dev">In development</span></div>
-      <div class="pcard-body">
-        <span class="project-tag">Game · Genre</span>
-        <h3>Game title</h3>
-        <p class="p-sum">One-line pitch: what the player does and what makes it fun.</p>
-        <div class="p-chips"><span class="chip">Unity</span><span class="chip">C#</span></div>
-        <div class="pprogress"><span>Progress</span><span>60%</span></div>
-        <div class="pbar"><i style="width:60%"></i></div>
-        <div class="plinks"><span class="soon">Links once it's released</span></div>
-      </div>
-    </article>
-    -->
         </div>
       </div>
     </section>
 
-    <!-- Project write-up viewer (filled from the card's hidden .pcard-full when opened) -->
+    <section id="games" class="games">
+      <div class="wrap">
+        <h2>Games</h2>
+        <p class="section-sub">I design and release my games under a separate name, Kampong Studio.</p>
+
+        <article class="pcard kampong" id="kampong-studio" data-cat="games">
+          <button type="button" class="kampong-logo" data-open="kampong-studio" aria-label="Open the highlight for Kampong Studio">
+            <img src="images/kampong-cow.svg" alt="" />
+          </button>
+          <div class="pcard-body">
+            <span class="project-tag">Website · React · Cloudflare</span>
+            <h3>Kampong Studio</h3>
+            <p class="p-sum">Why I built a separate site for my games, and how it’s set up. The cow comes from <i>Running Cow</i>, a game I started in 2020 and finally finished in 2026.</p>
+            <div class="plinks">
+              <button type="button" class="readmore" data-open="kampong-studio">View project</button>
+              <a href="https://kampongstudio.dev" target="_blank" rel="noopener" class="go" data-cta="Visit page &rarr;">Visit Kampong Studio &rarr;</a>
+            </div>
+          </div>
+          <div class="pcard-full" hidden>
+            <div class="kampong-banner"><img src="images/kampong-cow.svg" alt="Kampong Studio cow logo" /></div>
+            <div class="project-body">
+              <p>My games needed a home that speaks to players, not recruiters. So I built Kampong Studio as a separate site: this portfolio shows how things are built, and Kampong shows what they’re like to play.</p>
+              <div class="explore"><h4>What I built</h4><ul><li>A React single-page site where every game page is generated from one data file</li><li>Deployed on Cloudflare Workers, with each game on its own subdomain</li><li>Redirects for old links and alternate spellings</li><li>Its own voice and look: playful and Singapore-flavoured, with a cow mascot from my 2020 sketches for Running Cow</li></ul></div>
+              <div class="stack"><div class="stack-group"><span class="stack-label">Frontend</span><div class="stack-row"><span class="chip">React</span><span class="chip">React Router</span><span class="chip">Vite</span></div></div><div class="stack-group"><span class="stack-label">Hosting</span><div class="stack-row"><span class="chip">Cloudflare Workers</span><span class="chip">Custom subdomains</span></div></div></div>
+              <div class="wu-actions"><span class="btn wu-soon">Development write-up coming soon</span></div>
+            </div>
+          </div>
+        </article>
+
+        <div class="ggrid">
+          <a class="gcard" href="https://kampongstudio.dev/games/alamakzombies" target="_blank" rel="noopener">
+            <span class="gcover"><img src="images/thumbs/zombies.jpg" alt="" loading="lazy" /></span>
+            <span class="gtext"><b>Alamak! Zombies Ah?</b><small>Co-op zombie survival</small><em>Play on Kampong Studio &#8599;</em></span>
+          </a>
+          <a class="gcard" href="https://kampongstudio.dev/games/project-trains" target="_blank" rel="noopener">
+            <span class="gcover"><img src="images/thumbs/trains.jpg" alt="" loading="lazy" /></span>
+            <span class="gtext"><b>Project Trains</b><small>Toy-train city builder</small><em>Play on Kampong Studio &#8599;</em></span>
+          </a>
+          <a class="gcard" href="https://kampongstudio.dev/games/hex-farm" target="_blank" rel="noopener">
+            <span class="gcover"><img src="images/thumbs/hexfarm.jpg" alt="" loading="lazy" /></span>
+            <span class="gtext"><b>Hex Farm</b><small>Hex-tile farming sim</small><em>Play on Kampong Studio &#8599;</em></span>
+          </a>
+          <a class="gcard" href="https://kampongstudio.dev/games/spacebot" target="_blank" rel="noopener">
+            <span class="gcover"><img src="images/thumbs/spacebot.webp" alt="" loading="lazy" /></span>
+            <span class="gtext"><b>SpaceBot</b><small>Twin-stick robot shooter</small><em>Play on Kampong Studio &#8599;</em></span>
+          </a>
+          <a class="gcard" href="https://kampongstudio.dev/games/running-cow" target="_blank" rel="noopener">
+            <span class="gcover"><img src="images/thumbs/runningcow.webp" alt="" loading="lazy" /></span>
+            <span class="gtext"><b>Running Cow</b><small>Three-lane farm runner</small><em>Play on Kampong Studio &#8599;</em></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project highlight viewer (filled from the card's hidden .pcard-full when opened) -->
     <div class="pmodal" id="pmodal" hidden>
       <div
         class="pmodal-box"
@@ -2498,7 +1990,7 @@
 
     <section id="work">
       <div class="wrap">
-        <h2>Earlier Work</h2>
+        <h2>Internship Work</h2>
         <p class="section-sub">Internship · PTV Group</p>
         <p class="work-intro">
           During my internship at PTV Group, I worked on the software
@@ -2696,7 +2188,11 @@
           title.textContent = card.querySelector("h3").textContent;
           var go = card.querySelector(".plinks a.go");
           play.hidden = !go;
-          if (go) play.href = go.href;
+          if (go) {
+            play.href = go.href;
+            // The button uses the card's own label (data-cta), e.g. "Visit page" or "Watch on YouTube".
+            play.textContent = go.getAttribute("data-cta") || "Open \u2192";
+          }
           full.hidden = false;
           body.appendChild(full);
           modal.hidden = false;
@@ -2762,7 +2258,7 @@
             filters.forEach(function (x) {
               x.setAttribute("aria-pressed", x === f);
             });
-            [].forEach.call(document.querySelectorAll(".pcard"), function (c) {
+            [].forEach.call(document.querySelectorAll("#projects .pcard"), function (c) {
               c.hidden = !(
                 f.dataset.cat === "all" || c.dataset.cat === f.dataset.cat
               );
